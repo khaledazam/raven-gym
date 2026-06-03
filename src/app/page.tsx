@@ -4,6 +4,7 @@ import Transformations from "@/components/sections/Transformations";
 import AiNutrition from "@/components/sections/AiNutrition";
 import Memberships from "@/components/sections/Memberships";
 import Finale from "@/components/sections/Finale";
+import RavenCoachBot from "@/components/sections/RavenCoachBot";
 
 export default function Home() {
   return (
@@ -14,6 +15,8 @@ export default function Home() {
       <AiNutrition />
       <Memberships />
       <Finale />
+      <RavenCoachBot />
     </main>
   );
 }
+
