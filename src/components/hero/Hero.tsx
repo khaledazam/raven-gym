@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Scene from "./Scene";
+import LiveCapacity from "./LiveCapacity";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -55,6 +56,9 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <Scene scrollProgress={scrollProgress} />
       </div>
+      
+      {/* Live Capacity Indicator */}
+      <LiveCapacity />
       
       {/* Overlay Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-end pb-32 text-center px-4 pointer-events-none">
