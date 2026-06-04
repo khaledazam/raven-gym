@@ -1,12 +1,43 @@
+"use client";
+
+import dynamic from "next/dynamic";
 import Hero from "@/components/hero/Hero";
 import About from "@/components/sections/About";
-import GymGallery from "@/components/sections/GymGallery";
-import Transformations from "@/components/sections/Transformations";
-import ClassScheduler from "@/components/sections/ClassScheduler";
-import AiNutrition from "@/components/sections/AiNutrition";
-import Memberships from "@/components/sections/Memberships";
-import Finale from "@/components/sections/Finale";
-import RavenCoachBot from "@/components/sections/RavenCoachBot";
+
+// Dynamically import heavy sections below the fold
+const GymGallery = dynamic(() => import("@/components/sections/GymGallery"), {
+  ssr: false,
+  loading: () => <div className="h-[80vh] w-full bg-black animate-pulse" />
+});
+
+const Transformations = dynamic(() => import("@/components/sections/Transformations"), {
+  ssr: false,
+  loading: () => <div className="h-[80vh] w-full bg-black animate-pulse" />
+});
+
+const ClassScheduler = dynamic(() => import("@/components/sections/ClassScheduler"), {
+  ssr: false,
+  loading: () => <div className="h-[80vh] w-full bg-black animate-pulse" />
+});
+
+const AiNutrition = dynamic(() => import("@/components/sections/AiNutrition"), {
+  ssr: false,
+  loading: () => <div className="h-[80vh] w-full bg-black animate-pulse" />
+});
+
+const Memberships = dynamic(() => import("@/components/sections/Memberships"), {
+  ssr: false,
+  loading: () => <div className="h-[80vh] w-full bg-black animate-pulse" />
+});
+
+const Finale = dynamic(() => import("@/components/sections/Finale"), {
+  ssr: false,
+  loading: () => <div className="h-[80vh] w-full bg-black animate-pulse" />
+});
+
+const RavenCoachBot = dynamic(() => import("@/components/sections/RavenCoachBot"), {
+  ssr: false
+});
 
 export default function Home() {
   return (
@@ -23,5 +54,3 @@ export default function Home() {
     </main>
   );
 }
-
-

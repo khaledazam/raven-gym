@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import LazyCanvas from "../hero/LazyCanvas";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Sparkles, Center, Text3D } from "@react-three/drei";
 import * as THREE from "three";
@@ -197,12 +198,14 @@ export default function Finale() {
       {/* 3D Environment */}
       <div ref={canvasWrapperRef} className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center">
         <React.Suspense fallback={null}>
-          <Canvas camera={{ position: [0, 0, 10], fov: 45 }} dpr={[1, 2]}>
-            <ambientLight intensity={0.5} />
-            <spotLight position={[10, 20, 10]} intensity={2} angle={0.3} penumbra={1} color="#B08A47" />
-            <spotLight position={[-10, -20, -10]} intensity={1} angle={0.3} penumbra={1} color="#ffffff" />
-            <FinaleScene isHovered={isHovered} />
-          </Canvas>
+          <LazyCanvas>
+            <Canvas camera={{ position: [0, 0, 10], fov: 45 }} dpr={[1, 1.5]}>
+              <ambientLight intensity={0.5} />
+              <spotLight position={[10, 20, 10]} intensity={2} angle={0.3} penumbra={1} color="#B08A47" />
+              <spotLight position={[-10, -20, -10]} intensity={1} angle={0.3} penumbra={1} color="#ffffff" />
+              <FinaleScene isHovered={isHovered} />
+            </Canvas>
+          </LazyCanvas>
         </React.Suspense>
       </div>
 

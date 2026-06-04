@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 
@@ -90,9 +91,12 @@ export default function GymGallery() {
           >
             {/* Image Wrapper with Parallax Scale */}
             <div className="absolute inset-0 w-full h-full overflow-hidden">
-              <img 
+              <Image 
                 src={item.image} 
                 alt={item.title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority={item.id === 1}
                 className="w-full h-full object-cover transform scale-105 group-hover:scale-115 transition-transform duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-95 transition-opacity duration-500" />

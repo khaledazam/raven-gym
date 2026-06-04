@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Float, Sparkles, Center, Text3D } from "@react-three/drei";
 import { EffectComposer, Bloom, DepthOfField, Vignette } from "@react-three/postprocessing";
@@ -137,11 +137,22 @@ function CameraRig({ scrollProgress }: { scrollProgress: React.MutableRefObject<
 }
 
 export default function Scene({ scrollProgress }: { scrollProgress: React.MutableRefObject<number> }) {
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia("(max-width: 768px)").matches);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <Canvas
       camera={{ position: [0, 0, 12], fov: 45 }}
-      gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
-      dpr={[1, 2]}
+      gl={{ antialias: false, alpha: false, powerPreference: "high-performance" }}
+      dpr={[1, 1.5]}
     >
       <color attach="background" args={["#050505"]} />
       
@@ -158,11 +169,13 @@ export default function Scene({ scrollProgress }: { scrollProgress: React.Mutabl
       
       <CameraRig scrollProgress={scrollProgress} />
       
-      <EffectComposer>
-        <Bloom luminanceThreshold={0.2} mipmapBlur intensity={1.5} />
-        <DepthOfField focusDistance={0} focalLength={0.02} bokehScale={2} height={480} />
-        <Vignette eskil={false} offset={0.1} darkness={1.1} />
-      </EffectComposer>
+      {!isMobile && (
+        <EffectComposer>
+          <Bloom luminanceThreshold={0.2} mipmapBlur intensity={1.5} />
+          <DepthOfField focusDistance={0} focalLength={0.02} bokehScale={2} height={480} />
+          <Vignette eskil={false} offset={0.1} darkness={1.1} />
+        </EffectComposer>
+      )}
     </Canvas>
   );
 }

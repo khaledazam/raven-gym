@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Target, Dumbbell, Utensils, LineChart, Trophy } from "lucide-react";
+import LazyCanvas from "../hero/LazyCanvas";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Sparkles, Center, Text3D } from "@react-three/drei";
 import * as THREE from "three";
@@ -194,11 +195,13 @@ export default function Transformations() {
           className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md z-30 opacity-0 pointer-events-none"
         >
           <div className="w-full h-[50vh] pointer-events-auto">
-            <Canvas camera={{ position: [0, 0, 8] }}>
-              <ambientLight intensity={0.5} />
-              <pointLight position={[10, 10, 10]} intensity={2} color="#B08A47" />
-              <FinaleLogo />
-            </Canvas>
+            <LazyCanvas>
+              <Canvas camera={{ position: [0, 0, 8] }} dpr={[1, 1.5]}>
+                <ambientLight intensity={0.5} />
+                <pointLight position={[10, 10, 10]} intensity={2} color="#B08A47" />
+                <FinaleLogo />
+              </Canvas>
+            </LazyCanvas>
           </div>
           
           <div className="pointer-events-auto text-center -mt-10">
