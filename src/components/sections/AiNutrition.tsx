@@ -152,8 +152,8 @@ export default function AiNutrition() {
                         <input type="number" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors" placeholder="e.g. 28" value={formData.age} onChange={e => setFormData({...formData, age: e.target.value})} />
                       </div>
                       <div>
-                        <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Gender</label>
-                        <select className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors" value={formData.gender} onChange={e => setFormData({...formData, gender: e.target.value})}>
+                        <label htmlFor="gender-select" className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Gender</label>
+                        <select id="gender-select" aria-label="Gender" className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors" value={formData.gender} onChange={e => setFormData({...formData, gender: e.target.value})}>
                           <option>Male</option>
                           <option>Female</option>
                         </select>
@@ -161,8 +161,8 @@ export default function AiNutrition() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Activity Level</label>
-                      <select className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors" value={formData.activity} onChange={e => setFormData({...formData, activity: e.target.value as ActivityLevel})}>
+                      <label htmlFor="activity-select" className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Activity Level</label>
+                      <select id="activity-select" aria-label="Activity Level" className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors" value={formData.activity} onChange={e => setFormData({...formData, activity: e.target.value as ActivityLevel})}>
                         {["Sedentary", "Light", "Active", "Very Active"].map(a => <option key={a}>{a}</option>)}
                       </select>
                     </div>

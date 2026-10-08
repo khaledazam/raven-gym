@@ -161,6 +161,7 @@ To help you get started immediately, try asking me specifically about:
               </div>
               <button
                 onClick={() => setIsOpen(false)}
+                aria-label="إغلاق المحادثة"
                 className="text-gray-400 hover:text-white transition-colors p-1.5 rounded-full hover:bg-white/10"
               >
                 <X className="w-5 h-5" />
@@ -247,6 +248,7 @@ To help you get started immediately, try asking me specifically about:
               />
               <button
                 onClick={() => handleSend(inputText)}
+                aria-label="إرسال رسالة"
                 className="bg-gradient-to-r from-[#d4af37] to-[#aa8410] hover:from-[#aa8410] hover:to-[#d4af37] text-black font-bold p-2.5 rounded-xl transition-all shadow-[0_0_10px_rgba(212,175,55,0.2)] flex items-center justify-center shrink-0 active:scale-95"
               >
                 <Send className="w-4 h-4" />
@@ -259,6 +261,7 @@ To help you get started immediately, try asking me specifically about:
       {/* Floating Toggle Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
+        aria-label="فتح المساعد الذكي Raven Coach"
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
         className="w-14 h-14 rounded-full bg-gradient-to-tr from-[#d4af37] to-[#aa8410] hover:from-[#aa8410] hover:to-[#d4af37] flex items-center justify-center shadow-[0_5px_25px_rgba(212,175,55,0.4)] text-black relative focus:outline-none cursor-pointer group"

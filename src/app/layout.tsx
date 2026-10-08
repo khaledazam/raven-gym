@@ -7,12 +7,14 @@ const tajawal = Tajawal({
   variable: "--font-sans",
   subsets: ["arabic"],
   weight: ["300", "400", "500", "700"],
+  display: "swap",
 });
 
 const cairo = Cairo({
   variable: "--font-heading",
   subsets: ["arabic"],
   weight: ["400", "600", "700", "900"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

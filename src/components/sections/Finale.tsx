@@ -87,7 +87,9 @@ function FinaleScene({ isHovered }: { isHovered: boolean }) {
   );
 }
 
-function MagneticButton({ children, onHoverStart, onHoverEnd }: { children: React.ReactNode, onHoverStart: () => void, onHoverEnd: () => void }) {
+import Link from "next/link";
+
+function MagneticButton({ children, onHoverStart, onHoverEnd, onClick }: { children: React.ReactNode, onHoverStart: () => void, onHoverEnd: () => void, onClick?: () => void }) {
   const ref = useRef<HTMLButtonElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -113,6 +115,7 @@ function MagneticButton({ children, onHoverStart, onHoverEnd }: { children: Reac
   return (
     <motion.button
       ref={ref}
+      onClick={onClick}
       style={{ x: springX, y: springY }}
       onMouseMove={handleMouseMove}
       onMouseEnter={onHoverStart}
@@ -226,12 +229,14 @@ export default function Finale() {
         </p>
 
         <div ref={ctaRef} className="mt-16 pointer-events-auto opacity-0">
-          <MagneticButton 
-            onHoverStart={() => setIsHovered(true)} 
-            onHoverEnd={() => setIsHovered(false)}
-          >
-            JOIN RAVEN
-          </MagneticButton>
+          <Link href="/subscribe">
+            <MagneticButton 
+              onHoverStart={() => setIsHovered(true)} 
+              onHoverEnd={() => setIsHovered(false)}
+            >
+              JOIN RAVEN
+            </MagneticButton>
+          </Link>
         </div>
 
       </div>

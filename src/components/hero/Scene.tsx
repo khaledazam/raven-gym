@@ -165,7 +165,25 @@ export default function Scene({ scrollProgress }: { scrollProgress: React.Mutabl
       
       <Letters scrollProgress={scrollProgress} />
       
-      <Environment preset="studio" />
+      {/* Procedural Studio Environment (Zero Network Payload) */}
+      <Environment>
+        <mesh position={[0, 15, 0]} scale={[20, 1, 20]}>
+          <boxGeometry />
+          <meshBasicMaterial color="#ffffff" />
+        </mesh>
+        <mesh position={[15, 5, 0]} scale={[1, 15, 20]}>
+          <boxGeometry />
+          <meshBasicMaterial color="#B08A47" />
+        </mesh>
+        <mesh position={[-15, 5, 0]} scale={[1, 15, 20]}>
+          <boxGeometry />
+          <meshBasicMaterial color="#ffffff" />
+        </mesh>
+        <mesh position={[0, -10, 0]} scale={[20, 1, 20]}>
+          <boxGeometry />
+          <meshBasicMaterial color="#1a1505" />
+        </mesh>
+      </Environment>
       
       <CameraRig scrollProgress={scrollProgress} />
       

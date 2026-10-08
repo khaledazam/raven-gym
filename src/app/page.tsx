@@ -4,11 +4,11 @@ import dynamic from "next/dynamic";
 import Hero from "@/components/hero/Hero";
 import About from "@/components/sections/About";
 
-// Dynamically import heavy sections below the fold
-const GymGallery = dynamic(() => import("@/components/sections/GymGallery"), {
-  ssr: false,
-  loading: () => <div className="h-[80vh] w-full bg-black animate-pulse" />
-});
+// Temporarily hidden: The Sanctuary section
+// const GymGallery = dynamic(() => import("@/components/sections/GymGallery"), {
+//   ssr: false,
+//   loading: () => <div className="h-[80vh] w-full bg-black animate-pulse" />
+// });
 
 const Transformations = dynamic(() => import("@/components/sections/Transformations"), {
   ssr: false,
@@ -44,7 +44,7 @@ export default function Home() {
     <main className="flex flex-col w-full bg-black">
       <Hero />
       <About />
-      <GymGallery />
+      {/* <GymGallery /> */}
       <Transformations />
       <ClassScheduler />
       <AiNutrition />

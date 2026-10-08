@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import { Check, ArrowRight } from "lucide-react";
 import gsap from "gsap";
@@ -141,11 +142,14 @@ const TiltCard = ({ plan, isHovered, onHover, onLeave }: { plan: typeof plans[0]
       </div>
 
       <div style={{ transform: "translateZ(30px)" }}>
-        <button className={`group relative w-full py-4 rounded-xl font-heading text-sm font-bold tracking-widest uppercase transition-all overflow-hidden ${
-          plan.highlight 
-            ? "bg-gold text-black shadow-[0_0_20px_rgba(176,138,71,0.3)]" 
-            : "bg-transparent border border-white/20 text-white hover:border-gold hover:text-gold"
-        }`}>
+        <Link
+          href={`/subscribe?plan=${plan.id}`}
+          className={`group relative w-full py-4 rounded-xl font-heading text-sm font-bold tracking-widest uppercase transition-all overflow-hidden flex items-center justify-center ${
+            plan.highlight 
+              ? "bg-gold text-black shadow-[0_0_20px_rgba(176,138,71,0.3)]" 
+              : "bg-transparent border border-white/20 text-white hover:border-gold hover:text-gold"
+          }`}
+        >
           <span className="relative z-10 flex items-center justify-center gap-2">
             {plan.cta}
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -153,7 +157,7 @@ const TiltCard = ({ plan, isHovered, onHover, onLeave }: { plan: typeof plans[0]
           {plan.highlight && (
             <div className="absolute inset-0 z-0 h-full w-full -translate-x-full bg-white transition-transform duration-500 ease-out group-hover:translate-x-0" />
           )}
-        </button>
+        </Link>
       </div>
     </motion.div>
   );

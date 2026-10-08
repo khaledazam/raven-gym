@@ -1,32 +1,9 @@
 import { NextResponse } from 'next/server';
-import { MongoClient } from 'mongodb';
-
-const uri = process.env.MONGODB_URI as string;
-let client: MongoClient | null = null;
-let clientPromise: Promise<MongoClient>;
-
-if (!process.env.MONGODB_URI) {
-  throw new Error('Please add your Mongo URI to .env.local');
-}
-
-if (process.env.NODE_ENV === 'development') {
-  let globalWithMongo = global as typeof globalThis & {
-    _mongoClientPromise?: Promise<MongoClient>
-  }
-  if (!globalWithMongo._mongoClientPromise) {
-    client = new MongoClient(uri);
-    globalWithMongo._mongoClientPromise = client.connect();
-  }
-  clientPromise = globalWithMongo._mongoClientPromise;
-} else {
-  client = new MongoClient(uri);
-  clientPromise = client.connect();
-}
+import { getDatabase } from '@/lib/mongodb';
 
 export async function GET() {
   try {
-    const client = await clientPromise;
-    const db = client.db('gym_management');
+    const db = await getDatabase();
     
     const twoHoursAgo = new Date(Date.now() - 2 * 60 * 60 * 1000);
     

@@ -232,8 +232,8 @@ export default function ClassScheduler() {
                       }`}>
                         {cls.intensity} Intensity
                       </span>
-                      <span className="text-zinc-500 text-xs flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5 text-zinc-600" /> {cls.duration}
+                      <span className="text-zinc-300 text-xs flex items-center gap-1 font-medium">
+                        <Clock className="w-3.5 h-3.5 text-[#d4af37]" /> {cls.duration}
                       </span>
                     </div>
                     <h3 className="text-white text-lg md:text-xl font-bold tracking-wide uppercase">

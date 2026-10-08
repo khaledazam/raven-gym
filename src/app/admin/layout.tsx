@@ -9,11 +9,14 @@ import {
   Brain, 
   CreditCard, 
   Settings, 
-  LogOut 
+  LogOut,
+  UserCheck,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const navItems = [
   { name: "نظرة عامة", href: "/admin", icon: LayoutDashboard },
+  { name: "طلبات الاشتراك (كاش / إنستاباي)", href: "/admin/subscriptions", icon: UserCheck, hasBadge: true },
   { name: "الأعضاء", href: "/admin/members", icon: Users },
   { name: "التحولات", href: "/admin/transformations", icon: Activity },
   { name: "خطط الذكاء الاصطناعي", href: "/admin/ai-plans", icon: Brain },
@@ -23,6 +26,27 @@ const navItems = [
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const [pendingCount, setPendingCount] = useState<number>(0);
+
+  useEffect(() => {
+    async function checkPending() {
+      try {
+        const res = await fetch("/api/admin/subscriptions?status=pending");
+        const data = await res.json();
+        if (data.success && data.stats) {
+          setPendingCount(data.stats.pending || 0);
+        }
+      } catch (err) {
+        // quiet error
+      }
+    }
+    checkPending();
+    const interval = setInterval(checkPending, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const currentNav = navItems.find((item) => item.href === pathname);
+  const pageTitle = currentNav ? currentNav.name : "لوحة التحكم";
 
   return (
     <div className="flex h-screen w-full bg-black text-white font-sans overflow-hidden" dir="rtl">
@@ -44,14 +68,23 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Link 
                 key={item.name} 
                 href={item.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${
+                className={`flex items-center justify-between px-4 py-3 rounded-xl transition-colors ${
                   isActive 
                     ? "bg-gold text-black font-bold shadow-[0_0_15px_rgba(176,138,71,0.3)]" 
                     : "text-gray-400 hover:text-white hover:bg-white/5"
                 }`}
               >
-                <Icon className={`w-5 h-5 ${isActive ? "text-black" : ""}`} />
-                <span className="text-sm tracking-wide">{item.name}</span>
+                <div className="flex items-center gap-3">
+                  <Icon className={`w-5 h-5 ${isActive ? "text-black" : ""}`} />
+                  <span className="text-sm tracking-wide">{item.name}</span>
+                </div>
+                {item.hasBadge && pendingCount > 0 && (
+                  <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${
+                    isActive ? "bg-black text-gold" : "bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 animate-pulse"
+                  }`}>
+                    {pendingCount}
+                  </span>
+                )}
               </Link>
             );
           })}
@@ -71,7 +104,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto no-scrollbar bg-gradient-to-br from-black to-dark-gray">
         <header className="h-20 flex items-center justify-between px-8 border-b border-white/10 bg-black/50 backdrop-blur sticky top-0 z-10">
-          <h1 className="font-heading text-xl font-bold tracking-widest text-white">نظرة عامة</h1>
+          <h1 className="font-heading text-xl font-bold tracking-widest text-white">{pageTitle}</h1>
           <div className="flex items-center gap-4">
             <div className="text-left">
               <div className="text-sm font-bold">المدير العام</div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Scene from "./Scene";
@@ -18,12 +19,11 @@ export default function Hero() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Intro Timeline
-      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
       
-      tl.fromTo(
+      tl.from(
         [headlineRef.current, subHeadlineRef.current, buttonsRef.current],
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.5, stagger: 0.2, delay: 2 } // wait for 3D text to emerge
+        { y: 30, opacity: 0, duration: 0.8, stagger: 0.1, delay: 0.1 }
       );
 
       // Scroll Pin & Progress Timeline
@@ -79,10 +79,10 @@ export default function Hero() {
         </p>
 
         <div ref={buttonsRef} className="mt-12 flex flex-col sm:flex-row gap-6 pointer-events-auto">
-          <button className="group relative overflow-hidden rounded-none bg-gold px-10 py-5 font-heading text-lg font-bold tracking-widest text-black transition-all hover:scale-105 shadow-[0_0_40px_rgba(176,138,71,0.3)] hover:shadow-[0_0_60px_rgba(176,138,71,0.6)]">
+          <Link href="/subscribe" className="group relative overflow-hidden rounded-none bg-gold px-10 py-5 font-heading text-lg font-bold tracking-widest text-black transition-all hover:scale-105 shadow-[0_0_40px_rgba(176,138,71,0.3)] hover:shadow-[0_0_60px_rgba(176,138,71,0.6)] text-center flex items-center justify-center">
             <span className="relative z-10">JOIN NOW</span>
             <div className="absolute inset-0 z-0 h-full w-full translate-y-full bg-white transition-transform duration-500 ease-out group-hover:translate-y-0" />
-          </button>
+          </Link>
           
           <button className="group relative overflow-hidden rounded-none border border-gold/30 bg-black/50 backdrop-blur-md px-10 py-5 font-heading text-lg font-bold tracking-widest text-gold transition-all hover:border-gold hover:bg-gold/10">
             <span className="relative z-10">VIEW TRANSFORMATIONS</span>
