@@ -100,16 +100,16 @@ export default function CountdownPromo() {
                 className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-gradient-to-r from-red-500/15 via-[#d4af37]/20 to-red-500/15 border border-[#d4af37]/40 text-[#f5d77f] text-xs sm:text-sm font-bold tracking-wider mb-5 shadow-[0_0_25px_rgba(212,175,55,0.2)] animate-pulse"
               >
                 <Flame className="w-4 h-4 text-red-400 animate-bounce" />
-                <span>عرض الافتتاح والاشتراك الحصري | مهلة 30 يوماً فقط</span>
+                <span>عرض الافتتاح الحصري | خصم 30% لمهلة 30 يوماً فقط</span>
                 <Sparkles className="w-4 h-4 text-[#d4af37]" />
               </motion.div>
 
               <h2 className="text-3xl sm:text-5xl md:text-6xl font-heading font-black tracking-tight text-white mb-4">
-                العد التنازلي <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fff1be] to-[#aa8410]">لإغلاق باب العرض</span>
+                خصم <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fff1be] to-[#aa8410]">30% بمناسبة الافتتاح</span>
               </h2>
 
               <p className="text-gray-300 text-sm sm:text-base md:text-lg max-w-2xl leading-relaxed">
-                ينتهي هذا العرض الاستثنائي تلقائياً وتعود الاشتراكات لسعرها الطبيعي فور انتهاء العداد أو اكتمال المقاعد.
+                احصل على خصم 30% فوري على كافة باقات Raven. ينتهي هذا العرض الحصري تلقائياً وتعود الأسعار لوضعها الطبيعي فور انتهاء العداد أو اكتمال المقاعد.
               </p>
             </div>
 
@@ -182,7 +182,7 @@ export default function CountdownPromo() {
               <Link href="/subscribe" className="w-full sm:w-auto">
                 <button className="group relative w-full sm:w-auto overflow-hidden rounded-xl bg-gradient-to-r from-[#d4af37] to-[#aa8410] hover:from-[#aa8410] hover:to-[#d4af37] px-10 py-5 font-heading text-base sm:text-lg font-bold tracking-wider text-black transition-all hover:scale-105 shadow-[0_0_35px_rgba(212,175,55,0.4)] flex items-center justify-center gap-3 cursor-pointer">
                   <Zap className="w-5 h-5 fill-black stroke-none" />
-                  <span className="relative z-10">الحق العرض واشترك الآن</span>
+                  <span className="relative z-10">احصل على خصم 30% واشترك الآن</span>
                   <ArrowLeft className="w-5 h-5 relative z-10 transition-transform group-hover:-translate-x-1.5" />
                   <div className="absolute inset-0 z-0 h-full w-full -translate-x-full bg-white transition-transform duration-500 ease-out group-hover:translate-x-0" />
                 </button>

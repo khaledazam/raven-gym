@@ -26,6 +26,7 @@ import {
   MessageCircle,
   Home,
   RefreshCw,
+  Flame,
 } from "lucide-react";
 
 interface PlanOption {
@@ -83,11 +84,11 @@ const PLANS: PlanOption[] = [
   },
 ];
 
-const DURATIONS = [
-  { months: 1, label: "شهر واحد", discountPercent: 0, tag: "مرن" },
-  { months: 3, label: "3 شهور", discountPercent: 10, tag: "وفر 10%" },
-  { months: 6, label: "6 شهور", discountPercent: 15, tag: "وفر 15%" },
-  { months: 12, label: "سنة كاملة", discountPercent: 25, tag: "الأفضل قيمة - وفر 25%" },
+const BASE_DURATIONS = [
+  { months: 1, label: "شهر واحد", defaultDiscount: 0, promoDiscount: 30, tagDefault: "مرن", tagPromo: "خصم الافتتاح 30%" },
+  { months: 3, label: "3 شهور", defaultDiscount: 10, promoDiscount: 30, tagDefault: "وفر 10%", tagPromo: "خصم الافتتاح 30%" },
+  { months: 6, label: "6 شهور", defaultDiscount: 15, promoDiscount: 30, tagDefault: "وفر 15%", tagPromo: "خصم الافتتاح 30%" },
+  { months: 12, label: "سنة كاملة", defaultDiscount: 25, promoDiscount: 35, tagDefault: "الأفضل قيمة - وفر 25%", tagPromo: "الأفضل قيمة - وفر 35%" },
 ];
 
 function SubscribeContent() {
@@ -122,16 +123,39 @@ function SubscribeContent() {
     message: string;
   } | null>(null);
 
+  const [isPromoActive, setIsPromoActive] = useState<boolean>(true);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("raven_launch_countdown_v1");
+      if (stored) {
+        const target = parseInt(stored, 10);
+        if (target <= Date.now()) {
+          setIsPromoActive(false);
+        }
+      }
+    } catch {
+      // Keep true by default
+    }
+  }, []);
+
   useEffect(() => {
     if (preSelectedPlan && PLANS.some((p) => p.id === preSelectedPlan)) {
       setFormData((prev) => ({ ...prev, planId: preSelectedPlan }));
     }
   }, [preSelectedPlan]);
 
+  const activeDurations = BASE_DURATIONS.map((dur) => ({
+    months: dur.months,
+    label: dur.label,
+    discountPercent: isPromoActive ? dur.promoDiscount : dur.defaultDiscount,
+    tag: isPromoActive ? dur.tagPromo : dur.tagDefault,
+  }));
+
   // Pricing calculation
   const currentPlan = PLANS.find((p) => p.id === formData.planId) || PLANS[1];
   const currentDuration =
-    DURATIONS.find((d) => d.months === formData.durationMonths) || DURATIONS[0];
+    activeDurations.find((d) => d.months === formData.durationMonths) || activeDurations[0];
   const baseTotal = currentPlan.monthlyBasePrice * currentDuration.months;
   const finalPrice = Math.round(baseTotal * (1 - currentDuration.discountPercent / 100));
 
@@ -357,6 +381,36 @@ function SubscribeContent() {
           </div>
         </div>
 
+        {/* Launch Promo 30% Banner */}
+        {isPromoActive && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-red-500/15 via-[#d4af37]/20 to-red-500/15 border border-[#d4af37]/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-right shadow-[0_0_30px_rgba(212,175,55,0.2)]"
+          >
+            <div className="flex items-center gap-3 w-full sm:w-auto">
+              <div className="w-11 h-11 rounded-xl bg-[#d4af37]/20 border border-[#d4af37]/40 flex items-center justify-center text-[#d4af37] shrink-0">
+                <Flame className="w-5 h-5 text-red-400 animate-bounce" />
+              </div>
+              <div>
+                <div className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                  <span>تم تفعيل خصم الافتتاح 30% تلقائياً</span>
+                  <span className="bg-[#d4af37] text-black text-[10px] sm:text-[11px] font-black px-2.5 py-0.5 rounded-full shadow-sm">
+                    -30% فوري
+                  </span>
+                </div>
+                <div className="text-xs text-gray-300 mt-0.5">
+                  عرض الـ 30 يوماً نشط الآن! تم تخفيض جميع أسعار الباقات وحسابها تلقائياً.
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/60 border border-[#d4af37]/30 text-[#f5d77f] text-xs font-mono font-bold self-end sm:self-auto">
+              <Sparkles className="w-3.5 h-3.5 text-[#d4af37]" />
+              <span>كود: RAVEN30</span>
+            </div>
+          </motion.div>
+        )}
+
         {/* Error Alert */}
         {errorMsg && (
           <motion.div
@@ -538,7 +592,7 @@ function SubscribeContent() {
               <div className="space-y-3">
                 <label className="text-xs font-bold text-gray-300">مدة الاشتراك المطلوبة:</label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  {DURATIONS.map((dur) => {
+                  {activeDurations.map((dur) => {
                     const isSelected = formData.durationMonths === dur.months;
                     return (
                       <button

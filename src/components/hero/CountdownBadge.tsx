@@ -80,8 +80,9 @@ export default function CountdownBadge() {
           </div>
 
           <div className="flex flex-col">
-            <span className="text-[10px] font-bold text-gray-400 tracking-wider flex items-center gap-1">
-              <span>عرض الافتتاح ينتهي خلال</span>
+            <span className="text-[10px] font-bold text-gray-400 tracking-wider flex items-center gap-1.5">
+              <span className="text-[#f5d77f] font-black">خصم 30%</span>
+              <span>ينتهي خلال</span>
             </span>
             <div className="flex items-center gap-1 font-mono font-black text-sm text-white group-hover:text-[#f5d77f] transition-colors" dir="ltr">
               <span className="text-[#f5d77f]">{timeLeft.days}d</span>
