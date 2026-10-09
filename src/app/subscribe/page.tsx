@@ -70,7 +70,7 @@ const PLANS: PlanOption[] = [
   {
     id: "dominate",
     name: "DOMINATE",
-    nameAr: "باقة النخبة VIP",
+    nameAr: "باقة Raven VIP",
     tagline: "التجربة الفاخرة للرياضيين الطموحين لأقصى أداء",
     monthlyBasePrice: 2200,
     features: [
@@ -314,7 +314,7 @@ function SubscribeContent() {
           </Link>
 
           <h1 className="font-heading text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white mb-3">
-            انضم إلى <span className="text-gold">النخبة</span>
+            انضم إلى <span className="text-gold">Raven</span>
           </h1>
           <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">
             سجل بياناتك واختر باقتك، ثم حوّل قيمة الاشتراك عبر إنستاباي بسهولة لبدء رحلتك التحولية فوراً.

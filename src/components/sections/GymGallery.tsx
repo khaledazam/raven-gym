@@ -17,35 +17,35 @@ interface GalleryItem {
 const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: 1,
-    title: "Strength Arena",
+    title: "صالة القوة والأوزان",
     subtitle: "FORGE POWER",
-    tag: "EQUIPMENT",
+    tag: "معدات وأجهزة",
     image: "/images/strength_arena.png",
-    description: "Premium hammer strength machines, raw dumbbells up to 80kg, and high-tension platforms designed for maximum force production."
+    description: "أحدث أجهزة هامر سترينث، دمبلز أوزان حرة تصل إلى 80 كجم، ومنصات رفع مخصصة لأعلى إنتاجية للقوة."
   },
   {
     id: 2,
-    title: "Cardio Loft",
+    title: "منطقة الكارديو واللياقة",
     subtitle: "ENDURANCE REALM",
-    tag: "STAMINA",
+    tag: "اللياقة والتحمل",
     image: "/images/cardio_loft.png",
-    description: "State-of-the-art treadmills and stair climbers overlooking the city skyline, equipped with custom biometric tracking and cooling zones."
+    description: "أجهزة جري وتزلج متطورة مع شاشات قياس المؤشرات الحيوية ومناطق تبريد هواء مباشرة."
   },
   {
     id: 3,
-    title: "Recovery Spa",
+    title: "سبا والاستشفاء العضلي",
     subtitle: "REGENERATE & RESTORE",
-    tag: "WELLNESS",
+    tag: "صحة واستشفاء",
     image: "/images/recovery_spa.png",
-    description: "Elevate your cellular recovery with our thermal saunas, infrared therapy cabins, and cold plunge pools optimized at 4°C."
+    description: "تسريع الاستشفاء العضلي مع غرف الساونا الحرارية، وكبائن الأشعة تحت الحمراء، وأحواض الغطس الباردة عند 4 درجات مئوية."
   },
   {
     id: 4,
-    title: "VIP Lounge",
+    title: "لاونج كبار الزوار (VIP)",
     subtitle: "CONNECT & FUEL",
-    tag: "LIFESTYLE",
+    tag: "أسلوب حياة",
     image: "/images/vip_lounge.png",
-    description: "Relax, network, or enjoy premium curated protein blends, custom cold presses, and specialized pre-workout infusions."
+    description: "مكان مريح للتواصل والاسترخاء والاستمتاع بمخفوقات البروتين المعدة خصيصاً والمشروبات المنعشة قبل وبعد التمرين."
   }
 ];
 
@@ -54,26 +54,25 @@ export default function GymGallery() {
   const { scrollXProgress } = useScroll({ container: containerRef });
 
   return (
-    <section className="w-full bg-black py-24 relative overflow-hidden border-t border-zinc-900">
+    <section className="w-full bg-black py-24 relative overflow-hidden border-t border-zinc-900" dir="rtl">
       {/* Background soft lighting */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-[#d4af37]/5 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 mb-16 relative z-10">
-        <span className="text-[#d4af37] text-xs font-semibold uppercase tracking-[0.2em] flex items-center gap-2 mb-3">
-          <Sparkles className="w-3.5 h-3.5" /> Sanctuary
+        <span className="text-[#d4af37] text-xs font-semibold tracking-wider flex items-center gap-2 mb-3">
+          <Sparkles className="w-3.5 h-3.5" /> مرافق الصالة
         </span>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <h2 className="text-white text-4xl md:text-5xl font-black uppercase tracking-tight leading-none">
-              Explore The <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#f3e5ab] to-[#aa8410]">Sanctuary</span>
+            <h2 className="text-white text-4xl md:text-5xl font-black tracking-tight leading-none">
+              استكشف صالات <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#f3e5ab] to-[#aa8410]">Raven Gym</span>
             </h2>
             <p className="text-gray-400 mt-4 max-w-xl text-sm md:text-base leading-relaxed">
-              Step inside our luxury fitness chambers designed for elite training, deep recovery, and premium lifestyle experience.
+              تعرّف على مساحاتنا الرياضية الفاخرة المصممة لتدريب Raven، والاستشفاء العميق، وتجربة رياضية متكاملة.
             </p>
           </div>
-          <div className="flex items-center gap-4 text-xs text-[#d4af37] font-semibold tracking-widest uppercase">
-            <span>Scroll/Drag horizontally</span>
-            <ArrowRight className="w-4 h-4 animate-pulse" />
+          <div className="flex items-center gap-4 text-xs text-[#d4af37] font-semibold tracking-wider">
+            <span>اسحب أفقياً لاستكشاف المزيد</span>
           </div>
         </div>
       </div>
@@ -104,13 +103,13 @@ export default function GymGallery() {
 
             {/* Content overlay */}
             <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end z-20">
-              <span className="text-[#d4af37] text-xs font-bold tracking-widest uppercase mb-2 block">
+              <span className="text-[#d4af37] text-xs font-bold tracking-wider mb-2 block">
                 {item.tag}
               </span>
-              <span className="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-1 block">
+              <span className="text-zinc-500 text-[10px] font-bold tracking-wider mb-1 block">
                 {item.subtitle}
               </span>
-              <h3 className="text-white text-2xl md:text-3xl font-black uppercase tracking-wide leading-none mb-3">
+              <h3 className="text-white text-2xl md:text-3xl font-black tracking-wide leading-none mb-3">
                 {item.title}
               </h3>
               <p className="text-gray-400 text-xs md:text-sm leading-relaxed max-h-0 group-hover:max-h-24 opacity-0 group-hover:opacity-100 overflow-hidden transition-all duration-500 ease-out">

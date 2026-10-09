@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowLeft } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -12,47 +12,47 @@ gsap.registerPlugin(ScrollTrigger);
 const plans = [
   {
     id: "train",
-    name: "TRAIN",
-    description: "Build consistency, learn proper technique, and establish a strong fitness foundation.",
+    name: "TRAIN | تدريب أساسي",
+    description: "ابنِ استمراريتك، وتعلّم التكنيك الصحيح، وضع أساساً قوياً للياقتك البدنية.",
     features: [
-      "Access to training facilities",
-      "Full equipment access",
-      "Locker rooms",
-      "Beginner-friendly environment",
-      "Progress tracking",
+      "دخول كامل لمرافق الجيم",
+      "استخدام كافة الأجهزة والأوزان الحرة",
+      "خزائن خاصة وغرف تبديل الملابس",
+      "بيئة تدريب ملهمة لجميع المستويات",
+      "متابعة دورية للتقدم والتطور",
     ],
-    cta: "Start Training",
+    cta: "ابدأ التدريب",
     highlight: false,
     bgGradient: "radial-gradient(circle at 50% 50%, rgba(30,58,138,0.15) 0%, rgba(5,5,5,0) 60%)",
   },
   {
     id: "transform",
-    name: "TRANSFORM",
-    description: "A complete fitness journey designed for members who want noticeable progress.",
+    name: "TRANSFORM | التحول الشامل",
+    description: "رحلة لياقة متكاملة مصممة للأعضاء الباحثين عن نتائج واضحة وتغيير حقيقي.",
     features: [
-      "Everything in Train",
-      "Personalized workout plans",
-      "Nutrition guidance",
-      "Monthly progress reviews",
-      "Priority support",
+      "جميع مميزات باقة TRAIN",
+      "برامج وجداول تدريبية مخصصة لهدفك",
+      "خطة وتوجيه غذائي متكامل",
+      "مراجعة شهرية للقياسات والوزن",
+      "دعم ومتابعة ذات أولوية",
     ],
-    cta: "Start Transforming",
+    cta: "ابدأ التحول الآن",
     highlight: true,
     bgGradient: "radial-gradient(circle at 50% 50%, rgba(176,138,71,0.15) 0%, rgba(5,5,5,0) 70%)",
   },
   {
     id: "dominate",
-    name: "DOMINATE",
-    description: "The ultimate Raven experience for members committed to achieving their highest potential.",
+    name: "DOMINATE | Raven",
+    description: "التجربة الفائقة في Raven للأعضاء الملتزمين بالوصول لأعلى مستويات القوة واللياقة.",
     features: [
-      "Everything in Transform",
-      "Advanced coaching support",
-      "Priority scheduling",
-      "Premium member benefits",
-      "Exclusive Raven community access",
-      "Performance optimization guidance",
+      "جميع مميزات باقة TRANSFORM",
+      "إشراف ومتابعة مباشرة من كبار المدربين",
+      "أولوية في حجز الحصص والمواعيد",
+      "مزايا وتسهيلات حصرية للأعضاء",
+      "دخول مجتمع Raven الحصري",
+      "استشارات متقدمة لرفع الأداء الرياضي",
     ],
-    cta: "Become Elite",
+    cta: "انضم إلى Raven",
     highlight: false,
     bgGradient: "radial-gradient(circle at 50% 50%, rgba(139,0,0,0.15) 0%, rgba(5,5,5,0) 60%)",
   }
@@ -121,14 +121,14 @@ const TiltCard = ({ plan, isHovered, onHover, onLeave }: { plan: typeof plans[0]
       {plan.highlight && (
         <div 
           style={{ transform: "translateZ(30px)" }}
-          className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-gold to-yellow-600 text-black px-6 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-[0_0_20px_rgba(176,138,71,0.4)]"
+          className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-gold to-yellow-600 text-black px-6 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(176,138,71,0.4)]"
         >
-          Most Popular
+          الأكثر طلباً
         </div>
       )}
 
-      <div className="text-left mb-8 mt-4" style={{ transform: "translateZ(40px)" }}>
-        <h3 className={`font-heading text-4xl font-bold mb-4 tracking-wider uppercase ${plan.highlight ? 'text-gold' : 'text-white'}`}>{plan.name}</h3>
+      <div className="text-right mb-8 mt-4" style={{ transform: "translateZ(40px)" }}>
+        <h3 className={`font-heading text-2xl md:text-3xl font-bold mb-4 tracking-wide ${plan.highlight ? 'text-gold' : 'text-white'}`}>{plan.name}</h3>
         <p className="text-gray-400 font-light text-sm leading-relaxed min-h-[60px]">{plan.description}</p>
       </div>
 
@@ -144,7 +144,7 @@ const TiltCard = ({ plan, isHovered, onHover, onLeave }: { plan: typeof plans[0]
       <div style={{ transform: "translateZ(30px)" }}>
         <Link
           href={`/subscribe?plan=${plan.id}`}
-          className={`group relative w-full py-4 rounded-xl font-heading text-sm font-bold tracking-widest uppercase transition-all overflow-hidden flex items-center justify-center ${
+          className={`group relative w-full py-4 rounded-xl font-heading text-sm font-bold tracking-wider uppercase transition-all overflow-hidden flex items-center justify-center cursor-pointer ${
             plan.highlight 
               ? "bg-gold text-black shadow-[0_0_20px_rgba(176,138,71,0.3)]" 
               : "bg-transparent border border-white/20 text-white hover:border-gold hover:text-gold"
@@ -152,7 +152,7 @@ const TiltCard = ({ plan, isHovered, onHover, onLeave }: { plan: typeof plans[0]
         >
           <span className="relative z-10 flex items-center justify-center gap-2">
             {plan.cta}
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           </span>
           {plan.highlight && (
             <div className="absolute inset-0 z-0 h-full w-full -translate-x-full bg-white transition-transform duration-500 ease-out group-hover:translate-x-0" />
@@ -191,7 +191,7 @@ export default function Memberships() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative z-10 bg-[#050505] py-32 px-4 md:px-6 font-sans overflow-hidden" dir="ltr">
+    <section ref={containerRef} className="relative z-10 bg-[#050505] py-32 px-4 md:px-6 font-sans overflow-hidden" dir="rtl">
       
       {/* Dynamic Backgrounds */}
       <AnimatePresence>
@@ -216,18 +216,18 @@ export default function Memberships() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-heading text-5xl md:text-7xl font-bold tracking-tighter text-white uppercase"
+            className="font-heading text-4xl md:text-6xl font-bold tracking-tight text-white"
           >
-            Choose Your <span className="text-gold">Path</span>
+            اختر <span className="text-gold">باقتك التدريبية</span>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="mt-6 text-gray-400 font-light text-lg md:text-xl tracking-widest uppercase max-w-3xl mx-auto"
+            className="mt-6 text-gray-400 font-light text-lg md:text-xl tracking-wider max-w-3xl mx-auto"
           >
-            Three membership experiences designed for different goals, commitment levels, and ambitions.
+            ثلاث باقات اشتراك مصممة لتناسب مختلف الأهداف، ومستويات الالتزام، والطموحات الرياضية.
           </motion.p>
         </div>
 

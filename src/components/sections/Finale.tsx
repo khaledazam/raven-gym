@@ -215,17 +215,17 @@ export default function Finale() {
       {/* Content Overlay */}
       <div className="relative z-20 flex flex-col items-center justify-center text-center mt-32 pointer-events-none">
         
-        <h2 className="font-heading font-bold text-white uppercase leading-none drop-shadow-2xl flex flex-col gap-2">
-          <span ref={headlineLine1Ref} className="text-5xl md:text-7xl tracking-tighter opacity-0" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>
-            YOUR TRANSFORMATION
+        <h2 className="font-heading font-bold text-white leading-none drop-shadow-2xl flex flex-col gap-2">
+          <span ref={headlineLine1Ref} className="text-5xl md:text-7xl tracking-tight opacity-0" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>
+            تحولك الحقيقي
           </span>
-          <span ref={headlineLine2Ref} className="text-6xl md:text-8xl tracking-tighter text-gold opacity-0" style={{ textShadow: "0 0 40px rgba(176,138,71,0.4)" }}>
-            STARTS NOW
+          <span ref={headlineLine2Ref} className="text-6xl md:text-8xl tracking-tight text-gold opacity-0" style={{ textShadow: "0 0 40px rgba(176,138,71,0.4)" }}>
+            يبدأ الآن
           </span>
         </h2>
 
         <p ref={subtextRef} className="mt-8 text-xl md:text-2xl text-gray-300 font-light max-w-2xl px-4 opacity-0 drop-shadow-md">
-          Every goal starts with a decision. <br/> Take the first step and begin your journey with Raven Gym.
+          كل هدف حقيقي يبدأ بقرار. <br/> خذ الخطوة الأولى وابدأ رحلتك الرياضية اليوم في Raven Gym.
         </p>
 
         <div ref={ctaRef} className="mt-16 pointer-events-auto opacity-0">
@@ -234,7 +234,7 @@ export default function Finale() {
               onHoverStart={() => setIsHovered(true)} 
               onHoverEnd={() => setIsHovered(false)}
             >
-              JOIN RAVEN
+              انضم إلى RAVEN
             </MagneticButton>
           </Link>
         </div>

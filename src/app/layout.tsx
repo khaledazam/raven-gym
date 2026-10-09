@@ -18,8 +18,8 @@ const cairo = Cairo({
 });
 
 export const metadata: Metadata = {
-  title: "RAVEN GYM | تدريب النخبة والتغذية بالذكاء الاصطناعي",
-  description: "أطلق العنان للغراب بداخلك. علامة تجارية رائدة للياقة البدنية مع تدريب النخبة والتغذية الذكية وأحدث المعدات.",
+  title: "RAVEN GYM | تدريب Raven والتغذية",
+  description: "أطلق العنان للغراب بداخلك. علامة تجارية رائدة للياقة البدنية مع تدريب Raven والتغذية وأحدث المعدات.",
 };
 
 export default function RootLayout({

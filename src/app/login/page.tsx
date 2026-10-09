@@ -83,7 +83,7 @@ export default function LoginPage() {
           </form>
           
           <div className="mt-8 text-center text-sm text-gray-500">
-            ليس لديك حساب؟ <Link href="/" className="text-gold hover:text-white transition-colors">انضم للنخبة</Link>
+            ليس لديك حساب؟ <Link href="/" className="text-gold hover:text-white transition-colors">انضم إلى Raven</Link>
           </div>
         </div>
       </motion.div>

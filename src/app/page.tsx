@@ -4,6 +4,10 @@ import dynamic from "next/dynamic";
 import Hero from "@/components/hero/Hero";
 import About from "@/components/sections/About";
 
+const CountdownPromo = dynamic(() => import("@/components/sections/CountdownPromo"), {
+  ssr: false,
+});
+
 // Temporarily hidden: The Sanctuary section
 // const GymGallery = dynamic(() => import("@/components/sections/GymGallery"), {
 //   ssr: false,
@@ -30,6 +34,10 @@ const Memberships = dynamic(() => import("@/components/sections/Memberships"), {
   loading: () => <div className="h-[80vh] w-full bg-black animate-pulse" />
 });
 
+const Contact = dynamic(() => import("@/components/sections/Contact"), {
+  ssr: false
+});
+
 const Finale = dynamic(() => import("@/components/sections/Finale"), {
   ssr: false,
   loading: () => <div className="h-[80vh] w-full bg-black animate-pulse" />
@@ -43,12 +51,14 @@ export default function Home() {
   return (
     <main className="flex flex-col w-full bg-black">
       <Hero />
+      <CountdownPromo />
       <About />
       {/* <GymGallery /> */}
       <Transformations />
       <ClassScheduler />
       <AiNutrition />
       <Memberships />
+      <Contact />
       <Finale />
       <RavenCoachBot />
     </main>

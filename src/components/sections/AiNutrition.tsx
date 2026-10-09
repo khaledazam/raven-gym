@@ -1,17 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Cpu, Activity, Utensils, Zap, CheckCircle2, TrendingUp, Target, Clock, ArrowRight, ShieldCheck, Loader2 } from "lucide-react";
+import { Cpu, Activity, Utensils, Zap, CheckCircle2, TrendingUp, Target, Clock, ArrowLeft, ShieldCheck, Loader2 } from "lucide-react";
 
-type Goal = "Fat Loss" | "Muscle Gain" | "Body Recomposition";
-type ActivityLevel = "Sedentary" | "Light" | "Active" | "Very Active";
+type Goal = "خسارة دهون" | "زيادة عضلية" | "إعادة تشكيل الجسم";
+type ActivityLevel = "قليل الحركة (مكتبي)" | "نشاط خفيف (1-2 يوم/أسبوع)" | "نشط (3-5 أيام/أسبوع)" | "نشط جداً (تدريب يومي مكثف)";
 
 const PROCESSING_STEPS = [
-  "Analyzing Body Metrics",
-  "Calculating Daily Energy Needs",
-  "Building Nutrition Strategy",
-  "Estimating Timeline"
+  "تحليل البيانات والقياسات البدنية",
+  "حساب الاحتياج اليومي من الطاقة والسعرات",
+  "بناء استراتيجية التغذية وتوزيع الماكروز",
+  "تقدير المدة الزمنية للوصول للهدف"
 ];
 
 export default function AiNutrition() {
@@ -23,9 +24,9 @@ export default function AiNutrition() {
     weight: "",
     height: "",
     age: "",
-    gender: "Male",
-    activity: "Active" as ActivityLevel,
-    goal: "Fat Loss" as Goal,
+    gender: "ذكر",
+    activity: "نشط (3-5 أيام/أسبوع)" as ActivityLevel,
+    goal: "خسارة دهون" as Goal,
   });
 
   const handleGenerate = (e: React.FormEvent) => {
@@ -45,19 +46,19 @@ export default function AiNutrition() {
         calculateResults();
         setStatus("complete");
       }
-    }, 1500); // 1.5s per step for a premium feel
+    }, 1500);
   };
 
   const calculateResults = () => {
     let cals = 2500; let p = 180; let c = 250; let f = 70;
-    let timeline = "12 Weeks";
+    let timeline = "12 أسبوع";
 
-    if (formData.goal === "Fat Loss") {
-      cals = 2100; p = 200; c = 150; f = 60; timeline = "12-16 Weeks";
-    } else if (formData.goal === "Muscle Gain") {
-      cals = 3200; p = 220; c = 400; f = 80; timeline = "16-24 Weeks";
+    if (formData.goal === "خسارة دهون") {
+      cals = 2100; p = 200; c = 150; f = 60; timeline = "12-16 أسبوع";
+    } else if (formData.goal === "زيادة عضلية") {
+      cals = 3200; p = 220; c = 400; f = 80; timeline = "16-24 أسبوع";
     } else {
-      cals = 2600; p = 210; c = 220; f = 75; timeline = "16 Weeks";
+      cals = 2600; p = 210; c = 220; f = 75; timeline = "16 أسبوع";
     }
 
     setResults({
@@ -76,27 +77,25 @@ export default function AiNutrition() {
   };
 
   return (
-    <section className="relative z-10 bg-[#050505] py-32 px-6 overflow-hidden font-sans text-left" dir="ltr">
+    <section className="relative z-10 bg-[#050505] py-32 px-6 overflow-hidden font-sans" dir="rtl">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="mx-auto max-w-7xl relative z-10 flex flex-col lg:flex-row items-stretch gap-12">
         
-        {/* LEFT COLUMN: Header & Info */}
+        {/* RIGHT COLUMN: Header & Info */}
         <div className="flex-1 flex flex-col justify-center">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 text-gold mb-6 text-sm font-bold tracking-widest uppercase">
-              <Cpu className="w-4 h-4" /> System Online
-            </div>
-            <h2 className="font-heading text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6 uppercase">
-              Raven <span className="text-gold">AI Coach</span>
+            
+            <h2 className="font-heading text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">
+               التغذية الذكية مع <span className="text-gold">Raven</span>
             </h2>
-            <p className="text-gray-400 font-light text-xl leading-relaxed max-w-xl">
-              Get personalized fitness insights based on your body metrics and goals. Our intelligent system calculates your precise nutritional needs to map out a clear path to your objective.
+            <p className="text-gray-400 font-light text-lg md:text-xl leading-relaxed max-w-xl">
+              احصل على تحليل غذائي دقيق مخصص لبيانات جسمك وأهدافك. يقوم نظامنا بحساب احتياجاتك اليومية من السعرات والماكروز لتحديد أوضح مسار لتحقيق أفضل نتيجة.
             </p>
           </motion.div>
 
@@ -108,19 +107,21 @@ export default function AiNutrition() {
                 animate={{ opacity: 1, y: 0 }}
                 className="mt-12 p-8 rounded-2xl bg-black/50 border border-white/10 backdrop-blur-md"
               >
-                <h4 className="text-white text-2xl font-bold mb-4 font-heading uppercase tracking-wider">Ready to take the next step?</h4>
-                <p className="text-gray-400 mb-8 font-light">Get your complete nutrition and training plan inside Raven Gym.</p>
-                <button className="group relative overflow-hidden rounded-none bg-gold px-8 py-4 font-heading text-lg font-bold tracking-widest text-black transition-all hover:scale-105 shadow-[0_0_30px_rgba(176,138,71,0.2)] hover:shadow-[0_0_50px_rgba(176,138,71,0.5)] flex items-center justify-center gap-3 w-full sm:w-auto">
-                  <span className="relative z-10">START YOUR JOURNEY</span>
-                  <ArrowRight className="w-5 h-5 relative z-10 transition-transform group-hover:translate-x-1" />
-                  <div className="absolute inset-0 z-0 h-full w-full -translate-x-full bg-white transition-transform duration-500 ease-out group-hover:translate-x-0" />
-                </button>
+                <h4 className="text-white text-2xl font-bold mb-4 font-heading tracking-wide">جاهز لبدء الخطوة التالية؟</h4>
+                <p className="text-gray-400 mb-8 font-light">احصل على خطتك التدريبية والغذائية الكاملة مع مدربي Raven Gym.</p>
+                <Link href="/subscribe" className="inline-block">
+                  <button className="group relative overflow-hidden rounded-none bg-gold px-8 py-4 font-heading text-lg font-bold tracking-wider text-black transition-all hover:scale-105 shadow-[0_0_30px_rgba(176,138,71,0.2)] hover:shadow-[0_0_50px_rgba(176,138,71,0.5)] flex items-center justify-center gap-3 w-full sm:w-auto cursor-pointer">
+                    <span className="relative z-10">ابدأ رحلتك الآن</span>
+                    <ArrowLeft className="w-5 h-5 relative z-10 transition-transform group-hover:-translate-x-1" />
+                    <div className="absolute inset-0 z-0 h-full w-full -translate-x-full bg-white transition-transform duration-500 ease-out group-hover:translate-x-0" />
+                  </button>
+                </Link>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
 
-        {/* RIGHT COLUMN: Interactive Panel */}
+        {/* LEFT COLUMN: Interactive Panel */}
         <div className="flex-1 w-full max-w-2xl mx-auto">
           <div className="relative rounded-3xl bg-black/40 backdrop-blur-2xl border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden min-h-[600px] flex flex-col">
             
@@ -140,41 +141,41 @@ export default function AiNutrition() {
                   >
                     <div className="grid grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Weight (kg)</label>
-                        <input type="number" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors" placeholder="e.g. 85" value={formData.weight} onChange={e => setFormData({...formData, weight: e.target.value})} />
+                        <label className="block text-xs font-bold text-gray-400 mb-2 tracking-wider">الوزن (كجم)</label>
+                        <input type="number" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors text-right" placeholder="مثال: 80" value={formData.weight} onChange={e => setFormData({...formData, weight: e.target.value})} />
                       </div>
                       <div>
-                        <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Height (cm)</label>
-                        <input type="number" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors" placeholder="e.g. 180" value={formData.height} onChange={e => setFormData({...formData, height: e.target.value})} />
+                        <label className="block text-xs font-bold text-gray-400 mb-2 tracking-wider">الطول (سم)</label>
+                        <input type="number" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors text-right" placeholder="مثال: 175" value={formData.height} onChange={e => setFormData({...formData, height: e.target.value})} />
                       </div>
                       <div>
-                        <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Age</label>
-                        <input type="number" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors" placeholder="e.g. 28" value={formData.age} onChange={e => setFormData({...formData, age: e.target.value})} />
+                        <label className="block text-xs font-bold text-gray-400 mb-2 tracking-wider">العمر</label>
+                        <input type="number" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors text-right" placeholder="مثال: 25" value={formData.age} onChange={e => setFormData({...formData, age: e.target.value})} />
                       </div>
                       <div>
-                        <label htmlFor="gender-select" className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Gender</label>
-                        <select id="gender-select" aria-label="Gender" className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors" value={formData.gender} onChange={e => setFormData({...formData, gender: e.target.value})}>
-                          <option>Male</option>
-                          <option>Female</option>
+                        <label htmlFor="gender-select" className="block text-xs font-bold text-gray-400 mb-2 tracking-wider">الجنس</label>
+                        <select id="gender-select" aria-label="الجنس" className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors text-right" value={formData.gender} onChange={e => setFormData({...formData, gender: e.target.value})}>
+                          <option>ذكر</option>
+                          <option>أنثى</option>
                         </select>
                       </div>
                     </div>
 
                     <div>
-                      <label htmlFor="activity-select" className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Activity Level</label>
-                      <select id="activity-select" aria-label="Activity Level" className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors" value={formData.activity} onChange={e => setFormData({...formData, activity: e.target.value as ActivityLevel})}>
-                        {["Sedentary", "Light", "Active", "Very Active"].map(a => <option key={a}>{a}</option>)}
+                      <label htmlFor="activity-select" className="block text-xs font-bold text-gray-400 mb-2 tracking-wider">مستوى النشاط اليومي</label>
+                      <select id="activity-select" aria-label="مستوى النشاط" className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors text-right" value={formData.activity} onChange={e => setFormData({...formData, activity: e.target.value as ActivityLevel})}>
+                        {(["قليل الحركة (مكتبي)", "نشاط خفيف (1-2 يوم/أسبوع)", "نشط (3-5 أيام/أسبوع)", "نشط جداً (تدريب يومي مكثف)"] as ActivityLevel[]).map(a => <option key={a}>{a}</option>)}
                       </select>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Primary Goal</label>
+                      <label className="block text-xs font-bold text-gray-400 mb-2 tracking-wider">الهدف الأساسي</label>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        {["Fat Loss", "Body Recomposition", "Muscle Gain"].map((g) => (
+                        {(["خسارة دهون", "إعادة تشكيل الجسم", "زيادة عضلية"] as Goal[]).map((g) => (
                           <button 
                             key={g} type="button"
-                            onClick={() => setFormData({...formData, goal: g as Goal})}
-                            className={`py-3 px-2 rounded-xl text-sm font-bold transition-all border ${formData.goal === g ? 'bg-gold/10 border-gold text-gold shadow-[0_0_20px_rgba(176,138,71,0.15)]' : 'bg-[#0a0a0a] text-gray-400 border-white/10 hover:border-gold/50'}`}
+                            onClick={() => setFormData({...formData, goal: g})}
+                            className={`py-3 px-2 rounded-xl text-sm font-bold transition-all border cursor-pointer ${formData.goal === g ? 'bg-gold/10 border-gold text-gold shadow-[0_0_20px_rgba(176,138,71,0.15)]' : 'bg-[#0a0a0a] text-gray-400 border-white/10 hover:border-gold/50'}`}
                           >
                             {g}
                           </button>
@@ -184,9 +185,9 @@ export default function AiNutrition() {
 
                     <button 
                       type="submit" 
-                      className="w-full mt-8 bg-white text-black py-4 rounded-xl font-heading text-xl font-bold hover:bg-gray-200 transition-colors shadow-[0_0_30px_rgba(255,255,255,0.1)] flex justify-center items-center gap-3"
+                      className="w-full mt-8 bg-white text-black py-4 rounded-xl font-heading text-xl font-bold hover:bg-gray-200 transition-colors shadow-[0_0_30px_rgba(255,255,255,0.1)] flex justify-center items-center gap-3 cursor-pointer"
                     >
-                      <Zap className="w-5 h-5 text-gold" /> Analyze My Profile
+                      <Zap className="w-5 h-5 text-gold" /> احسب خطتي الآن
                     </button>
                   </motion.form>
                 )}
@@ -212,7 +213,7 @@ export default function AiNutrition() {
                         return (
                           <div key={idx} className={`flex items-center gap-4 p-4 rounded-xl border transition-all duration-500 ${isCurrent ? 'bg-gold/10 border-gold shadow-[0_0_20px_rgba(176,138,71,0.15)]' : isPast ? 'bg-[#0a0a0a] border-white/5 opacity-50' : 'bg-transparent border-transparent opacity-30'}`}>
                             {isPast ? <CheckCircle2 className="w-6 h-6 text-gold" /> : <Loader2 className={`w-6 h-6 ${isCurrent ? 'text-gold animate-spin' : 'text-gray-600'}`} />}
-                            <span className={`font-mono text-sm tracking-widest uppercase ${isCurrent ? 'text-gold' : 'text-gray-400'}`}>{step}</span>
+                            <span className={`text-sm font-semibold tracking-wider ${isCurrent ? 'text-gold' : 'text-gray-400'}`}>{step}</span>
                           </div>
                         );
                       })}
@@ -229,12 +230,12 @@ export default function AiNutrition() {
                   >
                     <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/10">
                       <div>
-                        <h3 className="text-white font-heading text-2xl font-bold uppercase tracking-wider">Analysis Complete</h3>
-                        <p className="text-gray-400 text-sm mt-1">Profile tuned for {formData.goal}</p>
+                        <h3 className="text-white font-heading text-2xl font-bold tracking-wide">تم التحليل بنجاح</h3>
+                        <p className="text-gray-400 text-sm mt-1">الخطة موجهة لهدف: {formData.goal}</p>
                       </div>
-                      <div className="flex flex-col items-end">
+                      <div className="flex flex-col items-start">
                         <span className="text-gold font-mono text-xl font-bold flex items-center gap-2"><ShieldCheck className="w-5 h-5" /> {results.confidence}</span>
-                        <span className="text-gray-500 text-xs uppercase tracking-widest">Confidence Score</span>
+                        <span className="text-gray-500 text-xs tracking-wider">دقة الحساب</span>
                       </div>
                     </div>
 
@@ -243,41 +244,41 @@ export default function AiNutrition() {
                         <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold"><Zap className="w-5 h-5" /></div>
                         <div>
                           <div className="text-white font-heading text-2xl font-bold">{results.calories}</div>
-                          <div className="text-gray-500 text-xs uppercase tracking-widest font-bold">Daily Calories</div>
+                          <div className="text-gray-500 text-xs tracking-wider font-bold">السعرات اليومية</div>
                         </div>
                       </div>
                       <div className="bg-[#0a0a0a] border border-white/5 p-5 rounded-2xl flex items-center gap-4">
                         <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold"><Clock className="w-5 h-5" /></div>
                         <div>
                           <div className="text-white font-heading text-xl font-bold">{results.timeline}</div>
-                          <div className="text-gray-500 text-xs uppercase tracking-widest font-bold">Est. Timeline</div>
+                          <div className="text-gray-500 text-xs tracking-wider font-bold">المدة المتوقعة</div>
                         </div>
                       </div>
                     </div>
 
                     <div className="bg-[#0a0a0a] border border-white/5 rounded-2xl p-6 mb-6">
-                      <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-6 flex items-center gap-2">
-                        <Target className="w-4 h-4 text-gold" /> Macro Targets
+                      <h4 className="text-white font-bold text-sm tracking-wider mb-6 flex items-center gap-2">
+                        <Target className="w-4 h-4 text-gold" /> توزيع الماكروز اليومي
                       </h4>
                       <div className="grid grid-cols-3 gap-6">
                         <div>
                           <div className="flex justify-between text-xs mb-2">
-                            <span className="text-gray-400">Protein</span>
-                            <span className="text-white font-bold">{results.protein}g</span>
+                            <span className="text-gray-400">بروتين</span>
+                            <span className="text-white font-bold">{results.protein}جم</span>
                           </div>
                           <div className="h-2 bg-black rounded-full overflow-hidden"><div className="h-full bg-blue-400 w-[40%]" /></div>
                         </div>
                         <div>
                           <div className="flex justify-between text-xs mb-2">
-                            <span className="text-gray-400">Carbs</span>
-                            <span className="text-white font-bold">{results.carbs}g</span>
+                            <span className="text-gray-400">كاربوهيدرات</span>
+                            <span className="text-white font-bold">{results.carbs}جم</span>
                           </div>
                           <div className="h-2 bg-black rounded-full overflow-hidden"><div className="h-full bg-gold w-[35%]" /></div>
                         </div>
                         <div>
                           <div className="flex justify-between text-xs mb-2">
-                            <span className="text-gray-400">Fats</span>
-                            <span className="text-white font-bold">{results.fats}g</span>
+                            <span className="text-gray-400">دهون صحية</span>
+                            <span className="text-white font-bold">{results.fats}جم</span>
                           </div>
                           <div className="h-2 bg-black rounded-full overflow-hidden"><div className="h-full bg-red-400 w-[25%]" /></div>
                         </div>
@@ -285,8 +286,8 @@ export default function AiNutrition() {
                     </div>
 
                     <div className="mt-auto">
-                      <button onClick={resetForm} className="text-gray-500 text-sm hover:text-white transition-colors underline underline-offset-4">
-                        Recalculate Metrics
+                      <button onClick={resetForm} className="text-gray-500 text-sm hover:text-white transition-colors underline underline-offset-4 cursor-pointer">
+                        إعادة إدخال القياسات
                       </button>
                     </div>
 

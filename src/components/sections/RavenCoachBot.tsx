@@ -12,58 +12,64 @@ interface Message {
 }
 
 // Structured mock database of gym answers in Arabic and English
+// Structured mock database of gym answers in Arabic
 const FITNESS_DATABASE: { keywords: string[]; response: string }[] = [
   {
     keywords: ["chest", "صدر", "بنش", "بنج"],
-    response: `🏋️ **Raven Chest Workout Plan:**
-1. **Incline Dumbbell Press:** 4 sets x 8-10 reps (Focus on upper chest).
-2. **Flat Barbell Bench Press:** 3 sets x 6-8 reps (Strength builder).
-3. **Weighted Dips:** 3 sets x 8-12 reps (Lower chest/triceps).
-4. **Cable Crossover (High to Low):** 3 sets x 12-15 reps (Peak contraction).
+    response: `🏋️ **جدول تدريب الصدر في Raven:**
+1. **تجميع دمبل عالي (Incline DB Press):** 4 مجموعات × 8-10 تكرارات (تركيز على الصدر العلوي).
+2. **بنش بار مستوي (Flat Barbell Bench):** 3 مجموعات × 6-8 تكرارات (لبناء القوة والكتلة).
+3. **متوازي / غطس بوزن (Weighted Dips):** 3 مجموعات × 8-12 تكرار (للصدر السفلي والترايسبس).
+4. **كابل كروس أوفر (Cable Crossover):** 3 مجموعات × 12-15 تكرار (عصر عضلي كامل).
 
-💡 *Tip: Squeeze your shoulder blades together and keep your elbows at a 45-degree angle to protect your joints.*`
+💡 *نصيحة: ضم لوحي الكتف للخلف وحافظ على زاوية كوعك عند 45 درجة لحماية مفصل الكتف.*`
   },
   {
     keywords: ["back", "ضهر", "ظهر"],
-    response: `✈️ **Raven Back Workout Plan:**
-1. **Deadlifts:** 3 sets x 5 reps (Overall power).
-2. **Pull-Ups / Lat Pulldown:** 4 sets x 8-12 reps (Width).
-3. **Bent-Over Barbell Rows:** 3 sets x 8-10 reps (Thickness).
-4. **Seated Cable Row:** 3 sets x 12 reps (Mid-back stretch).
+    response: `✈️ **جدول تدريب الظهر في Raven:**
+1. **ديدليفت (Deadlifts):** 3 مجموعات × 5 تكرارات (للقوة العامة وكثافة الظهر).
+2. **سحب عالي / عقلة (Lat Pulldown):** 4 مجموعات × 8-12 تكرار (لعرض الظهر والمجنص).
+3. **تجديف بالبار (Barbell Rows):** 3 مجموعات × 8-10 تكرارات (لسماكة الظهر).
+4. **سحب أرضي بالكابل (Seated Cable Row):** 3 مجموعات × 12 تكرار.
 
-💡 *Tip: Pull with your elbows, not your hands, to fully engage the latissimus dorsi.*`
+💡 *نصيحة: اسحب بكوعك للخلف وليس بقبضة يدك لتركيز التفعيل على عضلات الظهر.*`
   },
   {
-    keywords: ["squat", "اسكوات", "رجل", "legs", "فخذ"],
-    response: `🦵 **Raven Legs Workout Plan:**
-1. **Barbell Back Squats:** 4 sets x 6-8 reps (Leg builder).
-2. **Romanian Deadlifts:** 3 sets x 8-10 reps (Hamstrings/glutes).
-3. **Leg Press:** 3 sets x 10-12 reps (Quad focus).
-4. **Standing Calf Raises:** 4 sets x 15 reps.
+    keywords: ["squat", "اسكوات", "سكوات", "رجل", "legs", "فخذ"],
+    response: `🦵 **جدول تدريب الأرجل في Raven:**
+1. **باربل باك سكوات (Barbell Squats):** 4 مجموعات × 6-8 تكرارات (لبناء عضلات الفخذ).
+2. **ديدليفت روماني (Romanian Deadlifts):** 3 مجموعات × 8-10 تكرارات (للخلفيات والجلوتس).
+3. **جهاز دفع الأرجل (Leg Press):** 3 مجموعات × 10-12 تكرار.
+4. **سمانة واقف (Standing Calf Raises):** 4 مجموعات × 15 تكرار.
 
-💡 *Tip: Keep your feet flat on the ground. Drive through your heels on the way up.*`
+💡 *نصيحة: حافظ على ثبات كعب قدمك على الأرض وادفع من خلاله أثناء الصعود.*`
   },
   {
-    keywords: ["split", "جدول", "تقسيم", "3 days", "3 ايام"],
-    response: `📅 **Premium 3-Day Push/Pull/Legs Split:**
-* **Day 1: Push** (Chest, Shoulders, Triceps)
-* **Day 2: Pull** (Back, Biceps, Rear Delts)
-* **Day 3: Legs & Core** (Quads, Hamstrings, Calves, Abs)
+    keywords: ["split", "جدول", "تقسيم", "3 days", "3 ايام", "نظام"],
+    response: `📅 **جدول Push/Pull/Legs الاحترافي (3 أيام):**
+* **اليوم 1: Push (دفع)** - صدر، أكتاف أمامية وجانبية، ترايسبس.
+* **اليوم 2: Pull (سحب)** - ظهر كامل، بايسبس، كتف خلفي.
+* **اليوم 3: Legs (أرجل)** - كوادز، خلفيات، سمانة، بطن.
 
-This split allows for maximum recovery and high-frequency training when repeated.`
+يمنحك هذا النظام وقتاً كافياً للاستشفاء مع تحقيق أعلى معدل نمو عضلي.`
   },
   {
-    keywords: ["diet", "دايت", "اكل", "تغذية", "nutrition", "كالوري", "سعرات"],
-    response: `🍎 **Raven Nutrition Rulebook:**
-* **Protein:** Aim for 1.6 to 2.2g of protein per kg of bodyweight.
-* **Carbs:** Fuel your workouts with complex carbs (Oats, Sweet Potato, Brown Rice).
-* **Fats:** Keep healthy fats (Nuts, Olive oil, Avocado) for hormone health.
+    keywords: ["diet", "دايت", "اكل", "تغذية", "nutrition", "كالوري", "سعرات", "بروتين"],
+    response: `🍎 **قواعد التغذية الرياضية في Raven:**
+* **البروتين:** احرص على تناول 1.6 إلى 2.2 جرام بروتين لكل كيلوجرام من وزن جسمك.
+* **الكاربوهيدرات:** وقود تمرينك الأساسي (شوفان، بطاطا، أرز، بطاطس).
+* **الدهون الصحية:** مهمة جداً لصحة الهرمونات (مكسرات، زيت زيتون، أفوكادو).
 
-👉 Use our **Raven AI Coach Calculator** on the website to compute your precise daily calorie and protein requirements based on your metrics!`
+👉 يمكنك تجربة **حاسبة Raven للتغذية** في الصفحة لحساب سعراتك والماكروز بدقة!`
   },
   {
-    keywords: ["hi", "hello", "مرحب", "سلام", "اهلا"],
-    response: `👋 Welcome to Raven Gym! I am your AI Coach. How can I help you build your dream physique today? Ask me about chest/back/leg workouts, nutrition, or try one of the quick options below!`
+    keywords: ["مواعيد", "فتح", "شغال", "ساعة", "وقت", "ساعه", "hours", "open", "time"],
+    response: `🕒 **مواعيد العمل في Raven Gym:**
+صالة Raven Gym مفتوحة **24 ساعة طوال أيام الأسبوع (24/7)** على مدار اليوم، لتتمرن في أي وقت يناسب يومك بدون قيود!`
+  },
+  {
+    keywords: ["hi", "hello", "مرحب", "سلام", "اهلا", "صباح", "مساء"],
+    response: `👋 أهلاً بك في Raven Gym! أنا مدربك الرياضي المساعد. كيف أساعدك اليوم في رحلتك البدنية؟ اسألني عن تمارين الصدر، الظهر، الأرجل، التغذية، أو اختر من الاقتراحات السريعة بالأسفل!`
   }
 ];
 
@@ -73,7 +79,7 @@ export default function RavenCoachBot() {
     {
       id: "welcome",
       sender: "bot",
-      text: "👋 Welcome to Raven Gym! I am your AI Fitness Coach. Ask me any question about exercises, workouts, splits, or diet!",
+      text: "👋 أهلاً بك في Raven Gym! أنا مدربك ومساعدك التدريبي. اسألني أي سؤال عن التمارين، الجداول، أو التغذية الرياضية!",
       timestamp: new Date(),
     },
   ]);
@@ -102,13 +108,13 @@ export default function RavenCoachBot() {
 
     // Simulate AI thinking and reply
     setTimeout(() => {
-      let botResponse = `💪 That's a great question! For custom exercises and coaching, we highly recommend speaking directly to one of our head trainers at Raven Gym. 
+      let botResponse = `💪 سؤال رائع ومهم! للتمارين والبرامج المصممة خصيصاً لجسمك، يسعدنا تواصلك مع مدربي Raven Gym في الصالة.
 
-To help you get started immediately, try asking me specifically about:
-- **"Chest workout"** or **"Back workout"**
-- **"Legs workout"**
-- **"3-Day split"**
-- **"Diet and nutrition"**`;
+يمكنك أن تسألني فوراً عن:
+- **"تمرین صدر"** أو **"تمرین ظهر"**
+- **"تمرین أرجل"**
+- **"جدول 3 أيام"**
+- **"التغذية والدايت"**`;
 
       const normalizedText = textToSend.toLowerCase();
       for (const item of FITNESS_DATABASE) {
@@ -132,7 +138,7 @@ To help you get started immediately, try asking me specifically about:
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 font-sans">
+    <div className="fixed bottom-6 right-6 z-50 font-sans" dir="rtl">
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -149,20 +155,20 @@ To help you get started immediately, try asking me specifically about:
                   <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#d4af37] to-[#aa8410] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.3)]">
                     <Dumbbell className="w-5 h-5 text-black" />
                   </div>
-                  <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-black animate-pulse" />
+                  <span className="absolute bottom-0 left-0 w-3 h-3 bg-green-500 rounded-full border-2 border-black animate-pulse" />
                 </div>
                 <div>
-                  <h3 className="text-white font-bold text-sm tracking-wider uppercase flex items-center gap-1.5">
-                    Raven AI Coach
+                  <h3 className="text-white font-bold text-sm tracking-wide flex items-center gap-1.5">
+                    Raven Coach
                     <Sparkles className="w-3.5 h-3.5 text-[#d4af37] animate-pulse" />
                   </h3>
-                  <p className="text-[#d4af37] text-xs font-semibold">Active Fitness Guide</p>
+                  <p className="text-[#d4af37] text-xs font-semibold">دليلك التدريبي المباشر</p>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
                 aria-label="إغلاق المحادثة"
-                className="text-gray-400 hover:text-white transition-colors p-1.5 rounded-full hover:bg-white/10"
+                className="text-gray-400 hover:text-white transition-colors p-1.5 rounded-full hover:bg-white/10 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -173,7 +179,7 @@ To help you get started immediately, try asking me specifically about:
               {messages.map((msg) => (
                 <div
                   key={msg.id}
-                  className={`flex gap-2.5 ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
+                  className={`flex gap-2.5 ${msg.sender === "user" ? "justify-start flex-row-reverse" : "justify-start"}`}
                 >
                   {msg.sender === "bot" && (
                     <div className="w-8 h-8 rounded-full bg-zinc-900 border border-[#d4af37]/30 flex items-center justify-center shrink-0">
@@ -181,10 +187,10 @@ To help you get started immediately, try asking me specifically about:
                     </div>
                   )}
                   <div
-                    className={`max-w-[75%] p-3 rounded-2xl text-sm leading-relaxed whitespace-pre-line ${
+                    className={`max-w-[78%] p-3 rounded-2xl text-sm leading-relaxed whitespace-pre-line ${
                       msg.sender === "user"
-                        ? "bg-[#d4af37] text-black font-semibold rounded-tr-none shadow-[0_4px_15px_rgba(212,175,55,0.2)]"
-                        : "bg-zinc-950 border border-zinc-800 text-gray-200 rounded-tl-none"
+                        ? "bg-[#d4af37] text-black font-semibold rounded-tl-none shadow-[0_4px_15px_rgba(212,175,55,0.2)]"
+                        : "bg-zinc-950 border border-zinc-800 text-gray-200 rounded-tr-none"
                     }`}
                   >
                     {msg.text}
@@ -202,7 +208,7 @@ To help you get started immediately, try asking me specifically about:
                   <div className="w-8 h-8 rounded-full bg-zinc-900 border border-[#d4af37]/30 flex items-center justify-center shrink-0">
                     <Bot className="w-4 h-4 text-[#d4af37]" />
                   </div>
-                  <div className="bg-zinc-950 border border-zinc-800 text-gray-200 p-3 rounded-2xl rounded-tl-none flex items-center gap-1">
+                  <div className="bg-zinc-950 border border-zinc-800 text-gray-200 p-3 rounded-2xl rounded-tr-none flex items-center gap-1">
                     <span className="w-2 h-2 bg-[#d4af37] rounded-full animate-bounce delay-100" />
                     <span className="w-2 h-2 bg-[#d4af37] rounded-full animate-bounce delay-200" />
                     <span className="w-2 h-2 bg-[#d4af37] rounded-full animate-bounce delay-300" />
@@ -215,22 +221,22 @@ To help you get started immediately, try asking me specifically about:
             {/* Quick Prompts */}
             <div className="px-4 py-2 bg-black/40 border-t border-zinc-900 flex flex-wrap gap-2">
               <button
-                onClick={() => handleSend("Chest workout")}
-                className="text-xs px-2.5 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-[#d4af37]/30 text-gray-300 hover:text-white transition-all flex items-center gap-1"
+                onClick={() => handleSend("تمرین صدر")}
+                className="text-xs px-2.5 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-[#d4af37]/30 text-gray-300 hover:text-white transition-all flex items-center gap-1 cursor-pointer"
               >
-                Chest workout 🏋️
+                تمرین الصدر 🏋️
               </button>
               <button
-                onClick={() => handleSend("3-Day split")}
-                className="text-xs px-2.5 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-[#d4af37]/30 text-gray-300 hover:text-white transition-all flex items-center gap-1"
+                onClick={() => handleSend("جدول 3 ايام")}
+                className="text-xs px-2.5 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-[#d4af37]/30 text-gray-300 hover:text-white transition-all flex items-center gap-1 cursor-pointer"
               >
-                3-Day split 📅
+                جدول 3 أيام 📅
               </button>
               <button
-                onClick={() => handleSend("Squat form")}
-                className="text-xs px-2.5 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-[#d4af37]/30 text-gray-300 hover:text-white transition-all flex items-center gap-1"
+                onClick={() => handleSend("تكنيك الاسكوات")}
+                className="text-xs px-2.5 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-[#d4af37]/30 text-gray-300 hover:text-white transition-all flex items-center gap-1 cursor-pointer"
               >
-                Squat form 🦵
+                تكنيك الاسكوات 🦵
               </button>
             </div>
 
@@ -238,7 +244,7 @@ To help you get started immediately, try asking me specifically about:
             <div className="p-3 bg-zinc-950 border-t border-zinc-900 flex gap-2">
               <input
                 type="text"
-                placeholder="Ask about workouts, exercises..."
+                placeholder="اسأل عن التمارين، الجداول، التغذية..."
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 onKeyDown={(e) => {
@@ -249,9 +255,9 @@ To help you get started immediately, try asking me specifically about:
               <button
                 onClick={() => handleSend(inputText)}
                 aria-label="إرسال رسالة"
-                className="bg-gradient-to-r from-[#d4af37] to-[#aa8410] hover:from-[#aa8410] hover:to-[#d4af37] text-black font-bold p-2.5 rounded-xl transition-all shadow-[0_0_10px_rgba(212,175,55,0.2)] flex items-center justify-center shrink-0 active:scale-95"
+                className="bg-gradient-to-r from-[#d4af37] to-[#aa8410] hover:from-[#aa8410] hover:to-[#d4af37] text-black font-bold p-2.5 rounded-xl transition-all shadow-[0_0_10px_rgba(212,175,55,0.2)] flex items-center justify-center shrink-0 active:scale-95 cursor-pointer"
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-4 h-4 rotate-180" />
               </button>
             </div>
           </motion.div>

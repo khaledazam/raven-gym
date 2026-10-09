@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Target, Dumbbell, Utensils, LineChart, Trophy } from "lucide-react";
@@ -14,32 +15,32 @@ gsap.registerPlugin(ScrollTrigger);
 const steps = [
   {
     num: "01",
-    title: "Initial Assessment",
-    desc: "We start by understanding your current level, goals, and training needs to create the right starting point.",
+    title: "التقييم الأولي",
+    desc: "نبدأ بفهم مستواك البدني الحالي، أهدافك، واحتياجاتك التدريبية لتحديد نقطة البداية الصحيحة.",
     icon: Target,
   },
   {
     num: "02",
-    title: "Personal Training Plan",
-    desc: "A structured training program designed around your fitness level and objectives.",
+    title: "خطة تدريبية مخصصة",
+    desc: "برنامج تدريبي متكامل ومدروس يناسب قدراتك وهدفك الرياضي بدقة متناهية.",
     icon: Dumbbell,
   },
   {
     num: "03",
-    title: "Smart Nutrition Guidance",
-    desc: "Nutrition recommendations tailored to support your training and help you stay consistent.",
+    title: "إرشادات غذائية ذكية",
+    desc: "توصيات غذائية محسوبة تدعم تدريبك وتساعدك على الاستمرارية والالتزام الصحي.",
     icon: Utensils,
   },
   {
     num: "04",
-    title: "Progress Tracking",
-    desc: "Track your measurements, performance, and improvements over time with regular evaluations.",
+    title: "متابعة التطور والقياسات",
+    desc: "تسجيل قياساتك، أوزانك، ونسبة تقدمك دورياً لرؤية النتائج بالأرقام على أرض الواقع.",
     icon: LineChart,
   },
   {
     num: "05",
-    title: "Real Results",
-    desc: "Through consistency, training, and proper nutrition, members move closer to their goals step by step.",
+    title: "نتائج حقيقية ملموسة",
+    desc: "مع الاستمرارية والتدريب المنتظم، ينتقل أبطالنا خطوة بخطوة نحو أفضل فورمة بدنية.",
     icon: Trophy,
   },
 ];
@@ -139,7 +140,7 @@ export default function Transformations() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative w-full h-screen bg-black overflow-hidden flex flex-col items-center justify-center">
+    <section id="transformations" ref={containerRef} className="relative w-full h-screen bg-black overflow-hidden flex flex-col items-center justify-center">
       
       {/* Background glow */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black z-0" />
@@ -147,9 +148,9 @@ export default function Transformations() {
 
       {/* Header */}
       <div ref={titleRef} className="absolute top-20 left-0 right-0 z-10 text-center px-4">
-        <h2 className="font-heading text-4xl md:text-6xl font-bold text-white mb-4 uppercase tracking-wider">How Results Are Built</h2>
-        <p className="text-gray-400 font-light text-lg md:text-xl tracking-widest uppercase max-w-3xl mx-auto">
-          Every transformation starts with a plan, consistency, and expert guidance.
+        <h2 className="font-heading text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">كيف تُبنى النتائج الحقيقية</h2>
+        <p className="text-gray-400 font-light text-lg md:text-xl tracking-wider max-w-3xl mx-auto">
+          كل تحول حقيقي يبدأ بخطة واضحة، التزام مستمر، وإشراف تدريبي احترافي.
         </p>
       </div>
 
@@ -205,14 +206,16 @@ export default function Transformations() {
           </div>
           
           <div className="pointer-events-auto text-center -mt-10">
-            <h3 className="font-heading text-4xl md:text-6xl font-bold text-white text-center drop-shadow-2xl mb-12 uppercase tracking-widest">
-              Your Next Transformation <span className="text-gold block mt-4">Starts Here</span>
+            <h3 className="font-heading text-4xl md:text-6xl font-bold text-white text-center drop-shadow-2xl mb-12 tracking-tight">
+              تحولك القادم <span className="text-gold block mt-4">يبدأ من هنا</span>
             </h3>
             
-            <button className="group relative overflow-hidden rounded-none bg-gold px-14 py-6 font-heading text-xl font-bold tracking-widest text-black transition-all hover:scale-105 shadow-[0_0_40px_rgba(176,138,71,0.4)] hover:shadow-[0_0_60px_rgba(176,138,71,0.8)]">
-              <span className="relative z-10">START YOUR JOURNEY</span>
-              <div className="absolute inset-0 z-0 h-full w-full translate-y-full bg-white transition-transform duration-500 ease-out group-hover:translate-y-0" />
-            </button>
+            <Link href="/subscribe">
+              <button className="group relative overflow-hidden rounded-none bg-gold px-14 py-6 font-heading text-xl font-bold tracking-wider text-black transition-all hover:scale-105 shadow-[0_0_40px_rgba(176,138,71,0.4)] hover:shadow-[0_0_60px_rgba(176,138,71,0.8)] cursor-pointer">
+                <span className="relative z-10">ابدأ رحلتك الآن</span>
+                <div className="absolute inset-0 z-0 h-full w-full translate-y-full bg-white transition-transform duration-500 ease-out group-hover:translate-y-0" />
+              </button>
+            </Link>
           </div>
         </div>
 
