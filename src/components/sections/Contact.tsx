@@ -78,7 +78,7 @@ export default function Contact() {
           >
             ابدأ تواصلك مع <span className="text-gold">Raven Gym</span>
             <span className="block text-2xl md:text-3xl text-gray-300 font-bold mt-2 font-sans">
-              صالة ريفن الرياضية - أول المشاية
+              جيم ريفن - أول المشاية
             </span>
           </motion.h2>
 
@@ -89,7 +89,7 @@ export default function Contact() {
             transition={{ delay: 0.2 }}
             className="text-gray-400 text-base md:text-lg leading-relaxed"
           >
-            جاهزون للرد على كافة استفساراتك بخصوص الاشتراكات، برامج التدريب، أو زيارة صالة Raven Gym مباشرة في أي وقت.
+            جاهزون للرد على كافة استفساراتك بخصوص الاشتراكات، برامج التدريب، أو زيارة جيم Raven Gym مباشرة في أي وقت.
           </motion.p>
         </div>
 
@@ -240,7 +240,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <span className="text-[11px] font-bold text-[#f5d77f] tracking-wider uppercase block">المقر والعنوان الرسمي</span>
-                    <h5 className="text-xl sm:text-2xl font-heading font-black text-white">موقع صالة Raven Gym (ريفن)</h5>
+                    <h5 className="text-xl sm:text-2xl font-heading font-black text-white">موقع جيم Raven Gym (ريفن)</h5>
                   </div>
                 </div>
 

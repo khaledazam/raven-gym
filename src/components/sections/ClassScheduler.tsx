@@ -31,7 +31,7 @@ const SCHEDULE_DATA: Record<string, WorkoutClass[]> = {
       time: "10:30 ص - 12:00 م",
       duration: "90 دقيقة",
       intensity: "High",
-      room: "صالة القوة والأوزان",
+      room: "منطقة القوة والأوزان",
       description: "إتقان حركات الخطف (Snatch) والنتر (Clean & Jerk). تدريب تقني عالي يركز على القوة الانفجارية والسرعة الحركية."
     },
     {
@@ -60,7 +60,7 @@ const SCHEDULE_DATA: Record<string, WorkoutClass[]> = {
       time: "02:00 م - 03:30 م",
       duration: "90 دقيقة",
       intensity: "Medium",
-      room: "صالة القوة والأوزان",
+      room: "منطقة القوة والأوزان",
       description: "تدريب بناء عضلي عالي الكثافة يستهدف تطوير سمك وعرض عضلات الصدر والظهر باستخدام تكنيك التوتر الميكانيكي."
     },
     {
@@ -89,7 +89,7 @@ const SCHEDULE_DATA: Record<string, WorkoutClass[]> = {
       time: "11:00 ص - 12:30 م",
       duration: "90 دقيقة",
       intensity: "High",
-      room: "صالة القوة والأوزان",
+      room: "منطقة القوة والأوزان",
       description: "تدريب مركز على الحركات الكبرى الثلاث: السكوات، البنش برس، والديدليفت، مع التركيز على القوة المطلقة والتكنيك السليم."
     },
     {
@@ -109,7 +109,7 @@ const SCHEDULE_DATA: Record<string, WorkoutClass[]> = {
       time: "09:00 ص - 10:30 ص",
       duration: "90 دقيقة",
       intensity: "Medium",
-      room: "صالة القوة والأوزان",
+      room: "منطقة القوة والأوزان",
       description: "دمج تمارين تشكيل وتضخيم العضلات مع الحركات الوظيفية لتتمتع بمظهر رياضي جذاب وحركة رشيقة وقوية."
     },
     {
@@ -138,7 +138,7 @@ const SCHEDULE_DATA: Record<string, WorkoutClass[]> = {
       time: "03:00 م - 04:30 م",
       duration: "90 دقيقة",
       intensity: "High",
-      room: "صالة القوة والأوزان",
+      room: "منطقة القوة والأوزان",
       description: "تطوير معدل توليد القوة والسرعة الحركية من خلال تكرارات السكوات والرفعات الأولمبية السريعة."
     }
   ]

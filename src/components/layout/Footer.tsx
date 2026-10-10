@@ -27,7 +27,7 @@ export default function Footer() {
                 <span className="font-heading text-2xl font-black text-white tracking-wider block">
                   RAVEN <span className="text-gold">GYM</span>
                 </span>
-                <span className="text-xs text-[#f5d77f] font-bold">صالة ريفن الرياضية - السنبلاوين</span>
+                <span className="text-xs text-[#f5d77f] font-bold">جيم ريفن - السنبلاوين</span>
               </div>
             </div>
 

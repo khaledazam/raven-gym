@@ -112,7 +112,7 @@ export default function About() {
           >
             لماذا تختار <span className="text-gold">Raven Gym</span>؟
             <span className="block text-2xl md:text-3xl text-gray-300 font-bold mt-2 font-sans">
-              صالة ريفن الرياضية المتكاملة بالسنبلاوين
+              جيم ريفن الرياضي المتكامل بالسنبلاوين
             </span>
           </motion.h2>
           <motion.p

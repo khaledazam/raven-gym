@@ -125,7 +125,7 @@ export default function Hero() {
         >
           تحدَّ حدودك وافرض سيطرتك مع <span className="text-gold">Raven Gym</span>
           <span className="block text-2xl md:text-4xl text-gray-200 font-bold mt-2 font-sans tracking-normal">
-            صالة ريفن الرياضية - السنبلاوين
+            جيم ريفن - السنبلاوين
           </span>
         </h1>
 

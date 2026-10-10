@@ -17,7 +17,7 @@ interface GalleryItem {
 const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: 1,
-    title: "صالة القوة والأوزان",
+    title: "منطقة القوة والأوزان",
     subtitle: "FORGE POWER",
     tag: "معدات وأجهزة",
     image: "/images/strength_arena.png",
@@ -60,12 +60,12 @@ export default function GymGallery() {
 
       <div className="max-w-7xl mx-auto px-6 mb-16 relative z-10">
         <span className="text-[#d4af37] text-xs font-semibold tracking-wider flex items-center gap-2 mb-3">
-          <Sparkles className="w-3.5 h-3.5" /> مرافق الصالة
+          <Sparkles className="w-3.5 h-3.5" /> مرافق الجيم
         </span>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <h2 className="text-white text-4xl md:text-5xl font-black tracking-tight leading-none">
-              استكشف صالات <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#f3e5ab] to-[#aa8410]">Raven Gym</span>
+              استكشف مناطق وتجهيزات <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#f3e5ab] to-[#aa8410]">Raven Gym</span>
             </h2>
             <p className="text-gray-400 mt-4 max-w-xl text-sm md:text-base leading-relaxed">
               تعرّف على مساحاتنا الرياضية الفاخرة المصممة لتدريب Raven، والاستشفاء العميق، وتجربة رياضية متكاملة.
