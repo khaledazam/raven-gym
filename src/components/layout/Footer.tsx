@@ -66,7 +66,7 @@ export default function Footer() {
               </div>
 
               <a
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Raven Gym اول المشاية بجوار تشكن فاكتور عماره التوحيد والنور السنبلاوين")}`}
+                href="https://www.google.com/maps?q=30.884098,31.457378"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs text-gold hover:text-white transition-colors pt-2 font-bold cursor-pointer"

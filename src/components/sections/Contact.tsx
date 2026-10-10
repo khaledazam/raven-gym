@@ -276,6 +276,17 @@ export default function Contact() {
                 </div>
               </div>
 
+              {/* Interactive Google Map Embed with Exact GPS Pin */}
+              <div className="w-full rounded-2xl overflow-hidden border border-white/10 mb-5 shadow-2xl relative bg-zinc-950">
+                <iframe
+                  title="موقع Raven Gym على خرائط Google"
+                  src="https://maps.google.com/maps?q=30.884098,31.457378&hl=ar&z=17&output=embed"
+                  className="w-full h-52 sm:h-60 border-0 filter contrast-125 brightness-95 hover:brightness-100 transition-all duration-300"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+
               {/* Address Action Buttons */}
               <div className="flex flex-wrap items-center gap-3">
                 <button
@@ -296,7 +307,7 @@ export default function Contact() {
                 </button>
 
                 <a
-                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Raven Gym اول المشاية بجوار تشكن فاكتور عماره التوحيد والنور السنبلاوين")}`}
+                  href="https://www.google.com/maps/dir/?api=1&destination=30.884098,31.457378"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-5 py-3 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#aa8410] hover:from-[#aa8410] hover:to-[#d4af37] text-black text-xs font-bold flex items-center gap-2 transition-all shadow-[0_4px_15px_rgba(212,175,55,0.25)] cursor-pointer"

@@ -129,9 +129,10 @@ const jsonLd = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 30.9067,
-    longitude: 31.4647,
+    latitude: 30.884098,
+    longitude: 31.457378,
   },
+  hasMap: "https://www.google.com/maps?q=30.884098,31.457378",
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
