@@ -96,7 +96,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    google: "1znth3vzOYVkqahoEAYDOk6ssDom8tdtFQY3joprldU",
   },
 };
 
