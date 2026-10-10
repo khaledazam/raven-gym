@@ -19,6 +19,9 @@ import Link from "next/link";
 
 export default function Contact() {
   const [copiedNumber, setCopiedNumber] = useState<string | null>(null);
+  const [copiedAddress, setCopiedAddress] = useState(false);
+
+  const gymAddress = "أول المشاية / بجوار تشكن فاكتور / عمارة التوحيد والنور - السنبلاوين";
 
   const phoneNumbers = [
     {
@@ -41,6 +44,12 @@ export default function Contact() {
     setTimeout(() => setCopiedNumber(null), 2000);
   };
 
+  const handleCopyAddress = () => {
+    navigator.clipboard.writeText(gymAddress);
+    setCopiedAddress(true);
+    setTimeout(() => setCopiedAddress(false), 2500);
+  };
+
   return (
     <section id="contact" className="relative w-full bg-black py-28 px-4 md:px-8 border-t border-zinc-900 overflow-hidden font-sans" dir="rtl">
       {/* Background Ambient Glows */}
@@ -57,7 +66,7 @@ export default function Contact() {
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] text-xs font-bold tracking-wider mb-4"
           >
-            <Phone className="w-3.5 h-3.5" /> تواصل مباشر معنا
+            <Phone className="w-3.5 h-3.5" /> تواصل مباشر وموقع الجيم
           </motion.div>
           
           <motion.h2
@@ -65,9 +74,12 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-heading font-black tracking-tight text-white mb-6 leading-tight"
+            className="text-4xl md:text-6xl font-heading font-black tracking-tight text-white mb-4 leading-tight"
           >
             ابدأ تواصلك مع <span className="text-gold">Raven Gym</span>
+            <span className="block text-2xl md:text-3xl text-gray-300 font-bold mt-2 font-sans">
+              صالة ريفن الرياضية - أول المشاية
+            </span>
           </motion.h2>
 
           <motion.p
@@ -77,7 +89,7 @@ export default function Contact() {
             transition={{ delay: 0.2 }}
             className="text-gray-400 text-base md:text-lg leading-relaxed"
           >
-            جاهزون للرد على جميع استفساراتك بخصوص الاشتراكات، البرامج التدريبية، أو زيارة الصالة الرياضية مباشرة.
+            جاهزون للرد على كافة استفساراتك بخصوص الاشتراكات، برامج التدريب، أو زيارة صالة Raven Gym مباشرة في أي وقت.
           </motion.p>
         </div>
 
@@ -113,7 +125,7 @@ export default function Contact() {
                 <p className="text-[#d4af37] text-sm font-bold tracking-wider mb-6 flex items-center gap-2">
                   <span>Head Coach & Founder</span>
                   <span className="text-zinc-600">|</span>
-                  <span className="text-gray-300 font-normal">مؤسس Raven Gym</span>
+                  <span className="text-gray-300 font-normal">مؤسس Raven Gym (ريفن جيم)</span>
                 </p>
 
                 {/* Quote / Message */}
@@ -212,37 +224,88 @@ export default function Contact() {
               ))}
             </div>
 
-            {/* Timing & Location Info */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-              
-              {/* Working Hours */}
-              <div className="p-6 rounded-2xl bg-zinc-950/60 border border-zinc-900 flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-[#d4af37]/10 border border-[#d4af37]/20 flex items-center justify-center shrink-0 text-[#d4af37]">
-                  <Clock className="w-5 h-5" />
+            {/* HIGH-PROFILE ADDRESS & LOCATION CARD */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="relative rounded-3xl bg-gradient-to-br from-[#181408] via-zinc-950 to-zinc-950 border border-[#d4af37]/40 p-6 sm:p-8 shadow-[0_10px_40px_rgba(212,175,55,0.12)] overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-48 h-48 bg-[#d4af37]/10 rounded-full blur-3xl pointer-events-none" />
+
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-5 border-b border-white/5 pb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#d4af37] to-[#aa8410] flex items-center justify-center text-black shadow-[0_0_20px_rgba(212,175,55,0.35)] shrink-0">
+                    <MapPin className="w-6 h-6 stroke-[2.5]" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-bold text-[#f5d77f] tracking-wider uppercase block">المقر والعنوان الرسمي</span>
+                    <h5 className="text-xl sm:text-2xl font-heading font-black text-white">موقع صالة Raven Gym (ريفن)</h5>
+                  </div>
                 </div>
-                <div>
-                  <h5 className="text-white font-bold text-sm mb-1">مواعيد العمل</h5>
-                  <p className="text-gray-400 text-xs leading-relaxed">
-                    مفتوح 24 ساعة طوال أيام الأسبوع<br />
-                    تدريب بدون انقطاع على مدار الساعة (24/7)
+
+                <span className="px-3 py-1 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-bold flex items-center gap-1.5 shrink-0">
+                  <span className="w-2 h-2 rounded-full bg-green-400 animate-ping" />
+                  مفتوح 24 ساعة (24/7)
+                </span>
+              </div>
+
+              {/* Exact Address Highlight */}
+              <div className="bg-black/70 rounded-2xl border border-white/10 p-5 mb-5 space-y-3">
+                <div className="flex items-start gap-2.5">
+                  <span className="text-[#f5d77f] text-base font-bold shrink-0">العنوان:</span>
+                  <p className="text-white text-base sm:text-lg font-bold leading-relaxed">
+                    أول المشاية / بجوار تشكن فاكتور / عمارة التوحيد والنور
                   </p>
+                </div>
+                <p className="text-gray-400 text-xs sm:text-sm">
+                  السنبلاوين • محافظة الدقهلية • جمهورية مصر العربية
+                </p>
+
+                {/* Landmarks Tags */}
+                <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-white/5 text-xs">
+                  <span className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-gray-300 font-medium">
+                    أول المشاية
+                  </span>
+                  <span className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-gray-300 font-medium">
+                    بجوار تشكن فاكتور
+                  </span>
+                  <span className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-gray-300 font-medium">
+                    عمارة التوحيد والنور
+                  </span>
                 </div>
               </div>
 
-              {/* Direct Visits */}
-              <div className="p-6 rounded-2xl bg-zinc-950/60 border border-zinc-900 flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-[#d4af37]/10 border border-[#d4af37]/20 flex items-center justify-center shrink-0 text-[#d4af37]">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <div>
-                  <h5 className="text-white font-bold text-sm mb-1">زيارة الجيم</h5>
-                  <p className="text-gray-400 text-xs leading-relaxed">
-                    نرحب بزيارتك للتعرف على الصالة والأجهزة والاشتراك المباشر في أي وقت.
-                  </p>
-                </div>
-              </div>
+              {/* Address Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3">
+                <button
+                  onClick={handleCopyAddress}
+                  className="px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-[#d4af37] text-white text-xs font-bold flex items-center gap-2 transition-all cursor-pointer shadow-md"
+                >
+                  {copiedAddress ? (
+                    <>
+                      <Check className="w-4 h-4 text-green-400" />
+                      <span className="text-green-400">تم نسخ العنوان بنجاح</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4 text-[#d4af37]" />
+                      <span>نسخ العنوان بالكامل</span>
+                    </>
+                  )}
+                </button>
 
-            </div>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Raven Gym اول المشاية بجوار تشكن فاكتور عماره التوحيد والنور السنبلاوين")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#aa8410] hover:from-[#aa8410] hover:to-[#d4af37] text-black text-xs font-bold flex items-center gap-2 transition-all shadow-[0_4px_15px_rgba(212,175,55,0.25)] cursor-pointer"
+                >
+                  <MapPin className="w-4 h-4" />
+                  <span>الاتجاهات على خرائط Google</span>
+                </a>
+              </div>
+            </motion.div>
 
             {/* Quick Link to Subscriptions */}
             <div className="p-6 rounded-2xl bg-gradient-to-r from-zinc-950 via-[#161307] to-zinc-950 border border-[#d4af37]/20 flex flex-col sm:flex-row items-center justify-between gap-4">

@@ -76,7 +76,7 @@ export default function CountdownBadge() {
       >
         <div className="flex items-center gap-3 px-4 py-2.5 rounded-2xl border border-[#d4af37]/30 bg-black/60 backdrop-blur-md shadow-[0_4px_25px_rgba(212,175,55,0.15)] transition-all duration-300 hover:border-[#d4af37] hover:bg-black/80 hover:scale-105">
           <div className="w-8 h-8 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 shrink-0">
-            <Flame className="w-4 h-4 animate-bounce" />
+            <Flame className="w-4 h-4" />
           </div>
 
           <div className="flex flex-col">

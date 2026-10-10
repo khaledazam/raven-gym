@@ -36,10 +36,10 @@ function FinaleScene({ isHovered }: { isHovered: boolean }) {
             font="/fonts/optimer_bold.typeface.json" 
             size={3} 
             height={0.8} 
-            curveSegments={24} 
+            curveSegments={10} 
             bevelEnabled 
-            bevelSize={0.04} 
-            bevelThickness={0.04}
+            bevelSize={0.03} 
+            bevelThickness={0.03}
           >
             RAVEN
             <meshPhysicalMaterial 
@@ -59,7 +59,7 @@ function FinaleScene({ isHovered }: { isHovered: boolean }) {
       </mesh>
 
       {/* Abstract floating shards */}
-      {Array.from({ length: 15 }).map((_, i) => (
+      {Array.from({ length: 10 }).map((_, i) => (
         <Float 
           key={i} 
           speed={1.5} 
@@ -75,10 +75,10 @@ function FinaleScene({ isHovered }: { isHovered: boolean }) {
       ))}
 
       <Sparkles 
-        count={800} 
+        count={250} 
         scale={25} 
-        size={isHovered ? 8 : 4} 
-        speed={isHovered ? 2 : 0.3} 
+        size={isHovered ? 6 : 3} 
+        speed={isHovered ? 1.5 : 0.3} 
         opacity={isHovered ? 0.8 : 0.4} 
         color="#B08A47" 
         noise={2} 

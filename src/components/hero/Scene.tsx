@@ -72,12 +72,12 @@ function Letters({ scrollProgress }: { scrollProgress: React.MutableRefObject<nu
     font: fontUrl,
     size: 3,
     height: 0.8,
-    curveSegments: 32,
+    curveSegments: 12,
     bevelEnabled: true,
-    bevelThickness: 0.05,
-    bevelSize: 0.05,
+    bevelThickness: 0.04,
+    bevelSize: 0.04,
     bevelOffset: 0,
-    bevelSegments: 8,
+    bevelSegments: 3,
     material: TEXT_MATERIAL
   };
   
@@ -112,8 +112,8 @@ function Letters({ scrollProgress }: { scrollProgress: React.MutableRefObject<nu
       </group>
 
       <group ref={particlesRef}>
-        <Sparkles count={300} scale={20} size={3} speed={0.4} opacity={0.6} color="#B08A47" noise={1} />
-        <Sparkles count={150} scale={30} size={5} speed={0.2} opacity={0.3} color="#ffffff" />
+        <Sparkles count={180} scale={20} size={3} speed={0.4} opacity={0.6} color="#B08A47" noise={1} />
+        <Sparkles count={80} scale={30} size={4} speed={0.2} opacity={0.3} color="#ffffff" />
       </group>
     </>
   );
@@ -151,21 +151,21 @@ export default function Scene({ scrollProgress }: { scrollProgress: React.Mutabl
   return (
     <Canvas
       camera={{ position: [0, 0, 12], fov: 45 }}
-      gl={{ antialias: false, alpha: false, powerPreference: "high-performance" }}
+      gl={{ antialias: false, powerPreference: "high-performance" }}
       dpr={[1, 1.5]}
     >
       <color attach="background" args={["#050505"]} />
       
       {/* Cinematic Lighting */}
-      <ambientLight intensity={0.1} />
-      <directionalLight position={[10, 20, 10]} intensity={3} color="#ffffff" castShadow />
+      <ambientLight intensity={0.15} />
+      <directionalLight position={[10, 20, 10]} intensity={3} color="#ffffff" />
       <directionalLight position={[-10, -20, -10]} intensity={1.5} color="#B08A47" />
-      <pointLight position={[0, 0, 5]} intensity={5} color="#B08A47" distance={20} />
+      <pointLight position={[0, 0, 5]} intensity={4} color="#B08A47" distance={20} />
       <pointLight position={[0, 5, -5]} intensity={2} color="#ffffff" distance={20} />
       
       <Letters scrollProgress={scrollProgress} />
       
-      {/* Procedural Studio Environment (Zero Network Payload) */}
+      {/* Procedural Studio Environment */}
       <Environment>
         <mesh position={[0, 15, 0]} scale={[20, 1, 20]}>
           <boxGeometry />
@@ -188,10 +188,9 @@ export default function Scene({ scrollProgress }: { scrollProgress: React.Mutabl
       <CameraRig scrollProgress={scrollProgress} />
       
       {!isMobile && (
-        <EffectComposer>
-          <Bloom luminanceThreshold={0.2} mipmapBlur intensity={1.5} />
-          <DepthOfField focusDistance={0} focalLength={0.02} bokehScale={2} height={480} />
-          <Vignette eskil={false} offset={0.1} darkness={1.1} />
+        <EffectComposer multisampling={0}>
+          <Bloom luminanceThreshold={0.3} mipmapBlur intensity={1.2} />
+          <Vignette eskil={false} offset={0.15} darkness={1.1} />
         </EffectComposer>
       )}
     </Canvas>

@@ -108,10 +108,22 @@ export default function About() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-heading text-5xl md:text-7xl font-bold tracking-tighter text-white"
+            className="font-heading text-4xl md:text-6xl font-bold tracking-tight text-white"
           >
-            ليه تختار <span className="text-gold">Raven Gym</span>؟
+            لماذا تختار <span className="text-gold">Raven Gym</span>؟
+            <span className="block text-2xl md:text-3xl text-gray-300 font-bold mt-2 font-sans">
+              صالة ريفن الرياضية المتكاملة بالسنبلاوين
+            </span>
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="mt-4 text-gray-400 font-light text-base md:text-lg max-w-2xl mx-auto"
+          >
+            معايير تدريب وتغذية عالمية، بيئة حماسية، ومتابعة شخصية مستمرة في السنبلاوين (أول المشاية).
+          </motion.p>
           <motion.div 
             initial={{ opacity: 0, scaleX: 0 }}
             whileInView={{ opacity: 1, scaleX: 1 }}
