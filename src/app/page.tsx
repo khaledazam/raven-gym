@@ -8,7 +8,7 @@ import Memberships from "@/components/sections/Memberships";
 import Contact from "@/components/sections/Contact";
 import Finale from "@/components/sections/Finale";
 import Footer from "@/components/layout/Footer";
-import RavenCoachBot from "@/components/sections/RavenCoachBot";
+import ClientWidgets from "@/components/sections/ClientWidgets";
 
 export default function Home() {
   return (
@@ -23,7 +23,7 @@ export default function Home() {
       <Contact />
       <Finale />
       <Footer />
-      <RavenCoachBot />
+      <ClientWidgets />
     </main>
   );
 }

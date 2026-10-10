@@ -4,27 +4,29 @@ import { useEffect, useState, useMemo } from 'react';
 import { Activity } from 'lucide-react';
 
 export default function LiveCapacity() {
-  const [capacity, setCapacity] = useState<{ count: number } | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [capacity, setCapacity] = useState<{ count: number }>({ count: 18 });
 
   useEffect(() => {
     const fetchCapacity = async () => {
       try {
         const res = await fetch('/api/capacity');
         const data = await res.json();
-        if (data.success) {
+        if (data.success && typeof data.count === 'number') {
           setCapacity({ count: data.count });
         }
       } catch (err) {
         console.error('Failed to fetch capacity:', err);
-      } finally {
-        setLoading(false);
       }
     };
 
-    fetchCapacity();
+    // Defer initial capacity request by 2.5s so initial critical path is completely clear
+    const initialTimer = setTimeout(fetchCapacity, 2500);
     const interval = setInterval(fetchCapacity, 60000);
-    return () => clearInterval(interval);
+
+    return () => {
+      clearTimeout(initialTimer);
+      clearInterval(interval);
+    };
   }, []);
 
   const capacityStatus = useMemo(() => {
@@ -33,17 +35,6 @@ export default function LiveCapacity() {
     if (capacity.count > 15) return { label: 'متوسط', color: 'text-yellow-500', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20' };
     return { label: 'هادئ', color: 'text-green-500', bg: 'bg-green-500/10', border: 'border-green-500/20' };
   }, [capacity]);
-
-  if (loading) {
-    return (
-      <div className="absolute top-10 right-10 z-50 pointer-events-auto">
-        <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-black/50 backdrop-blur-md">
-          <Activity size={16} className="text-white/50 animate-pulse" />
-          <span className="text-xs font-heading tracking-wider text-white/50">حالة الصالة الآن...</span>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="absolute top-10 right-10 z-50 pointer-events-auto" dir="rtl">
