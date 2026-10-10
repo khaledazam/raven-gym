@@ -193,6 +193,10 @@ export default function RootLayout({
       className={`${tajawal.variable} ${cairo.variable} h-full antialiased dark`}
     >
       <head>
+        <meta
+          name="google-site-verification"
+          content="1znth3vzOYVkqahoEAYDOk6ssDom8tdtFQY3joprldU"
+        />
         <script
           id="schema-org"
           type="application/ld+json"
