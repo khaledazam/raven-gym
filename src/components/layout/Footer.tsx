@@ -47,15 +47,15 @@ export default function Footer() {
 
           {/* Official Location & Address (4 cols) */}
           <div className="lg:col-span-4 space-y-3">
-            <h4 className="text-white font-heading font-bold text-base flex items-center gap-2">
+            <h3 className="text-white font-heading font-bold text-base flex items-center gap-2">
               <MapPin className="w-4 h-4 text-gold" /> العنوان والموقع
-            </h4>
+            </h3>
 
             <div className="p-4 rounded-2xl bg-zinc-950/80 border border-zinc-900 space-y-2">
               <p className="text-white text-sm font-bold leading-relaxed">
                 {gymAddress}
               </p>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-zinc-300">
                 السنبلاوين • محافظة الدقهلية • مصر
               </p>
               
@@ -79,9 +79,9 @@ export default function Footer() {
 
           {/* Quick Links & Contact (3 cols) */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-white font-heading font-bold text-base flex items-center gap-2">
+            <h3 className="text-white font-heading font-bold text-base flex items-center gap-2">
               <Phone className="w-4 h-4 text-gold" /> أرقام التواصل السريع
-            </h4>
+            </h3>
 
             <ul className="space-y-2 text-sm">
               <li>

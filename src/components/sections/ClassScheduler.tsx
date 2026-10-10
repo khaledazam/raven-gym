@@ -255,25 +255,25 @@ export default function ClassScheduler() {
                     <span className="text-[#d4af37] text-xs font-bold tracking-wider flex items-center gap-1.5">
                       <Sparkles className="w-3.5 h-3.5 animate-pulse" /> تفاصيل الحصة التدريبية
                     </span>
-                    <span className="text-zinc-500 text-xs">{activeClassDetails.room}</span>
+                    <span className="text-zinc-400 text-xs">{activeClassDetails.room}</span>
                   </div>
 
                   <div>
                     <h3 className="text-white text-2xl font-black tracking-wide leading-tight mb-2">
                       {activeClassDetails.name}
                     </h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">
+                    <p className="text-gray-300 text-sm leading-relaxed">
                       {activeClassDetails.description}
                     </p>
                   </div>
 
                   <div className="space-y-3 pt-4 border-t border-zinc-900 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-zinc-500">المدة</span>
+                      <span className="text-zinc-400">المدة</span>
                       <span className="text-white font-bold">{activeClassDetails.duration}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-zinc-500">التوقيت</span>
+                      <span className="text-zinc-400">التوقيت</span>
                       <span className="text-[#d4af37] font-bold">{activeClassDetails.time}</span>
                     </div>
                   </div>
@@ -288,11 +288,11 @@ export default function ClassScheduler() {
               ) : (
                 <div className="h-full flex flex-col items-center justify-center text-center py-12 space-y-4">
                   <div className="w-14 h-14 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center">
-                    <Dumbbell className="w-6 h-6 text-zinc-500" />
+                    <Dumbbell className="w-6 h-6 text-zinc-400" />
                   </div>
                   <div>
                     <h4 className="text-white font-bold text-sm">اختر حصة تدريبية</h4>
-                    <p className="text-zinc-500 text-xs mt-1 max-w-[200px]">
+                    <p className="text-zinc-300 text-xs mt-1 max-w-[200px]">
                       اضغط على أي حصة من الجدول لعرض التفاصيل الكاملة والوقت ومكان التدريب.
                     </p>
                   </div>

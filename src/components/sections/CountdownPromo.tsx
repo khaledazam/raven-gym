@@ -97,7 +97,7 @@ export default function CountdownPromo() {
               <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-gradient-to-r from-red-500/15 via-[#d4af37]/20 to-red-500/15 border border-[#d4af37]/40 text-[#f5d77f] text-xs sm:text-sm font-bold tracking-wider mb-5 shadow-[0_0_25px_rgba(212,175,55,0.2)] animate-pulse"
+                className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-gradient-to-r from-red-500/15 via-[#d4af37]/20 to-red-500/15 border border-[#d4af37]/40 text-[#f5d77f] text-xs sm:text-sm font-bold tracking-wider mb-5 shadow-[0_0_25px_rgba(212,175,55,0.2)]"
               >
                 <Flame className="w-4 h-4 text-red-400" />
                 <span>عرض الافتتاح الحصري | خصم 30% لمهلة 30 يوماً فقط</span>

@@ -7,7 +7,7 @@ const tajawal = Tajawal({
   variable: "--font-sans",
   subsets: ["arabic"],
   weight: ["400", "700"],
-  display: "swap",
+  display: "optional",
   preload: true,
 });
 
@@ -15,7 +15,7 @@ const cairo = Cairo({
   variable: "--font-heading",
   subsets: ["arabic"],
   weight: ["700", "900"],
-  display: "swap",
+  display: "optional",
   preload: true,
 });
 

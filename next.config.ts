@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   compress: true,
   experimental: {
-    optimizePackageImports: ["lucide-react", "framer-motion"],
+    optimizePackageImports: ["lucide-react", "framer-motion", "gsap", "lenis"],
   },
   async headers() {
     return [

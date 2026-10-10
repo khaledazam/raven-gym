@@ -144,6 +144,7 @@ const TiltCard = ({ plan, isHovered, onHover, onLeave }: { plan: typeof plans[0]
       <div style={{ transform: "translateZ(30px)" }}>
         <Link
           href={`/subscribe?plan=${plan.id}`}
+          aria-label={`اشترك الآن في باقة ${plan.name} - ${plan.cta}`}
           className={`group relative w-full py-4 rounded-xl font-heading text-sm font-bold tracking-wider uppercase transition-all overflow-hidden flex items-center justify-center cursor-pointer ${
             plan.highlight 
               ? "bg-gold text-black shadow-[0_0_20px_rgba(176,138,71,0.3)]" 

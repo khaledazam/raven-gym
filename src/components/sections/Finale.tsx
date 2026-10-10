@@ -3,90 +3,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import LazyCanvas from "../hero/LazyCanvas";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Sparkles, Center, Text3D } from "@react-three/drei";
-import * as THREE from "three";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-
-gsap.registerPlugin(ScrollTrigger);
-
-function FinaleScene({ isHovered }: { isHovered: boolean }) {
-  const groupRef = useRef<THREE.Group>(null);
-  
-  const targetSpeed = isHovered ? 0.8 : 0.2;
-  const currentSpeed = useRef(0.2);
-  const emissiveTarget = isHovered ? 0.6 : 0.2;
-  const currentEmissive = useRef(0.2);
-
-  useFrame((state, delta) => {
-    currentSpeed.current = THREE.MathUtils.lerp(currentSpeed.current, targetSpeed, 0.05);
-    currentEmissive.current = THREE.MathUtils.lerp(currentEmissive.current, emissiveTarget, 0.05);
-    
-    if (groupRef.current) {
-      groupRef.current.rotation.y += delta * currentSpeed.current;
-    }
-  });
-
-  return (
-    <group ref={groupRef}>
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-        <Center>
-          <Text3D 
-            font="/fonts/optimer_bold.typeface.json" 
-            size={3} 
-            height={0.8} 
-            curveSegments={10} 
-            bevelEnabled 
-            bevelSize={0.03} 
-            bevelThickness={0.03}
-          >
-            RAVEN
-            <meshPhysicalMaterial 
-              color="#050505" 
-              metalness={0.9} 
-              roughness={0.1} 
-              clearcoat={1}
-            />
-          </Text3D>
-        </Center>
-      </Float>
-
-      {/* Center glowing core behind text */}
-      <mesh position={[0, 0, -2]}>
-        <planeGeometry args={[15, 15]} />
-        <meshBasicMaterial color="#B08A47" transparent opacity={currentEmissive.current} blending={THREE.AdditiveBlending} depthWrite={false} />
-      </mesh>
-
-      {/* Abstract floating shards */}
-      {Array.from({ length: 10 }).map((_, i) => (
-        <Float 
-          key={i} 
-          speed={1.5} 
-          rotationIntensity={2} 
-          floatIntensity={3} 
-          position={[(Math.random() - 0.5) * 20, (Math.random() - 0.5) * 15, (Math.random() - 0.5) * 10 - 2]}
-        >
-          <mesh rotation={[Math.random() * Math.PI, Math.random() * Math.PI, 0]}>
-            <octahedronGeometry args={[Math.random() * 0.8 + 0.2]} />
-            <meshStandardMaterial color="#B08A47" metalness={1} roughness={0.2} emissive="#B08A47" emissiveIntensity={0.2} />
-          </mesh>
-        </Float>
-      ))}
-
-      <Sparkles 
-        count={250} 
-        scale={25} 
-        size={isHovered ? 6 : 3} 
-        speed={isHovered ? 1.5 : 0.3} 
-        opacity={isHovered ? 0.8 : 0.4} 
-        color="#B08A47" 
-        noise={2} 
-      />
-    </group>
-  );
-}
-
 import Link from "next/link";
 
 function MagneticButton({ children, onHoverStart, onHoverEnd, onClick }: { children: React.ReactNode, onHoverStart: () => void, onHoverEnd: () => void, onClick?: () => void }) {
@@ -198,18 +115,10 @@ export default function Finale() {
       {/* Dynamic Black Background */}
       <div ref={bgRef} className="absolute inset-0 bg-black opacity-0 z-0 pointer-events-none" />
 
-      {/* 3D Environment */}
-      <div ref={canvasWrapperRef} className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center">
-        <React.Suspense fallback={null}>
-          <LazyCanvas>
-            <Canvas camera={{ position: [0, 0, 10], fov: 45 }} dpr={[1, 1.5]}>
-              <ambientLight intensity={0.5} />
-              <spotLight position={[10, 20, 10]} intensity={2} angle={0.3} penumbra={1} color="#B08A47" />
-              <spotLight position={[-10, -20, -10]} intensity={1} angle={0.3} penumbra={1} color="#ffffff" />
-              <FinaleScene isHovered={isHovered} />
-            </Canvas>
-          </LazyCanvas>
-        </React.Suspense>
+      {/* Cinematic Golden Lighting & Core */}
+      <div ref={canvasWrapperRef} className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center overflow-hidden">
+        <div className="w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full bg-gradient-to-r from-gold/15 via-[#aa8410]/10 to-transparent blur-[120px] md:blur-[160px] pointer-events-none transform-gpu animate-pulse" />
+        <div className="absolute w-[240px] h-[240px] md:w-[380px] md:h-[380px] rounded-full border border-gold/20 shadow-[0_0_100px_rgba(212,175,55,0.15)] pointer-events-none" />
       </div>
 
       {/* Content Overlay */}
@@ -229,7 +138,7 @@ export default function Finale() {
         </p>
 
         <div ref={ctaRef} className="mt-16 pointer-events-auto opacity-0">
-          <Link href="/subscribe">
+          <Link href="/subscribe" aria-label="انضم إلى مجتمع Raven Gym واشترك الآن">
             <MagneticButton 
               onHoverStart={() => setIsHovered(true)} 
               onHoverEnd={() => setIsHovered(false)}

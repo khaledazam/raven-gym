@@ -38,7 +38,7 @@ export default function LiveCapacity() {
 
   return (
     <div className="absolute top-10 right-10 z-50 pointer-events-auto" dir="rtl">
-      <div className={`flex flex-col items-start gap-1 px-5 py-3 rounded-xl border ${capacityStatus.border} bg-black/50 backdrop-blur-md shadow-2xl transition-all duration-500 hover:bg-black/70`}>
+      <div className={`flex flex-col items-start gap-1 px-5 py-3 rounded-xl border ${capacityStatus.border} bg-black/50 backdrop-blur-md shadow-2xl transition-colors duration-300 hover:bg-black/70`}>
         <div className="flex items-center gap-3 w-full justify-between mb-1">
           <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">
             <span className="relative flex h-2 w-2">

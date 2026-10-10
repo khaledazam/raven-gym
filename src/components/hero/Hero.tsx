@@ -30,13 +30,18 @@ export default function Hero() {
   const [canLoad3D, setCanLoad3D] = useState(false);
 
   useEffect(() => {
-    // Defer heavy 3D Canvas initialization until after initial paint & idle
+    // Only load 3D Scene on desktop to keep mobile score 95-100 and TBT 0ms
     if (typeof window !== "undefined") {
+      const isMobile = window.matchMedia("(max-width: 768px), (pointer: coarse)").matches;
+      if (isMobile) {
+        return;
+      }
+
       if ("requestIdleCallback" in window) {
-        const id = (window as any).requestIdleCallback(() => setCanLoad3D(true), { timeout: 1200 });
+        const id = (window as any).requestIdleCallback(() => setCanLoad3D(true), { timeout: 1500 });
         return () => (window as any).cancelIdleCallback(id);
       } else {
-        const timer = setTimeout(() => setCanLoad3D(true), 600);
+        const timer = setTimeout(() => setCanLoad3D(true), 800);
         return () => clearTimeout(timer);
       }
     }
@@ -52,27 +57,30 @@ export default function Hero() {
         { y: 30, opacity: 0, duration: 0.8, stagger: 0.1, delay: 0.1 }
       );
 
-      // Scroll Pin & Progress Timeline
-      ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: "top top",
-        end: "+=3000",
-        pin: true,
-        scrub: 1,
-        onUpdate: (self) => {
-          scrollProgress.current = self.progress;
+      // Scroll Pin & Progress Timeline (Only on desktop to preserve fluid mobile scroll)
+      const isDesktop = !window.matchMedia("(max-width: 768px)").matches;
+      if (isDesktop) {
+        ScrollTrigger.create({
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=2500",
+          pin: true,
+          scrub: 1,
+          onUpdate: (self) => {
+            scrollProgress.current = self.progress;
 
-          gsap.to(
-            [locationBadgeRef.current, headlineRef.current, subHeadlineRef.current, buttonsRef.current],
-            {
-              opacity: 1 - self.progress * 3,
-              y: -(self.progress * 200),
-              duration: 0.1,
-              overwrite: "auto",
-            }
-          );
-        },
-      });
+            gsap.to(
+              [locationBadgeRef.current, headlineRef.current, subHeadlineRef.current, buttonsRef.current],
+              {
+                opacity: 1 - self.progress * 3,
+                y: -(self.progress * 200),
+                duration: 0.1,
+                overwrite: "auto",
+              }
+            );
+          },
+        });
+      }
     }, containerRef);
 
     return () => ctx.revert();
@@ -80,13 +88,14 @@ export default function Hero() {
 
   return (
     <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-[#050505]">
-      {/* 3D Scene Background (Mounted on idle to achieve 0ms TBT and 95+ score) */}
+      {/* 3D Scene Background (Mounted on idle exclusively on desktop) */}
       <div className="absolute inset-0 z-0">
         {canLoad3D ? (
           <Scene scrollProgress={scrollProgress} />
         ) : (
-          <div className="absolute inset-0 bg-[#050505] flex items-center justify-center">
-            <div className="w-[500px] h-[500px] rounded-full bg-gold/5 blur-[120px] pointer-events-none" />
+          <div className="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden">
+            <div className="w-[340px] h-[340px] md:w-[600px] md:h-[600px] rounded-full bg-gradient-to-tr from-gold/15 via-[#aa8410]/10 to-transparent blur-[100px] md:blur-[140px] pointer-events-none transform-gpu animate-pulse" />
+            <div className="absolute w-[220px] h-[220px] md:w-[350px] md:h-[350px] rounded-full border border-gold/15 shadow-[0_0_80px_rgba(212,175,55,0.1)] pointer-events-none" />
           </div>
         )}
       </div>

@@ -5,10 +5,6 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Target, Dumbbell, Utensils, LineChart, Trophy } from "lucide-react";
-import LazyCanvas from "../hero/LazyCanvas";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Sparkles, Center, Text3D } from "@react-three/drei";
-import * as THREE from "three";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,37 +41,6 @@ const steps = [
   },
 ];
 
-function FinaleLogo() {
-  const groupRef = useRef<THREE.Group>(null);
-  
-  useFrame((state, delta) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.2;
-    }
-  });
-
-  return (
-    <group ref={groupRef}>
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-        <Center>
-          <Text3D 
-            font="/fonts/optimer_bold.typeface.json" 
-            size={2} 
-            height={0.5} 
-            curveSegments={12} 
-            bevelEnabled 
-            bevelSize={0.02} 
-            bevelThickness={0.02}
-          >
-            RAVEN
-            <meshStandardMaterial color="#B08A47" metalness={0.8} roughness={0.2} emissive="#B08A47" emissiveIntensity={0.2} />
-          </Text3D>
-        </Center>
-      </Float>
-      <Sparkles count={200} scale={10} size={3} speed={0.4} opacity={0.8} color="#B08A47" noise={1} />
-    </group>
-  );
-}
 
 export default function Transformations() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -87,11 +52,12 @@ export default function Transformations() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       
+      const isDesktop = typeof window !== "undefined" && !window.matchMedia("(max-width: 768px)").matches;
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=5000",
+          end: isDesktop ? "+=3200" : "+=1800",
           pin: true,
           scrub: 1,
         }
@@ -195,23 +161,25 @@ export default function Transformations() {
           ref={finaleRef}
           className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md z-30 opacity-0 pointer-events-none"
         >
-          <div className="w-full h-[50vh] pointer-events-auto">
-            <LazyCanvas>
-              <Canvas camera={{ position: [0, 0, 8] }} dpr={[1, 1.5]}>
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} intensity={2} color="#B08A47" />
-                <FinaleLogo />
-              </Canvas>
-            </LazyCanvas>
+          <div className="relative flex flex-col items-center justify-center py-6 pointer-events-auto">
+            <div className="w-32 h-32 md:w-44 md:h-44 rounded-full bg-gradient-to-tr from-gold/20 via-gold/5 to-transparent border border-gold/40 flex items-center justify-center shadow-[0_0_60px_rgba(212,175,55,0.25)] relative mb-6">
+              <div className="absolute inset-0 rounded-full bg-gold/10 blur-xl animate-pulse pointer-events-none" />
+              <span className="font-heading text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#fff1be] via-gold to-[#8a6820] tracking-widest">
+                RAVEN
+              </span>
+            </div>
           </div>
           
-          <div className="pointer-events-auto text-center -mt-10">
-            <h3 className="font-heading text-4xl md:text-6xl font-bold text-white text-center drop-shadow-2xl mb-12 tracking-tight">
+          <div className="pointer-events-auto text-center">
+            <h3 className="font-heading text-4xl md:text-6xl font-bold text-white text-center drop-shadow-2xl mb-8 tracking-tight">
               تحولك القادم <span className="text-gold block mt-4">يبدأ من هنا</span>
             </h3>
             
             <Link href="/subscribe">
-              <button className="group relative overflow-hidden rounded-none bg-gold px-14 py-6 font-heading text-xl font-bold tracking-wider text-black transition-all hover:scale-105 shadow-[0_0_40px_rgba(176,138,71,0.4)] hover:shadow-[0_0_60px_rgba(176,138,71,0.8)] cursor-pointer">
+              <button 
+                aria-label="ابدأ رحلتك الرياضية الآن في Raven Gym"
+                className="group relative overflow-hidden rounded-none bg-gold px-14 py-6 font-heading text-xl font-bold tracking-wider text-black transition-all hover:scale-105 shadow-[0_0_40px_rgba(176,138,71,0.4)] hover:shadow-[0_0_60px_rgba(176,138,71,0.8)] cursor-pointer"
+              >
                 <span className="relative z-10">ابدأ رحلتك الآن</span>
                 <div className="absolute inset-0 z-0 h-full w-full translate-y-full bg-white transition-transform duration-500 ease-out group-hover:translate-y-0" />
               </button>

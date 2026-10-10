@@ -11,6 +11,11 @@ export default function SmoothScrollProvider({
   children: React.ReactNode;
 }) {
   useEffect(() => {
+    // Disable virtual smooth scrolling on mobile & touch devices for optimal native 120Hz performance
+    if (typeof window === "undefined" || window.matchMedia("(max-width: 768px), (pointer: coarse)").matches) {
+      return;
+    }
+
     gsap.registerPlugin(ScrollTrigger);
 
     const lenis = new Lenis({
@@ -20,10 +25,8 @@ export default function SmoothScrollProvider({
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 1.5,
     });
 
-    // Synchronize Lenis scroll with GSAP ScrollTrigger to prevent forced layout thrashing
     lenis.on("scroll", ScrollTrigger.update);
 
     const tickerCallback = (time: number) => {
@@ -31,7 +34,6 @@ export default function SmoothScrollProvider({
     };
 
     gsap.ticker.add(tickerCallback);
-    gsap.ticker.lagSmoothing(0);
 
     return () => {
       gsap.ticker.remove(tickerCallback);
