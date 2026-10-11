@@ -4,7 +4,8 @@ import { useEffect, useState, useMemo } from 'react';
 import { Activity } from 'lucide-react';
 
 export default function LiveCapacity() {
-  const [capacity, setCapacity] = useState<{ count: number }>({ count: 18 });
+  const [capacity, setCapacity] = useState<{ count: number } | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchCapacity = async () => {
@@ -16,29 +17,29 @@ export default function LiveCapacity() {
         }
       } catch (err) {
         console.error('Failed to fetch capacity:', err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    // Defer initial capacity request by 2.5s so initial critical path is completely clear
-    const initialTimer = setTimeout(fetchCapacity, 2500);
+    fetchCapacity();
     const interval = setInterval(fetchCapacity, 60000);
 
-    return () => {
-      clearTimeout(initialTimer);
-      clearInterval(interval);
-    };
+    return () => clearInterval(interval);
   }, []);
 
   const capacityStatus = useMemo(() => {
-    if (!capacity) return { label: 'غير متوفر', color: 'text-gray-500', bg: 'bg-gray-500/10', border: 'border-gray-500/20' };
+    if (isLoading || !capacity) {
+      return { label: 'جاري التحديث...', color: 'text-zinc-400', bg: 'bg-zinc-500/10', border: 'border-zinc-800' };
+    }
     if (capacity.count > 40) return { label: 'مزدحم', color: 'text-red-500', bg: 'bg-red-500/10', border: 'border-red-500/20' };
     if (capacity.count > 15) return { label: 'متوسط', color: 'text-yellow-500', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20' };
     return { label: 'هادئ', color: 'text-green-500', bg: 'bg-green-500/10', border: 'border-green-500/20' };
-  }, [capacity]);
+  }, [capacity, isLoading]);
 
   return (
     <div className="absolute top-10 right-10 z-50 pointer-events-auto" dir="rtl">
-      <div className={`flex flex-col items-start gap-1 px-5 py-3 rounded-xl border ${capacityStatus.border} bg-black/50 backdrop-blur-md shadow-2xl transition-colors duration-300 hover:bg-black/70`}>
+      <div className={`flex flex-col items-start gap-1 px-5 py-3 rounded-xl border ${capacityStatus.border} bg-black/50 backdrop-blur-md shadow-2xl transition-colors duration-300 hover:bg-black/70 min-w-[130px]`}>
         <div className="flex items-center gap-3 w-full justify-between mb-1">
           <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">
             <span className="relative flex h-2 w-2">
@@ -50,8 +51,14 @@ export default function LiveCapacity() {
           <Activity size={16} className={capacityStatus.color} />
         </div>
         
-        <div className="flex items-baseline gap-2">
-          <span className="text-3xl font-heading font-black text-white">{capacity?.count || 0}</span>
+        <div className="flex items-baseline gap-2 min-h-[36px]">
+          <span className="text-3xl font-heading font-black text-white">
+            {isLoading ? (
+              <span className="text-zinc-500 animate-pulse text-2xl">--</span>
+            ) : (
+              capacity?.count ?? 0
+            )}
+          </span>
           <span className="text-xs text-gray-400 tracking-wider">متواجد الآن</span>
         </div>
         
