@@ -1,6 +1,9 @@
 import Hero from "@/components/hero/Hero";
 import CountdownPromo from "@/components/sections/CountdownPromo";
 import About from "@/components/sections/About";
+import BuildingFloors from "@/components/sections/BuildingFloors";
+import SkyArena from "@/components/sections/SkyArena";
+import RecoverySpa from "@/components/sections/RecoverySpa";
 import Transformations from "@/components/sections/Transformations";
 import ClassScheduler from "@/components/sections/ClassScheduler";
 import AiNutrition from "@/components/sections/AiNutrition";
@@ -16,6 +19,9 @@ export default function Home() {
       <Hero />
       <CountdownPromo />
       <About />
+      <BuildingFloors />
+      <SkyArena />
+      <RecoverySpa />
       <Transformations />
       <ClassScheduler />
       <AiNutrition />

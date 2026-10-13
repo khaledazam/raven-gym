@@ -13,9 +13,11 @@ import {
   ArrowLeft,
   Sparkles,
   Dumbbell,
-  ShieldCheck
+  ShieldCheck,
+  Share2
 } from "lucide-react";
 import Link from "next/link";
+import { TikTokIcon, InstagramIcon, FacebookIcon } from "@/components/layout/SocialIcons";
 
 export default function Contact() {
   const [copiedNumber, setCopiedNumber] = useState<string | null>(null);
@@ -223,6 +225,122 @@ export default function Contact() {
                 </motion.div>
               ))}
             </div>
+
+            {/* OFFICIAL SOCIAL MEDIA CHANNELS HUB */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-6 rounded-3xl bg-zinc-950/80 border border-zinc-800/80 hover:border-[#d4af37]/40 transition-all duration-300 space-y-4 shadow-xl relative overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 w-44 h-44 bg-[#d4af37]/5 rounded-full blur-2xl pointer-events-none" />
+
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#d4af37] to-[#aa8410] flex items-center justify-center text-black shadow-md shrink-0">
+                    <Share2 className="w-4 h-4 stroke-[2.5]" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-base sm:text-lg flex items-center gap-2">
+                      صفحات السوشيال ميديا الرسمية
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold/10 text-[#f5d77f] border border-gold/20">
+                        Official Channels
+                      </span>
+                    </h4>
+                    <p className="text-xs text-gray-400">
+                      تابع يوميات الجيم، تكنيك الأجهزة، ونتائج الأبطال المشتركين أولاً بأول
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3 Interactive Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                {/* Instagram */}
+                <a
+                  href="https://instagram.com/raven_gym1?utm_source=qr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative p-4 rounded-2xl bg-zinc-900/70 border border-zinc-800/90 hover:border-pink-500/50 hover:bg-zinc-900 transition-all duration-300 flex flex-col justify-between hover:shadow-[0_4px_25px_rgba(225,48,108,0.2)] cursor-pointer"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+                        <InstagramIcon className="w-5 h-5" />
+                      </div>
+                    </div>
+                    <span className="text-[11px] text-gray-400 block font-medium">Instagram</span>
+                    <span className="text-sm font-bold text-white group-hover:text-pink-400 transition-colors font-mono block" dir="ltr">
+                      @raven_gym1
+                    </span>
+                    <span className="text-[11px] text-zinc-400 line-clamp-1 mt-1 block">
+                      ستوريات وتمارين الأبطال
+                    </span>
+                  </div>
+                  <div className="mt-4 pt-2.5 border-t border-white/5 flex items-center justify-between text-xs font-bold text-gray-300 group-hover:text-pink-400 transition-colors">
+                    <span>متابعة الحساب</span>
+                    <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
+                  </div>
+                </a>
+
+                {/* TikTok */}
+                <a
+                  href="https://www.tiktok.com/@raven.gym?_r=1&_t=ZS-9AW8AIuBQ52"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative p-4 rounded-2xl bg-zinc-900/70 border border-zinc-800/90 hover:border-cyan-400/50 hover:bg-zinc-900 transition-all duration-300 flex flex-col justify-between hover:shadow-[0_4px_25px_rgba(0,242,234,0.2)] cursor-pointer"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="w-10 h-10 rounded-xl bg-black border border-white/10 flex items-center justify-center text-white shadow-md group-hover:scale-105 group-hover:text-cyan-400 transition-all">
+                        <TikTokIcon className="w-5 h-5" />
+                      </div>
+                    </div>
+                    <span className="text-[11px] text-gray-400 block font-medium">TikTok</span>
+                    <span className="text-sm font-bold text-white group-hover:text-cyan-400 transition-colors font-mono block" dir="ltr">
+                      @raven.gym
+                    </span>
+                    <span className="text-[11px] text-zinc-400 line-clamp-1 mt-1 block">
+                      فيديوهات التدريب والشرح
+                    </span>
+                  </div>
+                  <div className="mt-4 pt-2.5 border-t border-white/5 flex items-center justify-between text-xs font-bold text-gray-300 group-hover:text-cyan-400 transition-colors">
+                    <span>مشاهدة الفيديوهات</span>
+                    <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
+                  </div>
+                </a>
+
+                {/* Facebook */}
+                <a
+                  href="https://www.facebook.com/share/1C15kFpH3U/?mibextid=wwXIfr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative p-4 rounded-2xl bg-zinc-900/70 border border-zinc-800/90 hover:border-blue-500/50 hover:bg-zinc-900 transition-all duration-300 flex flex-col justify-between hover:shadow-[0_4px_25px_rgba(24,119,242,0.2)] cursor-pointer"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="w-10 h-10 rounded-xl bg-[#1877F2] flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+                        <FacebookIcon className="w-5 h-5" />
+                      </div>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400">
+                        الصفحة الرسمية
+                      </span>
+                    </div>
+                    <span className="text-[11px] text-gray-400 block font-medium">Facebook</span>
+                    <span className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors block">
+                      Raven Gym
+                    </span>
+                    <span className="text-[11px] text-zinc-400 line-clamp-1 mt-1 block">
+                      العروض والإعلانات الرسمية
+                    </span>
+                  </div>
+                  <div className="mt-4 pt-2.5 border-t border-white/5 flex items-center justify-between text-xs font-bold text-gray-300 group-hover:text-blue-400 transition-colors">
+                    <span>زيارة الصفحة</span>
+                    <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
+                  </div>
+                </a>
+              </div>
+            </motion.div>
 
             {/* HIGH-PROFILE ADDRESS & LOCATION CARD */}
             <motion.div

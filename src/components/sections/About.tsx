@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Dumbbell, Brain, Activity, Trophy } from "lucide-react";
+import { Dumbbell, Brain, Activity, Trophy, Sparkles } from "lucide-react";
 
 const features = [
   {
@@ -137,6 +137,34 @@ export default function About() {
             <TiltCard key={feature.title} feature={feature} index={idx} />
           ))}
         </div>
+
+        {/* Recovery & Spa Highlight Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12 p-6 rounded-2xl bg-zinc-950/80 border border-zinc-800/80 hover:border-[#d4af37]/40 transition-all flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-right"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold shrink-0">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="text-white font-bold text-base">
+                منطقة استشفاء وسبا رياضي متكاملة
+              </h4>
+              <p className="text-xs text-gray-400">
+                جاكوزي مائي، سونا جافة، غرفة بخار، حمام ثلج، حجامة رياضية، وعيادة تأهيل وعلاج طبيعي
+              </p>
+            </div>
+          </div>
+          <a
+            href="#recovery-spa"
+            className="px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-gold hover:text-black border border-zinc-700 hover:border-gold text-xs font-bold text-white transition-all whitespace-nowrap cursor-pointer shadow-md"
+          >
+            اكتشف خدمات الريكفري
+          </a>
+        </motion.div>
       </div>
     </section>
   );

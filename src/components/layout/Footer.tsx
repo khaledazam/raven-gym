@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { MapPin, Phone, Clock, MessageCircle, Crown, ShieldCheck, Dumbbell, Sparkles } from "lucide-react";
+import { TikTokIcon, InstagramIcon, FacebookIcon } from "./SocialIcons";
 
 export default function Footer() {
   const gymAddress = "أول المشاية / بجوار تشكن فاكتور / عمارة التوحيد والنور - السنبلاوين";
@@ -42,6 +43,53 @@ export default function Footer() {
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs text-green-400">
                 <ShieldCheck className="w-3.5 h-3.5" /> تدريب معتمد
               </span>
+            </div>
+
+            {/* Social Media Links */}
+            <div className="pt-3 space-y-2.5">
+              <span className="text-xs font-bold text-zinc-300 block">
+                صفحاتنا الرسمية على السوشيال ميديا:
+              </span>
+              <div className="flex items-center gap-2.5 flex-wrap">
+                <a
+                  href="https://instagram.com/raven_gym1?utm_source=qr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Raven Gym on Instagram"
+                  className="group flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 border border-zinc-800 hover:border-pink-500/50 hover:bg-zinc-800 text-gray-300 hover:text-white transition-all duration-300 text-xs font-bold shadow-md"
+                >
+                  <span className="w-6 h-6 rounded-lg bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] flex items-center justify-center text-white shrink-0 group-hover:scale-110 transition-transform">
+                    <InstagramIcon className="w-3.5 h-3.5" />
+                  </span>
+                  <span className="group-hover:text-pink-400 transition-colors">Instagram</span>
+                </a>
+
+                <a
+                  href="https://www.tiktok.com/@raven.gym?_r=1&_t=ZS-9AW8AIuBQ52"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Raven Gym on TikTok"
+                  className="group flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 border border-zinc-800 hover:border-cyan-400/50 hover:bg-zinc-800 text-gray-300 hover:text-white transition-all duration-300 text-xs font-bold shadow-md"
+                >
+                  <span className="w-6 h-6 rounded-lg bg-black border border-white/10 flex items-center justify-center text-white shrink-0 group-hover:scale-110 group-hover:text-cyan-400 transition-all">
+                    <TikTokIcon className="w-3.5 h-3.5" />
+                  </span>
+                  <span className="group-hover:text-cyan-400 transition-colors">TikTok</span>
+                </a>
+
+                <a
+                  href="https://www.facebook.com/share/1C15kFpH3U/?mibextid=wwXIfr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Raven Gym on Facebook"
+                  className="group flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 border border-zinc-800 hover:border-blue-500/50 hover:bg-zinc-800 text-gray-300 hover:text-white transition-all duration-300 text-xs font-bold shadow-md"
+                >
+                  <span className="w-6 h-6 rounded-lg bg-[#1877F2] flex items-center justify-center text-white shrink-0 group-hover:scale-110 transition-transform">
+                    <FacebookIcon className="w-3.5 h-3.5" />
+                  </span>
+                  <span className="group-hover:text-blue-400 transition-colors">Facebook</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -134,11 +182,62 @@ export default function Footer() {
           <p>
             جميع الحقوق محفوظة © {new Date().getFullYear()} <strong className="text-gray-400">Raven Gym (ريفن جيم)</strong>. السنبلاوين، مصر.
           </p>
-          <p className="flex items-center gap-1.5 justify-center">
-            <span>تحت إشراف كابتن محمد عبدالعاطي</span>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+              <a
+                href="https://instagram.com/raven_gym1?utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-pink-400 transition-colors"
+                title="Raven Gym on Instagram"
+                aria-label="Instagram"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a
+                href="https://www.tiktok.com/@raven.gym?_r=1&_t=ZS-9AW8AIuBQ52"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-cyan-400 transition-colors"
+                title="Raven Gym on TikTok"
+                aria-label="TikTok"
+              >
+                <TikTokIcon className="w-4 h-4" />
+              </a>
+              <a
+                href="https://www.facebook.com/share/1C15kFpH3U/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-400 transition-colors"
+                title="Raven Gym on Facebook"
+                aria-label="Facebook"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
+            </div>
             <span>•</span>
             <span className="text-gold">تدريب 24/7</span>
-          </p>
+          </div>
+        </div>
+
+        {/* Subtle SEO Alias Tags */}
+        <div className="mt-4 pt-3 border-t border-white/5 flex flex-wrap items-center justify-center sm:justify-start gap-x-2 gap-y-1 text-[11px] text-zinc-600">
+          <span className="text-zinc-500 font-medium">التهجئات الشائعة:</span>
+          <span>جيم ريفن</span>
+          <span>•</span>
+          <span>جيم رافن</span>
+          <span>•</span>
+          <span>ريفين</span>
+          <span>•</span>
+          <span>جم ريفن</span>
+          <span>•</span>
+          <span>جم رافن</span>
+          <span>•</span>
+          <span>Ravin Gym</span>
+          <span>•</span>
+          <span>Reven Gym</span>
+          <span>•</span>
+          <span>Raven Jim</span>
         </div>
       </div>
     </footer>
