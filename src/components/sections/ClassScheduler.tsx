@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, Clock, Dumbbell, Sparkles, Loader2, RefreshCw, CheckCircle2 } from "lucide-react";
+import { Calendar, Clock, Dumbbell, Sparkles, Loader2 } from "lucide-react";
 
 interface WorkoutClass {
   id: string;
@@ -18,156 +18,14 @@ interface WorkoutClass {
   dayOfWeek?: string;
 }
 
-const DEFAULT_SCHEDULE_DATA: Record<string, WorkoutClass[]> = {
-  Saturday: [
-    {
-      id: "sat-1",
-      name: "ملاكمة بطولات (Championship Boxing)",
-      time: "08:00 ص - 09:30 ص",
-      duration: "90 دقيقة",
-      intensity: "High",
-      room: "حلبة النزال (Combat Ring)",
-      description: "تدريب مكثف على الشادو بوكسينج، فترات الملاكمة مع الأكياس الثقيلة، والعمل على الميتس لرفع قوة الضربة والتحمل العضلي."
-    },
-    {
-      id: "sat-2",
-      name: "رفع أثقال أولمبي (Olympic Lifting)",
-      time: "10:30 ص - 12:00 م",
-      duration: "90 دقيقة",
-      intensity: "High",
-      room: "منطقة القوة والأوزان",
-      description: "إتقان حركات الخطف (Snatch) والنتر (Clean & Jerk). تدريب تقني عالي يركز على القوة الانفجارية والسرعة الحركية."
-    },
-    {
-      id: "sat-3",
-      name: "حصة Raven HIIT المكثفة",
-      time: "04:00 م - 05:00 م",
-      duration: "60 دقيقة",
-      intensity: "High",
-      room: "منطقة التمارين الوظيفية (Turf)",
-      description: "تمارين لياقة بدنية وحرق دهون لكامل الجسم تجمع بين الكيتل بيل، الحبال الثقيلة، وسحب الأوزان لرفع كفاءة القلب."
-    }
-  ],
-  Sunday: [
-    {
-      id: "sun-1",
-      name: "مرونة واستشفاء ويوجا (Mobility & Flow)",
-      time: "09:00 ص - 10:15 ص",
-      duration: "75 دقيقة",
-      intensity: "Low",
-      room: "استوديو الاسترخاء والمرونة",
-      description: "إطالات عميقة، تدفقات حركية لتليين المفاصل، وتمارين تنفس لتخفيف آلام العضلات وزيادة المدى الحركي."
-    },
-    {
-      id: "sun-2",
-      name: "تضخيم الصدر والظهر (Chest & Back)",
-      time: "02:00 م - 03:30 م",
-      duration: "90 دقيقة",
-      intensity: "Medium",
-      room: "منطقة القوة والأوزان",
-      description: "تدريب بناء عضلي عالي الكثافة يستهدف تطوير سمك وعرض عضلات الصدر والظهر باستخدام تكنيك التوتر الميكانيكي."
-    },
-    {
-      id: "sun-3",
-      name: "لياقة وأداء رياضي متقدم (Athletic Performance)",
-      time: "06:00 م - 07:30 م",
-      duration: "90 دقيقة",
-      intensity: "High",
-      room: "منطقة التمارين الوظيفية (Turf)",
-      description: "تمارين بليومتريكس، تسارع، وثبات عضلات الجذع مصممة للرياضيين لزيادة سرعة الانطلاق والقفز العمودي."
-    }
-  ],
-  Monday: [
-    {
-      id: "mon-1",
-      name: "كروس فيت WOD احترافي",
-      time: "07:00 ص - 08:30 ص",
-      duration: "90 دقيقة",
-      intensity: "High",
-      room: "منطقة التمارين الوظيفية (Turf)",
-      description: "تمرين اليوم الكلاسيكي عالي الشدة: جمباز رياضي، رفع أوزان حرة، وتمارين رفع لياقة مكثفة."
-    },
-    {
-      id: "mon-2",
-      name: "أساسيات الباورلفتنج (Powerlifting)",
-      time: "11:00 ص - 12:30 م",
-      duration: "90 دقيقة",
-      intensity: "High",
-      room: "منطقة القوة والأوزان",
-      description: "تدريب مركز على الحركات الكبرى الثلاث: السكوات، البنش برس، والديدليفت، مع التركيز على القوة المطلقة والتكنيك السليم."
-    },
-    {
-      id: "mon-3",
-      name: "تقوية عضلات الكور والاستشفاء (Core & Recovery)",
-      time: "05:00 م - 06:00 م",
-      duration: "60 دقيقة",
-      intensity: "Low",
-      room: "استوديو الاسترخاء والمرونة",
-      description: "تقوية عضلات الجذع والبطن العميقة مع جلسات الفوم رولر ومساج تحرير نقاط التوتر العضلي."
-    }
-  ],
-  Tuesday: [
-    {
-      id: "tue-1",
-      name: "كمال أجسام وظيفي (Functional Bodybuilding)",
-      time: "09:00 ص - 10:30 ص",
-      duration: "90 دقيقة",
-      intensity: "Medium",
-      room: "منطقة القوة والأوزان",
-      description: "دمج تمارين تشكيل وتضخيم العضلات مع الحركات الوظيفية لتتمتع بمظهر رياضي جذاب وحركة رشيقة وقوية."
-    },
-    {
-      id: "tue-2",
-      name: "مواي تاي ودفاع عن النفس (Muay Thai)",
-      time: "04:30 م - 06:00 م",
-      duration: "90 دقيقة",
-      intensity: "High",
-      room: "حلبة النزال (Combat Ring)",
-      description: "تعلّم فن الأطراف الثمانية: ضربات الكوع والركبة، العمل على أهداف الملاكمة، واستراتيجيات الدفاع والهجوم."
-    }
-  ],
-  Wednesday: [
-    {
-      id: "wed-1",
-      name: "تمارين حرق الدهون واللياقة (Metabolic Conditioning)",
-      time: "08:00 ص - 09:15 ص",
-      duration: "75 دقيقة",
-      intensity: "High",
-      room: "منطقة التمارين الوظيفية (Turf)",
-      description: "تمارين التحمل الهوائي باستخدام أجهزة التجديف، الدراجات الهوائية، وتمارين وزن الجسم لحرق السعرات بكفاءة عالية."
-    },
-    {
-      id: "wed-2",
-      name: "سرعة وديناميكية الباربيل (Barbell Cycling)",
-      time: "03:00 م - 04:30 م",
-      duration: "90 دقيقة",
-      intensity: "High",
-      room: "منطقة القوة والأوزان",
-      description: "تطوير معدل توليد القوة والسرعة الحركية من خلال تكرارات السكوات والرفعات الأولمبية السريعة."
-    }
-  ],
-  Thursday: [
-    {
-      id: "thu-1",
-      name: "تدريب التحمل والسرعة (Endurance & Agility)",
-      time: "09:00 ص - 10:30 ص",
-      duration: "90 دقيقة",
-      intensity: "High",
-      room: "منطقة التمارين الوظيفية (Turf)",
-      description: "تدريبات سرعة وردود أفعال وتحمل هوائي عالية الكثافة مناسبة لجميع مستويات اللياقة."
-    }
-  ],
-  Friday: [
-    {
-      id: "fri-1",
-      name: "حصة الاستشفاء الأسبوعي والتمدد (Open Recovery)",
-      time: "02:00 م - 03:30 م",
-      duration: "90 دقيقة",
-      intensity: "Low",
-      room: "استوديو الاسترخاء والمرونة",
-      description: "جلسات استشفاء خفيفة وإطالات عميقة وتفريغ الجهد العضلي المتراكم خلال الأسبوع."
-    }
-  ]
+const EMPTY_SCHEDULE: Record<string, WorkoutClass[]> = {
+  Saturday: [],
+  Sunday: [],
+  Monday: [],
+  Tuesday: [],
+  Wednesday: [],
+  Thursday: [],
+  Friday: []
 };
 
 const DAYS = [
@@ -183,7 +41,7 @@ const DAYS = [
 export default function ClassScheduler() {
   const [selectedDay, setSelectedDay] = useState("Saturday");
   const [activeClassDetails, setActiveClassDetails] = useState<WorkoutClass | null>(null);
-  const [scheduleData, setScheduleData] = useState<Record<string, WorkoutClass[]>>(DEFAULT_SCHEDULE_DATA);
+  const [scheduleData, setScheduleData] = useState<Record<string, WorkoutClass[]>>(EMPTY_SCHEDULE);
   const [isLoading, setIsLoading] = useState(true);
   const [isLiveFromSystem, setIsLiveFromSystem] = useState(false);
 
@@ -196,10 +54,8 @@ export default function ClassScheduler() {
         const data = await res.json();
 
         if (!cancelled && data.success && data.data) {
-          if (data.count > 0) {
-            setScheduleData(data.data);
-            setIsLiveFromSystem(true);
-          }
+          setScheduleData(data.data);
+          setIsLiveFromSystem(true);
         }
       } catch (err) {
         console.error("Failed to fetch live schedule:", err);
@@ -281,7 +137,7 @@ export default function ClassScheduler() {
             {isLoading ? (
               <div className="p-16 text-center rounded-2xl border border-zinc-900 bg-zinc-950/40 text-gray-400 space-y-3">
                 <Loader2 className="w-8 h-8 text-[#d4af37] animate-spin mx-auto" />
-                <p className="text-white font-bold text-sm">جارٍ تحميل جدول الحصص المحدث...</p>
+                <p className="text-white font-bold text-sm">جارٍ جلب جدول الحصص من السيستم...</p>
               </div>
             ) : classes.length === 0 ? (
               <div className="p-16 text-center rounded-2xl border border-zinc-900 bg-zinc-950/40 text-gray-400 space-y-3">
