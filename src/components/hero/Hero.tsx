@@ -7,7 +7,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MapPin } from "lucide-react";
 import LiveCapacity from "./LiveCapacity";
-import CountdownBadge from "./CountdownBadge";
 
 const Scene = dynamic(() => import("./Scene"), {
   ssr: false,
@@ -104,7 +103,6 @@ export default function Hero() {
       <LiveCapacity />
 
       {/* Floating 30-Day Countdown Badge */}
-      <CountdownBadge />
 
       {/* Overlay Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-end pb-28 md:pb-32 text-center px-4 pointer-events-none">
@@ -141,7 +139,7 @@ export default function Hero() {
             href="/subscribe"
             className="group relative overflow-hidden rounded-none bg-gold px-10 py-5 font-heading text-lg font-bold tracking-wider text-black transition-all hover:scale-105 shadow-[0_0_40px_rgba(176,138,71,0.3)] hover:shadow-[0_0_60px_rgba(176,138,71,0.6)] text-center flex items-center justify-center cursor-pointer"
           >
-            <span className="relative z-10">اشترك الآن بخصم 30%</span>
+            <span className="relative z-10">شوف الباقات واشترك الآن</span>
             <div className="absolute inset-0 z-0 h-full w-full translate-y-full bg-white transition-transform duration-500 ease-out group-hover:translate-y-0" />
           </Link>
 

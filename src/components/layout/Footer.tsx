@@ -170,7 +170,7 @@ export default function Footer() {
                 href="/subscribe"
                 className="text-xs text-gold underline hover:text-white transition-colors block"
               >
-                باقات واشتراكات Raven Gym (خصم الافتتاح 30%)
+                اشتراكات Raven Gym وباقات السيشنات
               </Link>
             </div>
           </div>

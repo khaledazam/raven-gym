@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDatabase } from '@/lib/mongodb';
+import { getMembershipPlans } from '@/lib/pricing-server';
+import { selectedMembership } from '@/lib/membership-plans';
 
 // Helper to generate a unique readable booking/subscription reference code
 function generateReferenceCode(): string {
@@ -24,8 +26,6 @@ export async function POST(req: NextRequest) {
       goal = '',
       medicalNotes = '',
       planId,
-      planName,
-      durationMonths = 1,
       amount,
       paymentMethod = 'instapay',
       senderAccount,
@@ -34,7 +34,9 @@ export async function POST(req: NextRequest) {
     } = body;
 
     // Validate required fields
-    if (!fullName || !phone || !planId || !amount || !senderAccount) {
+    if (typeof fullName !== 'string' || !fullName.trim() || typeof phone !== 'string' || !phone.trim() ||
+      typeof planId !== 'string' || typeof amount !== 'number' || !Number.isFinite(amount) || amount < 0 ||
+      typeof senderAccount !== 'string' || !senderAccount.trim()) {
       return NextResponse.json(
         {
           success: false,
@@ -42,6 +44,14 @@ export async function POST(req: NextRequest) {
         },
         { status: 400 }
       );
+    }
+
+    if (!['vodafone_cash', 'instapay'].includes(paymentMethod)) {
+      return NextResponse.json({ success: false, error: 'طريقة الدفع غير مدعومة.' }, { status: 400 });
+    }
+    const plan = selectedMembership(await getMembershipPlans(), planId, amount);
+    if (!plan) {
+      return NextResponse.json({ success: false, error: 'تغير سعر الباقة أو لم تعد متاحة. راجع الباقات الحالية قبل تأكيد التحويل وإرسال الطلب.' }, { status: 409 });
     }
 
     const isVodafoneCash = paymentMethod === 'vodafone_cash';
@@ -59,10 +69,15 @@ export async function POST(req: NextRequest) {
       gender,
       goal,
       medicalNotes,
-      planId,
-      planName: planName || planId.toUpperCase(),
-      durationMonths: Number(durationMonths) || 1,
-      amount: Number(amount),
+      planId: plan.id,
+      planName: plan.name,
+      subscriptionType: plan.type,
+      durationMonths: plan.durationMonths,
+      totalSessions: plan.totalSessions,
+      sessionPackageId: plan.sessionPackageId,
+      validityDays: plan.validityDays,
+      amount: plan.price,
+      branchId: 'branch-1',
       currency: 'EGP',
       paymentMethod: isVodafoneCash ? 'vodafone_cash' : 'instapay',
       paymentTarget: targetRecipient,

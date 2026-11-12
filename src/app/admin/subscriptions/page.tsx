@@ -39,6 +39,9 @@ interface Subscription {
   planId: string;
   planName: string;
   durationMonths: number;
+  subscriptionType?: 'time' | 'sessions';
+  totalSessions?: number;
+  validityDays?: number;
   amount: number;
   currency: string;
   paymentMethod: string;
@@ -171,7 +174,7 @@ export default function AdminSubscriptionsPage() {
     const methodDesc = isVodafone ? "فودافون كاش (لرقم 01036605024)" : "إنستاباي (لحساب St pop10)";
 
     if (type === "approval") {
-      text = `مرحباً بك يا كابتن ${sub.fullName} في Raven Gym! 🦅🔥\nتم التحقق من تحويل ${methodDesc} بنجاح واعتماد وتفعيل اشتراكك في باقة (${sub.planName}) لمدة ${sub.durationMonths} شهر.\nرقم عضويتك ومتابعتك هو: ${sub.referenceCode}.\nبانتظارك في الجيم لتسليمك بطاقة العضوية وبدء رحلتك التحولية!`;
+      text = `مرحباً بك يا كابتن ${sub.fullName} في Raven Gym! 🦅🔥\nتم التحقق من تحويل ${methodDesc} بنجاح واعتماد وتفعيل اشتراكك في باقة (${sub.planName}) ${sub.subscriptionType === 'sessions' ? `${sub.totalSessions} حصة` : `لمدة ${sub.durationMonths} شهر`}.\nرقم عضويتك ومتابعتك هو: ${sub.referenceCode}.\nبانتظارك في الجيم لتسليمك بطاقة العضوية وبدء رحلتك التحولية!`;
     } else {
       text = `مرحباً كابتن ${sub.fullName}، بخصوص طلب اشتراكك في Raven Gym برقم: ${sub.referenceCode} وتحويل ${methodDesc}، نود التأكد من بعض التفاصيل...`;
     }
@@ -390,7 +393,7 @@ export default function AdminSubscriptionsPage() {
                       <div className="flex items-center gap-2">
                         <CreditCard className="w-3.5 h-3.5 text-gold flex-shrink-0" />
                         <span>
-                          باقة <b>{sub.planName}</b> ({sub.durationMonths} شهر) -{" "}
+                          باقة <b>{sub.planName}</b> ({sub.subscriptionType === 'sessions' ? `${sub.totalSessions} حصة · ${sub.validityDays ? `${sub.validityDays} يوم` : 'بدون مدة صلاحية محددة'}` : `${sub.durationMonths} شهر`}) -{" "}
                           <b className="text-white">{sub.amount.toLocaleString()} ج.م</b>
                         </span>
                       </div>

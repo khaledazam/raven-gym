@@ -1,34 +1,29 @@
 import { MongoClient, Db } from 'mongodb';
 
 const uri = process.env.MONGODB_URI as string;
-const options = {};
-
-let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
-
-if (!process.env.MONGODB_URI) {
-  throw new Error('Please add your Mongo URI to .env.local');
-}
+const options = { serverSelectionTimeoutMS: 10000 };
 
 declare global {
   // eslint-disable-next-line no-var
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
-if (process.env.NODE_ENV === 'development') {
+function getClientPromise(): Promise<MongoClient> {
+  if (!uri) throw new Error('Database connection is not configured');
   if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, options);
-    global._mongoClientPromise = client.connect();
+    const client = new MongoClient(uri, options);
+    global._mongoClientPromise = client.connect().catch(async error => {
+      global._mongoClientPromise = undefined;
+      await client.close().catch(() => {});
+      throw error;
+    });
   }
-  clientPromise = global._mongoClientPromise;
-} else {
-  client = new MongoClient(uri, options);
-  clientPromise = client.connect();
+  return global._mongoClientPromise;
 }
 
 export async function getDatabase(dbName = 'gym_management'): Promise<Db> {
-  const connectedClient = await clientPromise;
+  const connectedClient = await getClientPromise();
   return connectedClient.db(dbName);
 }
 
-export default clientPromise;
+export default getClientPromise;

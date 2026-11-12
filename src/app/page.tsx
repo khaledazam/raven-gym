@@ -1,5 +1,4 @@
 import Hero from "@/components/hero/Hero";
-import CountdownPromo from "@/components/sections/CountdownPromo";
 import About from "@/components/sections/About";
 import BuildingFloors from "@/components/sections/BuildingFloors";
 import SkyArena from "@/components/sections/SkyArena";
@@ -17,7 +16,6 @@ export default function Home() {
   return (
     <main className="flex flex-col w-full bg-black">
       <Hero />
-      <CountdownPromo />
       <About />
       <BuildingFloors />
       <SkyArena />

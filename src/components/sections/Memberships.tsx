@@ -1,250 +1,29 @@
 "use client";
-
-import { useState, useRef, useEffect } from "react";
-import Link from "next/link";
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
-import { Check, ArrowLeft } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
-
-const plans = [
-  {
-    id: "train",
-    name: "TRAIN | تدريب أساسي",
-    description: "ابنِ استمراريتك، وتعلّم التكنيك الصحيح، وضع أساساً قوياً للياقتك البدنية.",
-    features: [
-      "دخول كامل لمرافق الجيم",
-      "استخدام كافة الأجهزة والأوزان الحرة",
-      "خزائن خاصة وغرف تبديل الملابس",
-      "بيئة تدريب ملهمة لجميع المستويات",
-      "متابعة دورية للتقدم والتطور",
-    ],
-    cta: "ابدأ التدريب",
-    highlight: false,
-    bgGradient: "radial-gradient(circle at 50% 50%, rgba(30,58,138,0.15) 0%, rgba(5,5,5,0) 60%)",
-  },
-  {
-    id: "transform",
-    name: "TRANSFORM | التحول الشامل",
-    description: "رحلة لياقة متكاملة مصممة للأعضاء الباحثين عن نتائج واضحة وتغيير حقيقي.",
-    features: [
-      "جميع مميزات باقة TRAIN",
-      "برامج وجداول تدريبية مخصصة لهدفك",
-      "خطة وتوجيه غذائي متكامل",
-      "مراجعة شهرية للقياسات والوزن",
-      "دعم ومتابعة ذات أولوية",
-    ],
-    cta: "ابدأ التحول الآن",
-    highlight: true,
-    bgGradient: "radial-gradient(circle at 50% 50%, rgba(176,138,71,0.15) 0%, rgba(5,5,5,0) 70%)",
-  },
-  {
-    id: "dominate",
-    name: "DOMINATE | Raven",
-    description: "التجربة الفائقة في Raven للأعضاء الملتزمين بالوصول لأعلى مستويات القوة واللياقة.",
-    features: [
-      "جميع مميزات باقة TRANSFORM",
-      "إشراف ومتابعة مباشرة من كبار المدربين",
-      "أولوية في حجز الحصص والمواعيد",
-      "مزايا وتسهيلات حصرية للأعضاء",
-      "دخول مجتمع Raven الحصري",
-      "استشارات متقدمة لرفع الأداء الرياضي",
-    ],
-    cta: "انضم إلى Raven",
-    highlight: false,
-    bgGradient: "radial-gradient(circle at 50% 50%, rgba(139,0,0,0.15) 0%, rgba(5,5,5,0) 60%)",
-  }
-];
-
-const TiltCard = ({ plan, isHovered, onHover, onLeave }: { plan: typeof plans[0], isHovered: boolean, onHover: () => void, onLeave: () => void }) => {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-    
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-    onLeave();
-  };
-
-  return (
-    <motion.div
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={onHover}
-      onMouseLeave={handleMouseLeave}
-      animate={{ 
-        y: plan.highlight ? -20 : 0,
-        scale: isHovered ? 1.02 : 1
-      }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className={`card-item relative h-full flex flex-col rounded-3xl p-8 transition-colors duration-500 z-10 ${
-        plan.highlight 
-          ? "bg-[#0a0a0a] border border-gold/40 shadow-[0_0_50px_rgba(176,138,71,0.2)]" 
-          : "bg-black/60 backdrop-blur-xl border border-white/5 hover:border-white/20"
-      }`}
-    >
-      {/* Light Reflection Sweep */}
-      <AnimatePresence>
-        {isHovered && (
-          <motion.div 
-            initial={{ opacity: 0, x: "-100%" }}
-            animate={{ opacity: 1, x: "200%" }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 pointer-events-none rounded-3xl"
-          />
-        )}
-      </AnimatePresence>
-
-      {plan.highlight && (
-        <div 
-          style={{ transform: "translateZ(30px)" }}
-          className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-gold to-yellow-600 text-black px-6 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(176,138,71,0.4)]"
-        >
-          الأكثر طلباً
-        </div>
-      )}
-
-      <div className="text-right mb-8 mt-4" style={{ transform: "translateZ(40px)" }}>
-        <h3 className={`font-heading text-2xl md:text-3xl font-bold mb-4 tracking-wide ${plan.highlight ? 'text-gold' : 'text-white'}`}>{plan.name}</h3>
-        <p className="text-gray-400 font-light text-sm leading-relaxed min-h-[60px]">{plan.description}</p>
-      </div>
-
-      <div className="space-y-4 mb-12 flex-1" style={{ transform: "translateZ(20px)" }}>
-        {plan.features.map((feature, i) => (
-          <div key={i} className="flex items-start gap-4">
-            <Check className={`w-5 h-5 shrink-0 mt-0.5 ${plan.highlight ? 'text-gold' : 'text-gray-500'}`} />
-            <span className="text-gray-300 text-sm font-light leading-relaxed">{feature}</span>
-          </div>
-        ))}
-      </div>
-
-      <div style={{ transform: "translateZ(30px)" }}>
-        <Link
-          href={`/subscribe?plan=${plan.id}`}
-          aria-label={`اشترك الآن في باقة ${plan.name} - ${plan.cta}`}
-          className={`group relative w-full py-4 rounded-xl font-heading text-sm font-bold tracking-wider uppercase transition-all overflow-hidden flex items-center justify-center cursor-pointer ${
-            plan.highlight 
-              ? "bg-gold text-black shadow-[0_0_20px_rgba(176,138,71,0.3)]" 
-              : "bg-transparent border border-white/20 text-white hover:border-gold hover:text-gold"
-          }`}
-        >
-          <span className="relative z-10 flex items-center justify-center gap-2">
-            {plan.cta}
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-          </span>
-          {plan.highlight && (
-            <div className="absolute inset-0 z-0 h-full w-full -translate-x-full bg-white transition-transform duration-500 ease-out group-hover:translate-x-0" />
-          )}
-        </Link>
-      </div>
-    </motion.div>
-  );
-};
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Loader2, RefreshCw } from "lucide-react";
+import PlanCards from "@/components/memberships/PlanCards";
+import { useMembershipPlans } from "@/lib/use-membership-plans";
 
 export default function Memberships() {
-  const [activePlan, setActivePlan] = useState<string | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const cardsWrapperRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Intro GSAP Animation
-      gsap.fromTo(".card-item", 
-        { opacity: 0, y: 100 },
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 1, 
-          stagger: 0.2, 
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 70%",
-          }
-        }
-      );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <section ref={containerRef} className="relative z-10 bg-[#050505] py-32 px-4 md:px-6 font-sans overflow-hidden" dir="rtl">
-      
-      {/* Dynamic Backgrounds */}
-      <AnimatePresence>
-        {plans.map((plan) => (
-          activePlan === plan.id && (
-            <motion.div 
-              key={plan.id}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1 }}
-              className="absolute inset-0 pointer-events-none z-0"
-              style={{ background: plan.bgGradient }}
-            />
-          )
-        ))}
-      </AnimatePresence>
-
-      <div className="mx-auto max-w-7xl relative z-10">
-        <div className="mb-24 text-center">
-          <motion.h2 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-heading text-4xl md:text-6xl font-bold tracking-tight text-white"
-          >
-            اختر <span className="text-gold">باقتك التدريبية</span>
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="mt-6 text-gray-400 font-light text-lg md:text-xl tracking-wider max-w-3xl mx-auto"
-          >
-            ثلاث باقات اشتراك مصممة لتناسب مختلف الأهداف، ومستويات الالتزام، والطموحات الرياضية.
-          </motion.p>
-        </div>
-
-        <div ref={cardsWrapperRef} className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 items-stretch perspective-1000">
-          {plans.map((plan) => (
-            <TiltCard 
-              key={plan.id} 
-              plan={plan} 
-              isHovered={activePlan === plan.id}
-              onHover={() => setActivePlan(plan.id)}
-              onLeave={() => setActivePlan(null)}
-            />
-          ))}
-        </div>
-
+  const [type, setType] = useState<"time" | "sessions">("time");
+  const { plans, loading, error, refresh } = useMembershipPlans();
+  return <section id="memberships" className="relative z-10 bg-[#050505] py-24 px-4 md:px-6 font-sans" dir="rtl">
+    <div className="max-w-6xl mx-auto">
+      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+        <p className="text-gold text-xs font-bold tracking-widest mb-4">RAVEN MEMBERSHIPS</p>
+        <h2 className="font-heading text-4xl md:text-6xl font-bold text-white">اختار <span className="text-gold">اللي يناسب تمرينك</span></h2>
+        <p className="mt-5 text-gray-400 leading-8">اشتراك بالمدة أو باقة حصص؛ سعر واضح وصلاحية محددة لكل باقة.</p>
+      </motion.div>
+      <div className="flex flex-wrap justify-center gap-3 mb-10" aria-label="نوع الاشتراك">
+        {([{ id: "time", label: "الاشتراكات الشهرية" }, { id: "sessions", label: "باقات السيشنات" }] as const).map(item =>
+          <button key={item.id} type="button" aria-pressed={type === item.id} onClick={() => setType(item.id)}
+            className={`rounded-full px-7 py-3 font-bold text-sm border transition-colors ${type === item.id ? "bg-gold text-black border-gold" : "border-white/15 text-gray-300 hover:border-gold/50"}`}>{item.label}</button>)}
       </div>
-    </section>
-  );
+      {loading ? <p role="status" className="text-center text-gray-400 py-16"><Loader2 className="w-6 h-6 animate-spin inline-block ml-2" />جاري تحميل الباقات والأسعار...</p>
+        : error ? <div role="alert" className="text-center rounded-3xl border border-white/10 p-10 text-gray-300"><p>{error}</p><button type="button" onClick={refresh} className="mt-5 text-gold inline-flex items-center gap-2"><RefreshCw className="w-4 h-4" />إعادة المحاولة</button></div>
+        : plans.some(plan => plan.type === type) ? <PlanCards plans={plans.filter(plan => plan.type === type)} />
+        : <p className="text-center text-gray-400 py-12">لا توجد باقات متاحة من هذا النوع حاليًا.</p>}
+    </div>
+  </section>;
 }

@@ -1,0 +1,70 @@
+{
+  "time": {
+    "1": 550,
+    "2": 1000,
+    "3": 1400,
+    "6": 2200,
+    "12": 3500
+  },
+  "sessions": [
+    {
+      "id": "s1",
+      "sessions": 1,
+      "price": 50,
+      "validityDays": 0,
+      "label": "حصة واحدة"
+    },
+    {
+      "id": "s15_30",
+      "sessions": 15,
+      "price": 350,
+      "validityDays": 30,
+      "label": "15 حصة / 30 يوم"
+    },
+    {
+      "id": "s15_60",
+      "sessions": 15,
+      "price": 500,
+      "validityDays": 60,
+      "label": "15 حصة / 60 يوم"
+    },
+    {
+      "id": "s30_60",
+      "sessions": 30,
+      "price": 600,
+      "validityDays": 60,
+      "label": "30 حصة / 60 يوم"
+    },
+    {
+      "id": "s45_90",
+      "sessions": 45,
+      "price": 900,
+      "validityDays": 90,
+      "label": "45 حصة / 90 يوم"
+    },
+    {
+      "id": "s90_180",
+      "sessions": 90,
+      "price": 1800,
+      "validityDays": 180,
+      "label": "90 حصة / 180 يوم"
+    },
+    {
+      "id": "s180_360",
+      "sessions": 180,
+      "price": 2800,
+      "validityDays": 360,
+      "label": "180 حصة / 360 يوم"
+    }
+  ],
+  "family": {
+    "3": 1100,
+    "4": 1500,
+    "5": 2000
+  },
+  "friends": {
+    "3": 1350,
+    "4": 1850,
+    "6": 2650
+  }
+}

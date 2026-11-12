@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense, ChangeEvent } from "react";
+import { useState, Suspense, ChangeEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -18,82 +18,22 @@ import {
   AlertCircle,
   ShieldCheck,
   Dumbbell,
-  Sparkles,
   Zap,
   Wallet,
-  Crown,
   FileText,
   MessageCircle,
   Home,
   RefreshCw,
-  Flame,
+  Loader2,
 } from "lucide-react";
 
-interface PlanOption {
-  id: string;
-  name: string;
-  nameAr: string;
-  tagline: string;
-  monthlyBasePrice: number;
-  highlight?: boolean;
-  features: string[];
-}
-
-const PLANS: PlanOption[] = [
-  {
-    id: "train",
-    name: "TRAIN",
-    nameAr: "باقة التمرين الأساسية",
-    tagline: "بناء الاستمرارية وتأسيس القوة البدنية",
-    monthlyBasePrice: 800,
-    features: [
-      "دخول كامل لمنطقة الأجهزة وصالات التدريب",
-      "استخدام غرف الملابس والخزائن الشخصية",
-      "جلسة قياس InBody ومتابعة شهرية",
-      "تطبيق الهاتف لتسجيل التمارين والحضور",
-    ],
-  },
-  {
-    id: "transform",
-    name: "TRANSFORM",
-    nameAr: "باقة التحول الشامل (الأكثر طلباً)",
-    tagline: "رحلة متكاملة لتحقيق نتائج مرئية وسريعة",
-    monthlyBasePrice: 1400,
-    highlight: true,
-    features: [
-      "كل مميزات باقة TRAIN بالكامل",
-      "خطة تغذية مخصصة",
-      "برنامج تدريبي مخصص يتجدد شهرياً",
-      "متابعة دورية مع كابتن الفريق أسبوعياً",
-      "أولوية الحجز في الحصص التدريبية الجماعية",
-    ],
-  },
-  {
-    id: "dominate",
-    name: "DOMINATE",
-    nameAr: "باقة Raven VIP",
-    tagline: "التجربة الفاخرة للرياضيين الطموحين لأقصى أداء",
-    monthlyBasePrice: 2200,
-    features: [
-      "كل مميزات باقة TRANSFORM بالكامل",
-      "مدرب شخصي مخصص لمتابعة الأداء والتطور",
-      "مشروبات طاقة وبروتين شيك مخصص مجاناً أسبوعياً",
-      "دخول مجاني للساونا والجاكوزي والاستشفاء",
-      "خدمة VIP ومساعدة مخصصة على مدار الساعة",
-    ],
-  },
-];
-
-const BASE_DURATIONS = [
-  { months: 1, label: "شهر واحد", defaultDiscount: 0, promoDiscount: 30, tagDefault: "مرن", tagPromo: "خصم الافتتاح 30%" },
-  { months: 3, label: "3 شهور", defaultDiscount: 10, promoDiscount: 30, tagDefault: "وفر 10%", tagPromo: "خصم الافتتاح 30%" },
-  { months: 6, label: "6 شهور", defaultDiscount: 15, promoDiscount: 30, tagDefault: "وفر 15%", tagPromo: "خصم الافتتاح 30%" },
-  { months: 12, label: "سنة كاملة", defaultDiscount: 25, promoDiscount: 35, tagDefault: "الأفضل قيمة - وفر 25%", tagPromo: "الأفضل قيمة - وفر 35%" },
-];
+import PlanCards from "@/components/memberships/PlanCards";
+import { useMembershipPlans } from "@/lib/use-membership-plans";
 
 function SubscribeContent() {
   const searchParams = useSearchParams();
   const preSelectedPlan = searchParams.get("plan");
+  const { plans, loading: pricingLoading, error: pricingError, refresh: refreshPricing } = useMembershipPlans();
 
   const [step, setStep] = useState<number>(1);
   const [copiedTarget, setCopiedTarget] = useState<string | null>(null);
@@ -109,7 +49,7 @@ function SubscribeContent() {
     gender: "male",
     goal: "hypertrophy",
     medicalNotes: "",
-    planId: "transform",
+    planId: "",
     durationMonths: 1,
     paymentMethod: "vodafone_cash", // "vodafone_cash" | "instapay"
     senderAccount: "",
@@ -123,41 +63,9 @@ function SubscribeContent() {
     message: string;
   } | null>(null);
 
-  const [isPromoActive, setIsPromoActive] = useState<boolean>(true);
-
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem("raven_launch_countdown_v1");
-      if (stored) {
-        const target = parseInt(stored, 10);
-        if (target <= Date.now()) {
-          setIsPromoActive(false);
-        }
-      }
-    } catch {
-      // Keep true by default
-    }
-  }, []);
-
-  useEffect(() => {
-    if (preSelectedPlan && PLANS.some((p) => p.id === preSelectedPlan)) {
-      setFormData((prev) => ({ ...prev, planId: preSelectedPlan }));
-    }
-  }, [preSelectedPlan]);
-
-  const activeDurations = BASE_DURATIONS.map((dur) => ({
-    months: dur.months,
-    label: dur.label,
-    discountPercent: isPromoActive ? dur.promoDiscount : dur.defaultDiscount,
-    tag: isPromoActive ? dur.tagPromo : dur.tagDefault,
-  }));
-
-  // Pricing calculation
-  const currentPlan = PLANS.find((p) => p.id === formData.planId) || PLANS[1];
-  const currentDuration =
-    activeDurations.find((d) => d.months === formData.durationMonths) || activeDurations[0];
-  const baseTotal = currentPlan.monthlyBasePrice * currentDuration.months;
-  const finalPrice = Math.round(baseTotal * (1 - currentDuration.discountPercent / 100));
+  const currentPlan = plans.find(plan => plan.id === (formData.planId || preSelectedPlan)) || plans[0];
+  const currentDuration = { label: currentPlan?.description || "" };
+  const finalPrice = currentPlan?.price ?? 0;
 
   const handleCopyText = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
@@ -184,6 +92,7 @@ function SubscribeContent() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg("");
+    if (!currentPlan || pricingLoading || pricingError || isSubmitting) return;
 
     if (!formData.fullName.trim() || !formData.phone.trim()) {
       setErrorMsg("يرجى ملء الاسم الكامل ورقم الهاتف.");
@@ -208,7 +117,13 @@ function SubscribeContent() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          planId: currentPlan.id,
           planName: currentPlan.name,
+          subscriptionType: currentPlan.type,
+          durationMonths: currentPlan.durationMonths,
+          totalSessions: currentPlan.totalSessions,
+          sessionPackageId: currentPlan.sessionPackageId,
+          validityDays: currentPlan.validityDays,
           amount: finalPrice,
         }),
       });
@@ -221,6 +136,7 @@ function SubscribeContent() {
           message: data.message,
         });
       } else {
+        if (response.status === 409) { refreshPricing(); setStep(2); }
         setErrorMsg(data.error || "حدث خطأ أثناء إرسال الطلب، يرجى المحاولة مرة أخرى.");
       }
     } catch (err) {
@@ -230,6 +146,9 @@ function SubscribeContent() {
       setIsSubmitting(false);
     }
   };
+
+  if (pricingLoading) return <div className="min-h-screen bg-black text-gray-300 flex items-center justify-center gap-3" dir="rtl" role="status"><Loader2 className="w-6 h-6 animate-spin text-gold" />جاري تحميل الباقات والأسعار الحالية...</div>;
+  if (pricingError || !currentPlan) return <div className="min-h-screen bg-black text-gray-300 flex flex-col items-center justify-center gap-5 p-6" dir="rtl" role="alert"><p>{pricingError || "لا توجد باقات متاحة حاليًا."}</p><button type="button" onClick={refreshPricing} className="bg-gold text-black rounded-xl px-6 py-3 font-bold">إعادة المحاولة</button><Link href="/" className="text-gold">العودة للرئيسية</Link></div>;
 
   if (submissionSuccess) {
     return (
@@ -341,7 +260,7 @@ function SubscribeContent() {
             انضم إلى <span className="text-gold">Raven</span>
           </h1>
           <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">
-            سجل بياناتك واختر باقتك، ثم حوّل قيمة الاشتراك عبر إنستاباي بسهولة لبدء رحلتك التحولية فوراً.
+            سجل بياناتك، واختر اشتراكك أو باقة السيشنات، ثم حوّل المبلغ لمراجعة الطلب وتفعيله من إدارة الجيم.
           </p>
 
           {/* Stepper */}
@@ -349,7 +268,7 @@ function SubscribeContent() {
             {[
               { num: 1, title: "البيانات الشخصية", icon: User },
               { num: 2, title: "اختيار الباقة", icon: Dumbbell },
-              { num: 3, title: "الدفع (إنستاباي)", icon: Zap },
+              { num: 3, title: "الدفع والتحويل", icon: Zap },
             ].map((s) => {
               const Icon = s.icon;
               const isActive = step === s.num;
@@ -380,36 +299,6 @@ function SubscribeContent() {
             })}
           </div>
         </div>
-
-        {/* Launch Promo 30% Banner */}
-        {isPromoActive && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-8 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-red-500/15 via-[#d4af37]/20 to-red-500/15 border border-[#d4af37]/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-right shadow-[0_0_30px_rgba(212,175,55,0.2)]"
-          >
-            <div className="flex items-center gap-3 w-full sm:w-auto">
-              <div className="w-11 h-11 rounded-xl bg-[#d4af37]/20 border border-[#d4af37]/40 flex items-center justify-center text-[#d4af37] shrink-0">
-                <Flame className="w-5 h-5 text-red-400 animate-bounce" />
-              </div>
-              <div>
-                <div className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-                  <span>تم تفعيل خصم الافتتاح 30% تلقائياً</span>
-                  <span className="bg-[#d4af37] text-black text-[10px] sm:text-[11px] font-black px-2.5 py-0.5 rounded-full shadow-sm">
-                    -30% فوري
-                  </span>
-                </div>
-                <div className="text-xs text-gray-300 mt-0.5">
-                  عرض الـ 30 يوماً نشط الآن! تم تخفيض جميع أسعار الباقات وحسابها تلقائياً.
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/60 border border-[#d4af37]/30 text-[#f5d77f] text-xs font-mono font-bold self-end sm:self-auto">
-              <Sparkles className="w-3.5 h-3.5 text-[#d4af37]" />
-              <span>كود: RAVEN30</span>
-            </div>
-          </motion.div>
-        )}
 
         {/* Error Alert */}
         {errorMsg && (
@@ -585,111 +474,19 @@ function SubscribeContent() {
                 <h2 className="font-heading text-xl font-bold text-white flex items-center gap-2">
                   <Dumbbell className="w-5 h-5 text-gold" /> الخطوة 2: باقة الاشتراك ومدة العضوية
                 </h2>
-                <p className="text-gray-400 text-xs mt-1">اختر باقة التدريب والمدة المناسبة لجدولك وأهدافك.</p>
+                <p className="text-gray-400 text-xs mt-1">اختر اشتراكًا بالمدة أو باقة حصص حسب جدولك.</p>
               </div>
 
-              {/* Duration Tabs */}
-              <div className="space-y-3">
-                <label className="text-xs font-bold text-gray-300">مدة الاشتراك المطلوبة:</label>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  {activeDurations.map((dur) => {
-                    const isSelected = formData.durationMonths === dur.months;
-                    return (
-                      <button
-                        key={dur.months}
-                        type="button"
-                        onClick={() => setFormData({ ...formData, durationMonths: dur.months })}
-                        className={`p-3.5 rounded-2xl border text-center transition-all relative overflow-hidden ${
-                          isSelected
-                            ? "bg-gold text-black border-gold font-bold shadow-[0_0_20px_rgba(176,138,71,0.3)]"
-                            : "bg-black/50 border-white/10 text-gray-300 hover:border-white/30"
-                        }`}
-                      >
-                        <div className="text-sm font-bold">{dur.label}</div>
-                        <div className={`text-[10px] mt-1 ${isSelected ? "text-black/80 font-bold" : "text-gold"}`}>
-                          {dur.tag}
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Plans Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {PLANS.map((plan) => {
-                  const isSelected = formData.planId === plan.id;
-                  const planBaseTotal = plan.monthlyBasePrice * currentDuration.months;
-                  const planCalculatedPrice = Math.round(
-                    planBaseTotal * (1 - currentDuration.discountPercent / 100)
-                  );
-
-                  return (
-                    <div
-                      key={plan.id}
-                      onClick={() => setFormData({ ...formData, planId: plan.id })}
-                      className={`relative rounded-3xl p-6 cursor-pointer transition-all flex flex-col justify-between border ${
-                        isSelected
-                          ? "bg-gradient-to-b from-[#18150d] to-black border-gold shadow-[0_0_35px_rgba(176,138,71,0.3)] scale-[1.02]"
-                          : "bg-black/50 border-white/10 hover:border-white/20"
-                      }`}
-                    >
-                      {plan.highlight && (
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-gold to-yellow-600 text-black px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
-                          الأكثر طلباً
-                        </div>
-                      )}
-
-                      <div>
-                        <div className="flex items-center justify-between mb-3">
-                          <h3 className={`font-heading text-2xl font-bold uppercase ${isSelected ? "text-gold" : "text-white"}`}>
-                            {plan.name}
-                          </h3>
-                          <div className={`w-6 h-6 rounded-full border flex items-center justify-center ${isSelected ? "border-gold bg-gold text-black" : "border-white/30"}`}>
-                            {isSelected && <Check className="w-3.5 h-3.5" />}
-                          </div>
-                        </div>
-
-                        <p className="text-gray-400 text-xs mb-4">{plan.tagline}</p>
-
-                        <div className="mb-6 p-3 bg-black/40 border border-white/5 rounded-xl">
-                          <div className="text-2xl font-heading font-bold text-white">
-                            {planCalculatedPrice.toLocaleString()} <span className="text-xs font-sans text-gold">ج.م</span>
-                          </div>
-                          <div className="text-[11px] text-gray-500">
-                            عن {currentDuration.label}
-                            {currentDuration.discountPercent > 0 && (
-                              <span className="text-green-400 mr-1.5 font-bold">
-                                (وفر {Math.round(planBaseTotal - planCalculatedPrice)} ج.م)
-                              </span>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="space-y-2 mb-6">
-                          {plan.features.map((feat, idx) => (
-                            <div key={idx} className="flex items-start gap-2 text-xs text-gray-300">
-                              <Check className={`w-3.5 h-3.5 mt-0.5 flex-shrink-0 ${isSelected ? "text-gold" : "text-gray-500"}`} />
-                              <span>{feat}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <button
-                        type="button"
-                        className={`w-full py-2.5 rounded-xl text-xs font-bold transition-all ${
-                          isSelected
-                            ? "bg-gold text-black"
-                            : "bg-white/5 text-gray-300 border border-white/10"
-                        }`}
-                      >
-                        {isSelected ? "الباقة المختارة" : "اختيار هذه الباقة"}
-                      </button>
-                    </div>
-                  );
+              <div className="flex flex-wrap gap-3" aria-label="نوع الاشتراك">
+                {([{ id: "time", label: "الاشتراكات الشهرية" }, { id: "sessions", label: "باقات السيشنات" }] as const).map(type => {
+                  const first = plans.find(plan => plan.type === type.id);
+                  return <button key={type.id} type="button" disabled={!first} aria-pressed={currentPlan.type === type.id}
+                    onClick={() => first && setFormData(previous => ({ ...previous, planId: first.id }))}
+                    className={`rounded-full border px-6 py-3 text-sm font-bold disabled:opacity-40 ${currentPlan.type === type.id ? "bg-gold border-gold text-black" : "border-white/20 text-gray-300"}`}>{type.label}</button>;
                 })}
               </div>
+              <PlanCards plans={plans.filter(plan => plan.type === currentPlan.type)} selectedId={currentPlan.id}
+                onSelect={plan => setFormData(previous => ({ ...previous, planId: plan.id }))} />
 
               {/* Total Summary */}
               <div className="p-5 bg-gold/10 border border-gold/30 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
