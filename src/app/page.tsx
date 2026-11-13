@@ -8,6 +8,7 @@ import ClassScheduler from "@/components/sections/ClassScheduler";
 import RavenCafe from "@/components/sections/RavenCafe";
 import AiNutrition from "@/components/sections/AiNutrition";
 import Memberships from "@/components/sections/Memberships";
+import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
 import Finale from "@/components/sections/Finale";
 import Footer from "@/components/layout/Footer";
@@ -26,6 +27,7 @@ export default function Home() {
       <RavenCafe />
       <AiNutrition />
       <Memberships />
+      <FAQ />
       <Contact />
       <Finale />
       <Footer />
