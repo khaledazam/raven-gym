@@ -6,24 +6,24 @@ import { Dumbbell, Brain, Activity, Trophy, Sparkles } from "lucide-react";
 
 const features = [
   {
+    title: "100% أجهزة مستوردة",
+    description: "أكبر تشكيلة أجهزة لياقة ومحطات قوة مستوردة بالكامل من كبرى الشركات العالمية، بزوايا حركية دقيقة تحمي المفاصل وتستهدف الألياف العضلية بأعلى كفاءة وأمان.",
+    icon: <Dumbbell className="w-10 h-10 text-gold" />,
+  },
+  {
+    title: "1000 م² على 5 طوابق",
+    description: "صرح رياضي عملاق مقسم على 5 طوابق متخصصة (ريكفري، أرجل وكارديو، علوي وقوة، سكاي أرينا، كافيه ولاونج) لضمان انعدام التكدس وتجربة تمرين بأعلى خصوصية.",
+    icon: <Sparkles className="w-10 h-10 text-gold" />,
+  },
+  {
     title: "مدربين بخبرة حقيقية",
-    description: "سواء هدفك زيادة الكتلة العضلية، خسارة الوزن أو تحسين لياقتك، فريق المدربين في Raven Gym هيتابعك خطوة بخطوة ويجهزلك برنامج تدريبي مناسب لمستواك وأهدافك.",
+    description: "سواء هدفك زيادة الكتلة العضلية، خسارة الوزن أو التحضير للبطولات، فريق المدربين في Raven Gym هيتابعك خطوة بخطوة ويصمم لك برنامج تدريبي مناسب لأهدافك.",
     icon: <Trophy className="w-10 h-10 text-gold" />,
   },
   {
-    title: "خطة غذائية مناسبة ليك",
-    description: "التدريب لوحده مش كفاية. علشان كده بنساعدك بخطط غذائية محسوبة بناءً على بياناتك وهدفك، مع استخدام أدوات ذكية تساعدك تلتزم وتحقق أفضل نتيجة ممكنة.",
+    title: "تغذية ذكية وريكفري",
+    description: "أنظمة غذائية محسوبة الماكروز، كافيه صحي وبروتين بار متخصص، مع منظومة سبا واستشفاء متطورة تشمل جاكوزي، سونا، حمام ثلج، وحجامة رياضية.",
     icon: <Brain className="w-10 h-10 text-gold" />,
-  },
-  {
-    title: "تابع تقدمك بالأرقام",
-    description: "هنسجل قياساتك بشكل دوري ونساعدك تتابع تطورك في الوزن ونسبة الدهون والكتلة العضلية، عشان تقدر تشوف الفرق الحقيقي مع الوقت.",
-    icon: <Activity className="w-10 h-10 text-gold" />,
-  },
-  {
-    title: "معدات حديثة وتجربة تدريب متكاملة",
-    description: "الجيم مجهز بمجموعة متنوعة من الأجهزة والأوزان الحرة اللي تناسب مختلف المستويات والأهداف، مع الاهتمام بتوفير بيئة تدريب مريحة وآمنة للجميع.",
-    icon: <Dumbbell className="w-10 h-10 text-gold" />,
   },
 ];
 
@@ -131,6 +131,31 @@ export default function About() {
             className="mx-auto mt-6 h-1 w-24 bg-gold origin-center"
           />
         </div>
+
+        {/* Facility Highlights / Specs Counter */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 max-w-4xl mx-auto"
+        >
+          <div className="p-4 rounded-2xl bg-zinc-950/80 border border-gold/30 text-center shadow-[0_0_20px_rgba(212,175,55,0.08)]">
+            <span className="block text-2xl md:text-3xl font-black font-heading text-gold">1000 م²</span>
+            <span className="text-xs md:text-sm text-gray-300 font-medium">مساحة تدريبية متكاملة</span>
+          </div>
+          <div className="p-4 rounded-2xl bg-zinc-950/80 border border-gold/30 text-center shadow-[0_0_20px_rgba(212,175,55,0.08)]">
+            <span className="block text-2xl md:text-3xl font-black font-heading text-gold">100%</span>
+            <span className="text-xs md:text-sm text-gray-300 font-medium">أجهزة رياضية مستوردة</span>
+          </div>
+          <div className="p-4 rounded-2xl bg-zinc-950/80 border border-gold/30 text-center shadow-[0_0_20px_rgba(212,175,55,0.08)]">
+            <span className="block text-2xl md:text-3xl font-black font-heading text-gold">5 أدوار</span>
+            <span className="text-xs md:text-sm text-gray-300 font-medium">طوابق تخصصية مستقلة</span>
+          </div>
+          <div className="p-4 rounded-2xl bg-zinc-950/80 border border-gold/30 text-center shadow-[0_0_20px_rgba(212,175,55,0.08)]">
+            <span className="block text-2xl md:text-3xl font-black font-heading text-gold">24 / 7</span>
+            <span className="text-xs md:text-sm text-gray-300 font-medium">مفتوح على مدار الساعة</span>
+          </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 perspective-1000">
           {features.map((feature, idx) => (

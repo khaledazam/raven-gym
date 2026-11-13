@@ -5,7 +5,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MapPin } from "lucide-react";
+import { MapPin, Sparkles, Dumbbell } from "lucide-react";
 import LiveCapacity from "./LiveCapacity";
 
 const Scene = dynamic(() => import("./Scene"), {
@@ -107,13 +107,25 @@ export default function Hero() {
       {/* Overlay Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-end pb-28 md:pb-32 text-center px-4 pointer-events-none">
         
-        {/* Location Badge (High SEO prominence for Sinbillawin / Mashaya / Raven) */}
+        {/* High SEO Badges (Location + 1000m² Space + 100% Imported Equipment) */}
         <div 
           ref={locationBadgeRef}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/60 border border-gold/30 text-[#f5d77f] text-xs md:text-sm font-bold tracking-wider mb-4 shadow-[0_0_20px_rgba(212,175,55,0.15)] pointer-events-auto"
+          className="flex flex-wrap items-center justify-center gap-2 mb-4 pointer-events-auto max-w-4xl"
         >
-          <MapPin className="w-3.5 h-3.5 text-gold shrink-0" />
-          <span>السنبلاوين • أول المشاية (بجوار تشكن فاكتور - عمارة التوحيد والنور)</span>
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/70 border border-gold/30 text-[#f5d77f] text-xs md:text-sm font-bold tracking-wider shadow-[0_0_20px_rgba(212,175,55,0.15)] backdrop-blur-md">
+            <MapPin className="w-3.5 h-3.5 text-gold shrink-0" />
+            <span>السنبلاوين • أول المشاية (عمارة التوحيد والنور)</span>
+          </div>
+
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gold/15 border border-gold/50 text-[#fff0b3] text-xs md:text-sm font-bold tracking-wider shadow-[0_0_20px_rgba(212,175,55,0.2)] backdrop-blur-md">
+            <Sparkles className="w-3.5 h-3.5 text-gold shrink-0" />
+            <span>مساحة 1000 م² على 5 طوابق</span>
+          </div>
+
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-700/80 text-gray-200 text-xs md:text-sm font-semibold tracking-wider backdrop-blur-md">
+            <Dumbbell className="w-3.5 h-3.5 text-gold shrink-0" />
+            <span>أجهزة رياضية مستوردة بالكامل 100%</span>
+          </div>
         </div>
 
         <h1
@@ -131,7 +143,7 @@ export default function Hero() {
           ref={subHeadlineRef}
           className="mt-5 text-lg md:text-2xl font-light text-gray-300 tracking-wider max-w-3xl leading-relaxed"
         >
-          تدريب احترافي 24 ساعة • خطط تغذية ذكية • بيئة بطولات وتحول حقيقي في السنبلاوين
+          أكبر صرح رياضي بالسنبلاوين بمساحة 1000 م² على 5 طوابق متكاملة • أجهزة رياضية ومحطات قوة مستوردة بالكامل • تدريب 24 ساعة وكافيه صحي
         </p>
 
         <div ref={buttonsRef} className="mt-10 flex flex-col sm:flex-row gap-5 pointer-events-auto">
