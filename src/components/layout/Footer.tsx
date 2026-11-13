@@ -165,13 +165,21 @@ export default function Footer() {
               </li>
             </ul>
 
-            <div className="pt-2">
+            <div className="pt-2 space-y-1.5">
               <Link
                 href="/subscribe"
                 className="text-xs text-gold underline hover:text-white transition-colors block"
               >
                 اشتراكات Raven Gym وباقات السيشنات
               </Link>
+              <a
+                href="https://cafe.raven-gym.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-[#f5d77f] hover:text-white transition-colors block font-semibold flex items-center gap-1"
+              >
+                ☕ Raven Cafe & Lounge (الروف) ↗
+              </a>
             </div>
           </div>
 

@@ -5,6 +5,7 @@ import SkyArena from "@/components/sections/SkyArena";
 import RecoverySpa from "@/components/sections/RecoverySpa";
 import Transformations from "@/components/sections/Transformations";
 import ClassScheduler from "@/components/sections/ClassScheduler";
+import RavenCafe from "@/components/sections/RavenCafe";
 import AiNutrition from "@/components/sections/AiNutrition";
 import Memberships from "@/components/sections/Memberships";
 import Contact from "@/components/sections/Contact";
@@ -22,6 +23,7 @@ export default function Home() {
       <RecoverySpa />
       <Transformations />
       <ClassScheduler />
+      <RavenCafe />
       <AiNutrition />
       <Memberships />
       <Contact />

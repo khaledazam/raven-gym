@@ -152,7 +152,7 @@ const FLOORS: FloorData[] = [
       "جلسات روف مفتوحة بإطلالة بانورامية كاملة على السنبلاوين",
     ],
     featuresList: ["Protein Shakes", "Specialty Coffee", "Healthy Snacks", "Rooftop Chill", "Panoramic View"],
-    badge: "الافتتاح قريباً",
+    badge: "متاح الآن - Raven Lounge",
     colorScheme: {
       badge: "bg-emerald-500/10 text-emerald-300 border-emerald-500/30",
       pill: "border-emerald-500/40 text-emerald-300",
@@ -413,7 +413,7 @@ export default function BuildingFloors() {
               <div className="flex items-center gap-2">
                 <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-bold flex items-center gap-1.5">
                   <Coffee className="w-3.5 h-3.5" />
-                  <span>طابق القمة • الافتتاح قريباً</span>
+                  <span>طابق القمة • متاح الآن (Raven Lounge)</span>
                 </span>
                 <span className="text-xs font-mono text-gray-400">LEVEL 5 ROOFTOP</span>
               </div>
@@ -441,20 +441,21 @@ export default function BuildingFloors() {
 
             <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0 w-full lg:w-auto">
               <a
-                href="https://wa.me/201036605024?text=مرحباً،%20أود%20الاستفسار%20عن%20افتتاح%20كافيه%20الروف%20الجديد%20في%20Raven%20Gym"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#cafe"
                 className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-teal-600 hover:to-emerald-500 text-black font-bold text-xs text-center transition-all shadow-[0_4px_20px_rgba(16,185,129,0.25)] cursor-pointer"
               >
-                تواصل للاستفسار عن كافيه الروف
+                تصفح منيو Raven Cafe & Lounge ↓
               </a>
 
-              <Link
-                href="/subscribe"
-                className="px-6 py-3.5 rounded-xl bg-zinc-900 border border-zinc-700 hover:border-emerald-400 text-white font-bold text-xs text-center transition-all hover:bg-zinc-800"
+              <a
+                href="https://cafe.raven-gym.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3.5 rounded-xl bg-zinc-900 border border-zinc-700 hover:border-emerald-400 text-white font-bold text-xs text-center transition-all hover:bg-zinc-800 flex items-center justify-center gap-1.5"
               >
-                باقات العضوية والاشتراكات
-              </Link>
+                <span>فتح سيستم الكافيه الكامل</span>
+                <span dir="ltr">↗</span>
+              </a>
             </div>
           </div>
         </motion.div>
